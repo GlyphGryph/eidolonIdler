@@ -1,0 +1,70 @@
+Make an Idler/Clicker version of my classic Eidolon game
+
+The player has various "action" buttons, that belong to families. Every action causes a cooldown for that family.
+
+Actions increase Monster skills, grant Monster resources, and grant Material resources.
+
+By default, the player has one action family, Monster, with one action, Hunt Wisp.
+
+Clicking this disables the button and displays a 4 second timer.
+
+After the timer runs out, the button is re-enabled.
+
+Hunt Wisp grants a small amount of experience to the Hunt skill, and grants a Monster resource based on the region you're in (ignore for now), plus a generic Monster resource called Spirit.
+
+Players see the result of the action on the right text bar, in the Monster family color.
+
+Once the player has gathered four Spirit (which will take two hunts), the Monster "grows in strength, and may increase their skills".
+
+Two new tabs are added, one of which is already selected, "Action". The other is "Monster".
+
+Clicking Monster takes you to the Monster page, which lists your monster stats and has various actions that can be taken with various costs.
+
+--
+
+The only stat listed is Bond, at level 0/1. Next to it is a plus icon.
+
+Mousing over Bond shows a description, "Strengthens the connection between a character and their monster."
+
+Mousing over the plus icon shows a description: "Cost: 4 Spirit"
+
+Clicking the plus icon raises the level of the Bond to 1, removes 4 spirit from the player's resources, and, since the bond is now at max level, removes the + button.
+
+This adds an Ability to the Ability list called "Shared Healing", as well as a 1/1.
+
+The Shared healing has a checkbox next to it that can be clicked to disable the ability and reduce the counter to 0/1, and clicked again to re-enable it and increase the counter to 1/1. 
+
+Mousing over the ability says the following: "While The Orphan is damaged, some of the spirit gained by this monster will be siphoned off to heal them."
+
+Several more buttons for things to do are added, but the player will not have the resources to do them at this point.
+
+Additionally, a new tab is added, Player.
+
+Selecting this tab shows the player and their stats, and has a section for Wounds. Under the wounds area is "Knocked Out" with a "3" next to it. This number represents how much spirit is required to heal the wound.
+
+The player may now return to hunting Wisps. The monster gains 1 less Spirit from each fight, as it instead goes to heal the player.
+
+After hunting three times, the player is no longer Knocked Out, and a new action family "Player" is added to the Actions page.
+
+The player family has two actions, "Explore" and "Care". Care increases the monster's Affinity resource, while Explore raises Awareness of the local area.
+
+Note that the Affinity resource decays over time.
+
+Exploring adds a new tab "Region". Clicking on the Region tab displays a list of 1 item, that says the name of the current region "Blasted Barrens" and a percentage, currently 25% and "Current Location".
+
+Every time the player explores, the percentage raises, in this region by 25%. Reaching 50% reveals an item on a skeleton - "Old Scabbard", which has no current use. Reaching 75% reveals another skeleton and the item Broken Music Box, which also has no current use, as well as 2@, a currency which also currently has no use.
+
+At 100%, an Exit is revealed, and a new Region is added to the Region list, "Tangled Jungle", which does not display "Current Location" and instead displays a button, "Travel", and the words: Travel Time: 20 seconds. Traveling is not enabled for Phase 1, but would disable some actions.
+
+With Affinity and Spirit, the player may start train the Monsters stats. Every stat trained increases the cost to train all other stats.
+
+The basic stats at this point are:
+
+POWER - How effective the Monsters abilities are, increasing it by 1 level increases the damage healed by Shared Healing by one per point of Spirit.
+WILL - How resilient the Monster is, increases Health and Defenses.
+INTELLECT - How many abilities the Monster can have enabled at once.
+BOND
+
+Upgrading any of these stats (except Bond, which has already been maxxed) also adds a new Untrained ability to the ability list, Basic Attack (unused in Phase 1, but very useful immediately afterwards since it lets player fight a Boss Monster dealing damage equal to POWER), Ferocious Hunter (bonus spirit gain from hunting), and Assist (a monster action that makes the player action run faster while it's active).
+
+Save state of the application in a cookie so it's not lost if the player closes the tab 
