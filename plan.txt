@@ -20,19 +20,26 @@ Two new tabs are added, one of which is already selected, "Action". The other is
 
 Clicking Monster takes you to the Monster page, which lists your monster stats and has various actions that can be taken with various costs.
 
---
-
 The only stat listed is Bond, at level 0/1. Next to it is a plus icon.
+
 
 Mousing over Bond shows a description, "Strengthens the connection between a character and their monster."
 
 Mousing over the plus icon shows a description: "Cost: 4 Spirit"
 
-Clicking the plus icon raises the level of the Bond to 1, removes 4 spirit from the player's resources, and, since the bond is now at max level, removes the + button.
+Clicking the plus icon raises the level of the Bond to 1, removes 4 spirit from the player's resources, and, since the bond is now at max level, disables the + button.
 
-This adds an Ability to the Ability list called "Shared Healing", as well as a 1/1.
+--
 
-The Shared healing has a checkbox next to it that can be clicked to disable the ability and reduce the counter to 0/1, and clicked again to re-enable it and increase the counter to 1/1. 
+This adds an Ability to the Ability list called "Shared Healing Level 0/1", as well as a 0/1 to the Abilities header.
+
+The ability looks like a button and starts disabled, with a "Train" button next to it. The description for Train is "Costs 0 Spirit".
+
+Clicking "Train" starts a timer that works like using an action. When the timer finishes, the ability button becomes enabled.
+
+Since the ability is now at max level, the Train button is disabled and says "Max Level".
+
+The Shared healing ability can be clicked to enable/disable the ability and reduce/increase the 0/1 counter.
 
 Mousing over the ability says the following: "While The Orphan is damaged, some of the spirit gained by this monster will be siphoned off to heal them."
 
