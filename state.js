@@ -33,15 +33,25 @@ var monster = {
 			name: 'Shared Healing',
 			description: "Some of the Spirit you earn from hunting goes to heal your Orphan.",
 			locked: true,
-			unlockConditions: function(){
-				return monster.stats.bond >= 1;
+			unlockedConditionsMet: function(){
+				return monster.stats.bond.level >= 1;
 			},
 			level: 0,
 			maxLevel: 1,
 			active: false,
 			upgrade: {
-				id: 'bond-upgrade',
-				spiritCost: 0   
+				elementId: 'bond-upgrade',
+				spiritCost: 0,
+				shouldStart: false,
+				running: 0,
+				runTime: 100,
+				progressBarElement: $("#templates .progress-bar").clone(),
+				start: function(){
+					addLog('green', "Fake Action started");
+				},
+				finish: function(){
+					addLog('green', "Fake Action finished.");
+				}				
 			}
 		}
 	},
@@ -57,12 +67,11 @@ var monster = {
 		bond: {
 			id: 'bond',
 			elementId: 'bond-stat',
+			name: 'Bond',
 			description: "Strengthens the connection between a character and their monster.",
 			level: 0,
 			maxLevel: 1,
-			visible: true,
-			increasable: true,
-			shouldIncrease: false,
+			unlockedConditionsMet: function(){true},
 			upgrade: {
 				elementId: 'bond-upgrade',
 				spiritCost: function(){ return 4+4*upgradeMultiplier()+2*monster.stats.bond.level },
@@ -77,12 +86,11 @@ var monster = {
 		will: {
 			id: 'will',
 			elementId: 'will-stat',
+			name: "Will",
 			description: "--",
 			level: 0,
 			maxLevel: 1,
-			visible: true,
-			increasable: false,
-			shouldIncrease: false,
+			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'will-upgrade',
 				spiritCost: function(){ return 4+4*upgradeMultiplier()+2*monster.stats.will.level },
@@ -97,12 +105,11 @@ var monster = {
 		intellect: {
 			id: 'intellect',
 			elementId: 'intellect-stat',
+			name: "Intellect",
 			description: "--",
 			level: 0,
 			maxLevel: 1,
-			visible: false,
-			increasable: false,
-			shouldIncrease: false,
+			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'intellect-upgrade',
 				spiritCost: function(){ return 4+4*upgradeMultiplier()+2*monster.stats.intellect.level },
@@ -117,12 +124,11 @@ var monster = {
 		power: {
 			id: 'power',
 			elementId: 'power-stat',
+			name: "Power",
 			description: "--",
 			level: 0,
 			maxLevel: 1,
-			visible: false,
-			increasable: false,
-			shouldIncrease: false,
+			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'power-upgrade',
 				spiritCost: function(){ return 4+4*upgradeMultiplier()+2*monster.stats.power.level },

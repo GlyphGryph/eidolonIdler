@@ -29,9 +29,13 @@ Mousing over the plus icon shows a description: "Cost: 4 Spirit"
 
 Clicking the plus icon raises the level of the Bond to 1, removes 4 spirit from the player's resources, and, since the bond is now at max level, disables the + button.
 
+This adds an Ability to the Ability list called "Shared Healing Level 0/1"
+
+A 0/1 is present in the Abilities header
+
 --
 
-This adds an Ability to the Ability list called "Shared Healing Level 0/1", as well as a 0/1 to the Abilities header.
+The ability header is not visible until the first ability is unlocked
 
 The ability looks like a button and starts disabled, with a "Train" button next to it. The description for Train is "Costs 0 Spirit".
 

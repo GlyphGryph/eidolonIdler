@@ -1,3 +1,7 @@
+removeFromArray = function(array, value){
+	return array.filter(function(elem){ return elem != value; }); 
+};
+
 var selectView = function(id){
 	if('action'==id){
 		$('#monster-view').hide();
@@ -125,17 +129,63 @@ var updateStat = function(stat){
 	} else {
 		statElement.find('.upgrade-button button').prop('disabled', false);	
 	}
-	if(stat.visible){
-		statElement.show();
-	}else{
-		statElement.hide();
-	}
+}
+
+var unlockStat = function(stat){
+	monster.lockedStats = removeFromArray(monster.lockedStats, stat.id);
+	monster.unlockedStats.push(stat.id);
+	setupStat(stat);
+	addLog('black', "Stat "+stat.name+" unlocked.");
 }
 
 var updateStats = function(){
-	$.each(monster.stats, function(key, stat){
+	monster.lockedStats.forEach(function(id){
+		var stat = monster.stats[id];
+		if(stat.unlockedConditionsMet()){
+			unlockStat(stat);
+		}
+	});
+	monster.unlockedStats.forEach(function(id){
+		var stat = monster.stats[id];
 		updateStat(stat);
-	})
+	});
+}
+
+var updateAbility = function(ability){
+	var abilityElement = $("#"+ability.elementId);
+	var levelElement = abilityElement.find('.level');
+	var maxLevelElement = abilityElement.find('.max-level');
+	if(levelElement.html()!=ability.level.toString){
+		levelElement.html(ability.level);
+	}
+	if(maxLevelElement.html()!=ability.maxLevel.toString){
+		maxLevelElement.html(ability.maxLevel);
+	}
+	if(ability.level==ability.maxLevel || !canStatBeUpgraded(ability)){
+		abilityElement.find('.upgrade-button button').prop('disabled', true);
+	} else {
+		abilityElement.find('.upgrade-button button').prop('disabled', false);	
+	}
+}
+
+var unlockAbility = function(ability){
+	monster.lockedAbilities = removeFromArray(monster.lockedAbilities, ability.id);
+	monster.unlockedAbilities.push(ability.id);
+	setupAbility(ability);
+	addLog('black', "Ability "+ability.name+" unlocked.");
+}
+
+var updateAbilities = function(){
+	monster.lockedAbilities.forEach(function(id){
+		var ability = monster.abilities[id];
+		if(ability.unlockedConditionsMet()){
+			unlockAbility(ability);
+		}
+	});
+	monster.unlockedAbilities.forEach(function(id){
+		var ability = monster.abilities[id];
+		updateAbility(ability);
+	});
 }
 
 var updateProgress = function(){
@@ -200,11 +250,22 @@ var upgradeStat = function(stat){
 
 // Attach handlers when a stat is loaded or unlocked
 var setupStat = function(stat){
+	$("#"+stat.elementId).show();
 	$("#"+stat.elementId+" .name").mouseenter(function(){openDescription(this, stat)});
 	$("#"+stat.elementId+" .name").mouseleave(closeDescription);
 	$("#"+stat.upgrade.elementId).mouseenter(function(){openDescription(this, stat.upgrade)});
 	$("#"+stat.upgrade.elementId).mouseleave(closeDescription);
 	$("#"+stat.upgrade.elementId).click(function(){upgradeStat(stat)});	
+}
+
+// Attach handlers when a stat is loaded or unlocked
+var setupAbility = function(ability){
+	$("#"+ability.elementId).show();
+	$("#"+ability.elementId+" .name").mouseenter(function(){openDescription(this, ability)});
+	$("#"+ability.elementId+" .name").mouseleave(closeDescription);
+	$("#"+ability.upgrade.elementId).mouseenter(function(){openDescription(this, ability.upgrade)});
+	$("#"+ability.upgrade.elementId).mouseleave(closeDescription);
+	$("#"+ability.upgrade.elementId).click(function(){upgradeStat(ability)});	
 }
 
 // The main game loop
@@ -219,6 +280,7 @@ var update = function(timestamp){
 	updateActionFamilies();
 	updateResources();
 	updateStats();
+	updateAbilities();
 	updateProgress();
 	updateLog();
 	
@@ -235,10 +297,27 @@ var setup = function(){
 			}
 		});
 	});
+	
+	// Setup stats
 	monster.unlockedStats.forEach(function(id){
 		var stat = monster.stats[id];
 		setupStat(stat);
 	});
+	monster.lockedStats.forEach(function(id){
+		var stat = monster.stats[id];
+		$("#"+stat.elementId).hide();
+	});
+	
+	// Setup abilities
+	monster.unlockedAbilities.forEach(function(id){
+		var ability = monster.abilities[id];
+		setupStat(ability);
+	});
+	monster.lockedAbilities.forEach(function(id){
+		var ability = monster.abilities[id];
+		$("#"+ability.elementId).hide();
+	});
+	
 	$.each(actions, function(key, action){
 		$("#"+action.id).mouseenter(function(){openDescription(this, action)});
 		$("#"+action.id).mouseleave(function(){closeDescription()});
