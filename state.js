@@ -8,7 +8,7 @@ var state = {
 var log = [];
 
 var gameProgress = {
-	tabsUnlocked: false,
+	tabsAreUnlocked: false,
 }
 
 var resources = {
@@ -21,6 +21,8 @@ var resources = {
 }
 
 var monster = {
+	abilitiesAreUnlocked: false,
+	abilitiesAreTraining: false,
 	unlockedAbilities:[
 	],
 	lockedAbilities:[
@@ -39,12 +41,16 @@ var monster = {
 			level: 0,
 			maxLevel: 1,
 			active: false,
+			canBeTrained: function(){
+				return monster.abilities.sharedHealing.level < monster.abilities.sharedHealing.maxLevel;
+			},
 			upgrade: {
-				elementId: 'bond-upgrade',
-				spiritCost: 0,
+				elementId: 'shared-healing-train',
+				description: "Cost: 0 spirit",
+				cost: [],
 				shouldStart: false,
 				running: 0,
-				runTime: 100,
+				runTime: 5000,
 				progressBarElement: $("#templates .progress-bar").clone(),
 				start: function(){
 					addLog('green', "Fake Action started");
@@ -88,7 +94,7 @@ var monster = {
 			elementId: 'will-stat',
 			name: "Will",
 			description: "--",
-			level: 0,
+			level: 1,
 			maxLevel: 1,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
@@ -107,7 +113,7 @@ var monster = {
 			elementId: 'intellect-stat',
 			name: "Intellect",
 			description: "--",
-			level: 0,
+			level: 1,
 			maxLevel: 1,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
@@ -126,7 +132,7 @@ var monster = {
 			elementId: 'power-stat',
 			name: "Power",
 			description: "--",
-			level: 0,
+			level: 1,
 			maxLevel: 1,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {

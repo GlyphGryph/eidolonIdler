@@ -20,25 +20,6 @@ var addLog = function(color, message){
 	log.push([color, message]);
 };
 
-var runAction = function(id){
-	var action = actions[id];
-	if(action.running < 1){ return; }
-	var actionElement = $("#"+action.id);
-	action.running -= state.timeSinceLastUpdate;
-	if(action.running >= 1){
-		progress = Math.floor(100 - (action.running / action.runTime) * 100)
-		actionElement.find('.progress-bar').css('width', ''+progress+'%');
-	}
-	if(action.running < 1){
-		action.running = 0;
-		var family = actionFamilies[action.family];
-		family.busy = false;
-		actionElement.find('.progress-bar').css('width', '0%');
-		actionElement.find('button').show();
-		action.finish();
-	}
-};
-
 var totalLevels = function(){
 	var total = 0;
 	$.each(monster.stats, function(key, monsterStat){
@@ -58,114 +39,11 @@ var changeResource = function(id, value){
 	addLog('black', "Gained "+value+" "+resource.name+".");
 };
 
-var updateAction = function(id){
-	var action = actions[id];
-	var actionElement = $("#"+action.id);
-	var family = actionFamilies[action.family];
-	if(action.visible){
-		actionElement.show();
-	}else{
-		actionElement.hide();
-	}
-	if(true==action.shouldStart){
-		action.start();
-		action.running = action.runTime;
-		action.shouldStart=false;
-		actionElement.find('button').hide();
-	}
-	if(family.busy){
-		actionElement.find('button').prop('disabled', true);
-	}else{
-		actionElement.find('button').prop('disabled', false);
-	}
-	runAction(id);
-};
-
-var updateActionFamilies = function(){
-	$.each(actionFamilies, function(key, actionFamily){
-		if(actionFamily.visible){
-			$("#"+actionFamily.id).show();
-		}else{
-			$("#"+actionFamily.id).hide();
-		}
-		actionFamily.actions.forEach(updateAction);
-	});
-};
-
-var updateResources = function(){
-	$.each(resources, function(key, resource){
-		if(resource.visible){
-			var resourceElement = $("#"+resource.id)
-			resourceElement.show();
-			resourceElement.html(resource.name +": "+resource.value);
-		} else {
-			$("#"+resource.id).hide()
-		}
-	})
-};
-
-var updateLog = function(){
-	var logElement = $('#log-text');
-	logElement.html("");
-	[...log].reverse().forEach(function(message){
-		messageElement = $("<p>"+message[1]+"</p>");
-		messageElement.css('color', message[0]);
-		logElement.append(messageElement);
-	});
-};
-
-var updateStat = function(stat){
-	var statElement = $("#"+stat.elementId);
-	var levelElement = statElement.find('.level');
-	var maxLevelElement = statElement.find('.max-level');
-	if(levelElement.html()!=stat.level.toString){
-		levelElement.html(stat.level);
-	}
-	if(maxLevelElement.html()!=stat.maxLevel.toString){
-		maxLevelElement.html(stat.maxLevel);
-	}
-	if(stat.level==stat.maxLevel || !canStatBeUpgraded(stat)){
-		statElement.find('.upgrade-button button').prop('disabled', true);
-	} else {
-		statElement.find('.upgrade-button button').prop('disabled', false);	
-	}
-}
-
 var unlockStat = function(stat){
 	monster.lockedStats = removeFromArray(monster.lockedStats, stat.id);
 	monster.unlockedStats.push(stat.id);
 	setupStat(stat);
 	addLog('black', "Stat "+stat.name+" unlocked.");
-}
-
-var updateStats = function(){
-	monster.lockedStats.forEach(function(id){
-		var stat = monster.stats[id];
-		if(stat.unlockedConditionsMet()){
-			unlockStat(stat);
-		}
-	});
-	monster.unlockedStats.forEach(function(id){
-		var stat = monster.stats[id];
-		updateStat(stat);
-	});
-}
-
-var updateAbility = function(ability){
-	var abilityElement = $("#"+ability.elementId);
-	var levelElement = abilityElement.find('.level');
-	var maxLevelElement = abilityElement.find('.max-level');
-	if(levelElement.html()!=ability.level.toString){
-		levelElement.html(ability.level);
-	}
-	if(maxLevelElement.html()!=ability.maxLevel.toString){
-		maxLevelElement.html(ability.maxLevel);
-	}
-	if(ability.level==ability.maxLevel || !canStatBeUpgraded(ability)){
-		abilityElement.find('.upgrade-button button').prop('disabled', true);
-	} else {
-		abilityElement.find('.upgrade-button button').prop('disabled', false);	
-	}
 }
 
 var unlockAbility = function(ability){
@@ -175,27 +53,10 @@ var unlockAbility = function(ability){
 	addLog('black', "Ability "+ability.name+" unlocked.");
 }
 
-var updateAbilities = function(){
-	monster.lockedAbilities.forEach(function(id){
-		var ability = monster.abilities[id];
-		if(ability.unlockedConditionsMet()){
-			unlockAbility(ability);
-		}
-	});
-	monster.unlockedAbilities.forEach(function(id){
-		var ability = monster.abilities[id];
-		updateAbility(ability);
-	});
-}
-
-var updateProgress = function(){
-	// Unlock tabs at 4 spirit
-	if(!gameProgress.tabsUnlocked){
-		if(resources.monsterSpirit.value > 3){
-			gameProgress.tabsUnlocked=true;
-			$("#view-select-menu").show();
-			addLog('green', "The monster has grown in strength and may improve his skills.")
-		}
+var prepareAbilityToTrain = function(ability){
+	if(!monster.abilitiesAreTraining && ability.canBeTrained()){
+		ability.upgrade.shouldStart=true;
+		monster.abilitiesAreTraining=true;
 	}
 }
 
@@ -229,6 +90,14 @@ var closeDescription = function(){
 	$("#description").html("").hide();
 }
 
+var canMeetCost = function(costArray){
+	// TODO : For ability training and actions
+}
+
+var payCost = function(costArray){
+	// TODO: For ability training and actions
+}
+
 var canStatBeUpgraded = function(stat){
 	return (
 		stat.level < stat.maxLevel &&
@@ -248,91 +117,7 @@ var upgradeStat = function(stat){
 	openDescription($("#"+stat.upgrade.elementId),stat.upgrade);
 }
 
-// Attach handlers when a stat is loaded or unlocked
-var setupStat = function(stat){
-	$("#"+stat.elementId).show();
-	$("#"+stat.elementId+" .name").mouseenter(function(){openDescription(this, stat)});
-	$("#"+stat.elementId+" .name").mouseleave(closeDescription);
-	$("#"+stat.upgrade.elementId).mouseenter(function(){openDescription(this, stat.upgrade)});
-	$("#"+stat.upgrade.elementId).mouseleave(closeDescription);
-	$("#"+stat.upgrade.elementId).click(function(){upgradeStat(stat)});	
-}
 
-// Attach handlers when a stat is loaded or unlocked
-var setupAbility = function(ability){
-	$("#"+ability.elementId).show();
-	$("#"+ability.elementId+" .name").mouseenter(function(){openDescription(this, ability)});
-	$("#"+ability.elementId+" .name").mouseleave(closeDescription);
-	$("#"+ability.upgrade.elementId).mouseenter(function(){openDescription(this, ability.upgrade)});
-	$("#"+ability.upgrade.elementId).mouseleave(closeDescription);
-	$("#"+ability.upgrade.elementId).click(function(){upgradeStat(ability)});	
-}
-
-// The main game loop
-var update = function(timestamp){
-	if(state.currentTime){
-		state.lastTime = state.currentTime;
-	}else{
-		state.lastTime = timestamp;
-	}
-	state.currentTime = timestamp;
-	state.timeSinceLastUpdate = state.currentTime - state.lastTime;
-	updateActionFamilies();
-	updateResources();
-	updateStats();
-	updateAbilities();
-	updateProgress();
-	updateLog();
-	
-	window.requestAnimationFrame(update);
-}
-
-// Runs once at game start / on game load
-var setup = function(){
-	$.each(actionFamilies, function(key, actionFamily){
-		actionFamily.actions.forEach(function(id){
-			var action = actions[id];
-			if(action.start){
-				$("#"+action.id).click(function(){prepareActionToStart(action)});
-			}
-		});
-	});
-	
-	// Setup stats
-	monster.unlockedStats.forEach(function(id){
-		var stat = monster.stats[id];
-		setupStat(stat);
-	});
-	monster.lockedStats.forEach(function(id){
-		var stat = monster.stats[id];
-		$("#"+stat.elementId).hide();
-	});
-	
-	// Setup abilities
-	monster.unlockedAbilities.forEach(function(id){
-		var ability = monster.abilities[id];
-		setupStat(ability);
-	});
-	monster.lockedAbilities.forEach(function(id){
-		var ability = monster.abilities[id];
-		$("#"+ability.elementId).hide();
-	});
-	
-	$.each(actions, function(key, action){
-		$("#"+action.id).mouseenter(function(){openDescription(this, action)});
-		$("#"+action.id).mouseleave(function(){closeDescription()});
-	});
-	$("#action-view-tab").click(function(){selectView('action')});
-	$("#monster-view-tab").click(function(){selectView('monster')});
-	selectView('action');
-	if(gameProgress.tabsUnlocked){
-		$("#view-select-menu").show();
-	}else{
-		$("#view-select-menu").hide();
-	}
-	update();
-	$('#play-area').show();
-}
 
 var startScript = function(){
 	setup();

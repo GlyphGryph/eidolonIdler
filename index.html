@@ -5,6 +5,8 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 		<script src="state.js" type="text/javascript"></script>
 		<script src="logic.js" type="text/javascript"></script>
+		<script src="update.js" type="text/javascript"></script>
+		<script src="setup.js" type="text/javascript"></script>
 		<link href="style.css" rel="stylesheet" type="text/css" media="all">
 	</head>
 	<body>
@@ -71,18 +73,22 @@
 							<span class='upgrade-button' id='will-upgrade'><button>+</button></span>
 						</div>
 					</div>
-					<div>
+					<div id='abilities'>
 						<h1>ABILITIES</h2>
 						<div class='ability-tracker'>
 							<span id='currently-active-abilities'>0</span>/<span id='max-active-abilities'>1</span>
 						</div>
 						<div class='ability' id='shared-healing-ability'>
-							<span class='name'>Shared Healing</span>
-							<span class='level-label'>Level: </span>
-							<span class='level'>0</span>
-							<span class='divider'>/</span>
+							<span class='name'>Shared Healing
+								<span class='level-label'>Level: </span>
+								<span class='level'>0</span>
+								<span class='divider'>/</span>
 							<span class='max-level'>1</span>
-							<span class='upgrade-button' id='shared-healing-train'><button>Train</button></span>
+							</span>
+							<span class='trainer' id='shared-healing-train'>
+								<button>Train</button>
+								<div class='progress-bar'></div>
+							</span>
 						</div>
 					</div>
 				</div>
