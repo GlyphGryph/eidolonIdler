@@ -195,6 +195,8 @@ var updateAbility = function(ability){
 }
 
 var updateAbilities = function(){
+	$('#currently-active-abilities').text(monster.activeAbilities.length);
+	$('#max-active-abilities').text(monster.maxActiveAbilities());
 	monster.lockedAbilities.forEach(function(id){
 		var ability = monster.abilities[id];
 		if(ability.unlockedConditionsMet()){

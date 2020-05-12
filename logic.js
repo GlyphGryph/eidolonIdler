@@ -67,10 +67,12 @@ var prepareAbilityToTrain = function(ability){
 }
 
 var activateAbility = function(ability){
+	monster.activeAbilities.push(ability.id);
 	ability.active = true;
 }
 
 var deactivateAbility = function(ability){
+	monster.activeAbilities = removeFromArray(monster.activeAbilities, ability.id);
 	ability.active = false;
 }
 

@@ -21,6 +21,7 @@ var resources = {
 }
 
 var monster = {
+	maxActiveAbilities: function(){ return monster.stats.intellect.level; },
 	abilitiesAreUnlocked: false,
 	abilitiesAreTraining: false,
 	unlockedAbilities:[
@@ -29,12 +30,13 @@ var monster = {
 		'sharedHealing',
 		'fakeAbility'
 	],
+	activeAbilities: [],
 	abilities: {
 		sharedHealing: {
 			id: 'sharedHealing',
 			elementId: 'shared-healing-ability',
 			name: 'Shared Healing',
-			description: "Some of the Spirit you earn from hunting goes to heal your Orphan.",
+			description: "While The Orphan is damaged, some of the spirit gained by this monster will be siphoned off to heal them.",
 			locked: true,
 			unlockedConditionsMet: function(){
 				return monster.stats.bond.level >= 1;
@@ -123,7 +125,7 @@ var monster = {
 			name: "Will",
 			description: "--",
 			level: 1,
-			maxLevel: 1,
+			maxLevel: 2,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'will-upgrade',
@@ -142,7 +144,7 @@ var monster = {
 			name: "Intellect",
 			description: "--",
 			level: 1,
-			maxLevel: 1,
+			maxLevel: 2,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'intellect-upgrade',
@@ -161,7 +163,7 @@ var monster = {
 			name: "Power",
 			description: "--",
 			level: 1,
-			maxLevel: 1,
+			maxLevel: 2,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'power-upgrade',

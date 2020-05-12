@@ -57,11 +57,11 @@ The deactivate button deactivates the activity.
 
 Enabled abilities have a colored border around them, deactivated abilities do not.
 
---
-
 The Ability counter now displays #{number of activated abilities}/#{intellect} instead of 0/1.
 
 Mousing over the ability says the following: "While The Orphan is damaged, some of the spirit gained by this monster will be siphoned off to heal them."
+
+--
 
 The basic stats at this point are:
 
