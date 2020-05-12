@@ -44,7 +44,6 @@ Finishing increases the level of the skill.
 
 Since the ability is now at max level, the Train button is removed.
 
---
 
 Change the "levels" of abilities to simply whether or not the ability has been "Learned"
 
@@ -57,6 +56,8 @@ Enabled abilities do not display the Activate button, but instead display a Deac
 The deactivate button deactivates the activity.
 
 Enabled abilities have a colored border around them, deactivated abilities do not.
+
+--
 
 The Ability counter now displays #{number of activated abilities}/#{intellect} instead of 0/1.
 
@@ -79,7 +80,7 @@ When an ability is training, no other abilities can be trained and any other Tra
 
 Mousing over the train description should say how many seconds/minutes/hours the ability takes to train.
 
-While training, the progress bar should also contain a countdown for how many seconds remain.
+While training, the progress bar should also contain a countdown for how many seconds remain. 
 
 When Shared Healing is unlocked a new tab is added, Orphan.
 

@@ -20,7 +20,9 @@ var setupAbility = function(ability){
 	$("#"+ability.elementId+" .text").mouseleave(closeDescription);
 	$("#"+ability.upgrade.elementId).mouseenter(function(){openDescription(this, ability.upgrade)});
 	$("#"+ability.upgrade.elementId).mouseleave(closeDescription);
-	$("#"+ability.upgrade.elementId).click(function(){prepareAbilityToTrain(ability)});	
+	$("#"+ability.upgrade.elementId).click(function(){prepareAbilityToTrain(ability)});
+	abilityElement.find('.activate').click(function(){activateAbility(ability)});
+	abilityElement.find('.deactivate').click(function(){deactivateAbility(ability)});	
 }
 
 // Runs once at game start / on game load

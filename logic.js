@@ -66,6 +66,14 @@ var prepareAbilityToTrain = function(ability){
 	}
 }
 
+var activateAbility = function(ability){
+	ability.active = true;
+}
+
+var deactivateAbility = function(ability){
+	ability.active = false;
+}
+
 var prepareActionToStart = function(action){
 	var actionFamily = actionFamilies[action.family];
 	if(!actionFamily.busy){

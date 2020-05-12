@@ -120,29 +120,49 @@ var updateStats = function(){
 
 var updateAbility = function(ability){
 	var abilityElement = $("#"+ability.elementId);
-	var levelElement = abilityElement.find('.level');
-	var maxLevelElement = abilityElement.find('.max-level');
+	var statusElement = abilityElement.find('.status');
 	var upgrade = ability.upgrade
 	var upgradeElement = $("#"+upgrade.elementId);
+	var activateElement = abilityElement.find('.activate');
+	var deactivateElement = abilityElement.find('.deactivate');
+
 	
-	if(levelElement.html()!=ability.level.toString){
-		levelElement.html(ability.level);
-	}
-	
-	if(maxLevelElement.html()!=ability.maxLevel.toString){
-		maxLevelElement.html(ability.maxLevel);
+	if(ability.trained){
+		if(statusElement.text()!=''){
+			statusElement.text('');
+		}
+	}else{
+		if(statusElement.text()!='(Unrained)'){
+			statusElement.text('(Untrained)');
+		}
 	}
 	
 	if(monster.abilitiesAreTraining){
 		upgradeElement.find('button').prop('disabled', true);
-	} else {
+	}else{
 		upgradeElement.find('button').prop('disabled', false);	
 	}
 	
 	if(ability.canBeTrained()){
 		upgradeElement.show();
-	} else {
+	}else{
 		upgradeElement.hide();	
+	}
+	
+	if(ability.trained){
+		if(ability.active){
+			abilityElement.addClass('active');
+			activateElement.hide();
+			deactivateElement.show();
+		}else{
+			abilityElement.removeClass('active');
+			deactivateElement.hide();
+			activateElement.show();
+		}
+	}else{
+		abilityElement.removeClass('active');
+		activateElement.hide();
+		deactivateElement.hide();
 	}
 	
 	if(true==ability.upgrade.shouldStart){
@@ -166,7 +186,7 @@ var updateAbility = function(ability){
 	}
 	if(upgrade.running < 1){
 		upgrade.running = 0;
-		ability.level += 1;
+		ability.trained = true;
 		monster.abilitiesAreTraining = false
 		upgradeElement.find('.progress-bar').css('width', '0%');
 		upgradeElement.find('button').show();

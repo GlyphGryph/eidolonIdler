@@ -39,11 +39,10 @@ var monster = {
 			unlockedConditionsMet: function(){
 				return monster.stats.bond.level >= 1;
 			},
-			level: 0,
-			maxLevel: 1,
+			trained: false,
 			active: false,
 			canBeTrained: function(){
-				return monster.abilities.sharedHealing.level < monster.abilities.sharedHealing.maxLevel;
+				return !monster.abilities.sharedHealing.trained;
 			},
 			upgrade: {
 				elementId: 'shared-healing-train',
@@ -69,11 +68,10 @@ var monster = {
 			unlockedConditionsMet: function(){
 				return monster.stats.bond.level >= 1;
 			},
-			level: 0,
-			maxLevel: 1,
+			trained: false,
 			active: false,
 			canBeTrained: function(){
-				return monster.abilities.fakeAbility.level < monster.abilities.fakeAbility.maxLevel;
+				return !monster.abilities.fakeAbility.trained;
 			},
 			upgrade: {
 				elementId: 'fake-ability-train',
