@@ -29,7 +29,13 @@ var totalLevels = function(){
 }
 
 var upgradeMultiplier = function(){
-	return totalLevels();
+	// We don't count the first three levels into the multiplier
+	var levels = totalLevels()-3;
+	if( levels < 0){
+		return 0
+	}else{
+		return levels;
+	}
 }
 
 var changeResource = function(id, value){

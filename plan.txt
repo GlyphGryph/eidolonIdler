@@ -46,17 +46,36 @@ Since the ability is now at max level, the Train button is removed.
 
 --
 
-When the timer finishes, the "Activate/Deactivate" ability buttons becomes enabled.
+When the timer finishes, the "Activate" ability button appears.
 
-The Shared healing ability Activate button can be clicked to enable/disable the ability.
+Clicking the Activate button adds the ability to the enabledAbilities list and marks it as enabled.
 
-The Ability counter now displays #{number of activated abilities}/#{intellect} instead of .
+Enabled abilities do not display the Activate button, but instead display a Deactivate button.
+
+The deactivate button deactivates the activity.
+
+Enabled abilities have a colored border around them, deactivated abilities do not.
+
+The Ability counter now displays #{number of activated abilities}/#{intellect} instead of 0/1.
 
 Mousing over the ability says the following: "While The Orphan is damaged, some of the spirit gained by this monster will be siphoned off to heal them."
 
-Several more buttons for things to do are added, but the player will not have the resources to do them at this point.
+The basic stats at this point are:
 
-Additionally, a new tab is added, Player.
+POWER - How effective the Monsters abilities are, increasing it by 1 level increases the damage healed by Shared Healing by one per point of Spirit.
+WILL - How resilient the Monster is, increases Health and Defenses.
+INTELLECT - How many abilities the Monster can have enabled at once.
+BOND
+
+Upgrading any of these stats (except Bond, which has already been maxxed) also adds a new Untrained ability to the ability list, Basic Attack (unused in Phase 1, but very useful immediately afterwards since it lets player fight a Boss Monster dealing damage equal to POWER), Tenacious Hunter (bonus spirit gain from hunting), and Assist (a monster ability that makes the player action run faster while it's active and the monster is not doing anything else).
+
+These ability functions do not have to be implemented yet, the abilities themselves should appear and be activatable.
+
+When the maximum number of abilities are enabled, activating abilities should no longer work and any other Activate buttons should disappear.
+
+When an ability is training, no other abilities can be trained and any other Train buttons should disappear.
+
+When Shared Healing is unlocked a new tab is added, Orphan.
 
 Selecting this tab shows the player and their stats, and has a section for Wounds. Under the wounds area is "Knocked Out" with a "3" next to it. This number represents how much spirit is required to heal the wound.
 
@@ -75,15 +94,6 @@ Every time the player explores, the percentage raises, in this region by 25%. Re
 At 100%, an Exit is revealed, and a new Region is added to the Region list, "Tangled Jungle", which does not display "Current Location" and instead displays a button, "Travel", and the words: Travel Time: 20 seconds. Traveling is not enabled for Phase 1, but would disable some actions.
 
 With Affinity and Spirit, the player may start train the Monsters stats. Every stat trained increases the cost to train all other stats.
-
-The basic stats at this point are:
-
-POWER - How effective the Monsters abilities are, increasing it by 1 level increases the damage healed by Shared Healing by one per point of Spirit.
-WILL - How resilient the Monster is, increases Health and Defenses.
-INTELLECT - How many abilities the Monster can have enabled at once.
-BOND
-
-Upgrading any of these stats (except Bond, which has already been maxxed) also adds a new Untrained ability to the ability list, Basic Attack (unused in Phase 1, but very useful immediately afterwards since it lets player fight a Boss Monster dealing damage equal to POWER), Ferocious Hunter (bonus spirit gain from hunting), and Assist (a monster action that makes the player action run faster while it's active).
 
 Save state of the application in a cookie so it's not lost if the player closes the tab 
 

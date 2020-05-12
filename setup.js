@@ -10,9 +10,13 @@ var setupStat = function(stat){
 
 // Attach handlers when a stat is loaded or unlocked
 var setupAbility = function(ability){
+	abilityElement = $("#ability-template").clone();
+	abilityElement.attr('id', ability.elementId);
+	abilityElement.find('name').text(ability.name);
+	$("#abilities").append(abilityElement);
 	$("#"+ability.elementId).show();
-	$("#"+ability.elementId+" .name").mouseenter(function(){openDescription(this, ability)});
-	$("#"+ability.elementId+" .name").mouseleave(closeDescription);
+	$("#"+ability.elementId+" .text").mouseenter(function(){openDescription(this, ability)});
+	$("#"+ability.elementId+" .text").mouseleave(closeDescription);
 	$("#"+ability.upgrade.elementId).mouseenter(function(){openDescription(this, ability.upgrade)});
 	$("#"+ability.upgrade.elementId).mouseleave(closeDescription);
 	$("#"+ability.upgrade.elementId).click(function(){prepareAbilityToTrain(ability)});	
