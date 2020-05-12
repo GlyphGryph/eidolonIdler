@@ -21,3 +21,13 @@ Players can choose to capture defeated bosses or devour them. Devouring them gra
 Capturing them allows you to have an additional monster that can do things at the same time as your main monster.
 
 You're best off capturing some and devouring others.
+
+
+The basic stats at this point are:
+
+POWER - How effective the Monsters abilities are, increasing it by 1 level increases the damage healed by Shared Healing by one per point of Spirit.
+WILL - How resilient the Monster is, increases Health and Defenses.
+INTELLECT - How many abilities the Monster can have enabled at once.
+BOND
+
+Upgrading any of these stats (except Bond, which has already been maxxed) also adds a new Untrained ability to the ability list, Basic Attack (unused in Phase 1, but very useful immediately afterwards since it lets player fight a Boss Monster dealing damage equal to POWER), Tenacious Hunter (bonus spirit gain from hunting), and Assist (a monster ability that makes the player action run faster while it's active and the monster is not doing anything else).

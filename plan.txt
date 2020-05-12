@@ -61,18 +61,11 @@ The Ability counter now displays #{number of activated abilities}/#{intellect} i
 
 Mousing over the ability says the following: "While The Orphan is damaged, some of the spirit gained by this monster will be siphoned off to heal them."
 
---
-
-The basic stats at this point are:
-
-POWER - How effective the Monsters abilities are, increasing it by 1 level increases the damage healed by Shared Healing by one per point of Spirit.
-WILL - How resilient the Monster is, increases Health and Defenses.
-INTELLECT - How many abilities the Monster can have enabled at once.
-BOND
-
-Upgrading any of these stats (except Bond, which has already been maxxed) also adds a new Untrained ability to the ability list, Basic Attack (unused in Phase 1, but very useful immediately afterwards since it lets player fight a Boss Monster dealing damage equal to POWER), Tenacious Hunter (bonus spirit gain from hunting), and Assist (a monster ability that makes the player action run faster while it's active and the monster is not doing anything else).
+Add Assist ability and increase the max level of Intellect by 1
 
 These ability functions do not have to be implemented yet, the abilities themselves should appear and be activatable.
+
+--
 
 When the maximum number of abilities are enabled, activating abilities should no longer work and any other Activate buttons should disappear.
 

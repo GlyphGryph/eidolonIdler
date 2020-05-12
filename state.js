@@ -28,7 +28,8 @@ var monster = {
 	],
 	lockedAbilities:[
 		'sharedHealing',
-		'fakeAbility'
+		'fakeAbility',
+		'assist'
 	],
 	activeAbilities: [],
 	abilities: {
@@ -87,6 +88,35 @@ var monster = {
 				},
 				finish: function(){
 					addLog('green', "Finished training Fake Ability.");
+				}				
+			}
+		},
+		assist: {
+			id: 'assist',
+			elementId: 'assist-ability',
+			name: 'Assist',
+			description: "When this monster isn't doing an action of their own, they help the Orphan complete their actions faster.",
+			locked: true,
+			unlockedConditionsMet: function(){
+				return monster.stats.intellect.level >= 2;
+			},
+			trained: false,
+			active: false,
+			canBeTrained: function(){
+				return !monster.abilities.assist.trained;
+			},
+			upgrade: {
+				elementId: 'assist-train',
+				description: "Cost: 0 spirit",
+				cost: [],
+				shouldStart: false,
+				running: 0,
+				runTime: 500,
+				start: function(){
+					addLog('green', "Started training Assist.");
+				},
+				finish: function(){
+					addLog('green', "Finished training Assist.");
 				}				
 			}
 		}
