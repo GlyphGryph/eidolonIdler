@@ -12,7 +12,8 @@ var setupStat = function(stat){
 var setupAbility = function(ability){
 	abilityElement = $("#ability-template").clone();
 	abilityElement.attr('id', ability.elementId);
-	abilityElement.find('name').text(ability.name);
+	abilityElement.find('#trainer-template').attr('id', ability.upgrade.elementId);
+	abilityElement.find('.name').text(ability.name);
 	$("#abilities").append(abilityElement);
 	$("#"+ability.elementId).show();
 	$("#"+ability.elementId+" .text").mouseenter(function(){openDescription(this, ability)});

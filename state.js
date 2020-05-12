@@ -26,7 +26,8 @@ var monster = {
 	unlockedAbilities:[
 	],
 	lockedAbilities:[
-		'sharedHealing'
+		'sharedHealing',
+		'fakeAbility'
 	],
 	abilities: {
 		sharedHealing: {
@@ -50,13 +51,42 @@ var monster = {
 				cost: [],
 				shouldStart: false,
 				running: 0,
-				runTime: 5000,
-				progressBarElement: $("#templates .progress-bar").clone(),
+				runTime: 500,
 				start: function(){
-					addLog('green', "Fake Action started");
+					addLog('green', "Started training Shared Healing.");
 				},
 				finish: function(){
-					addLog('green', "Fake Action finished.");
+					addLog('green', "Finished training Shared Healing.");
+				}				
+			}
+		},
+		fakeAbility: {
+			id: 'fakeAbility',
+			elementId: 'fake-ability',
+			name: 'Fake Ability',
+			description: "Does nothing.",
+			locked: true,
+			unlockedConditionsMet: function(){
+				return monster.stats.bond.level >= 1;
+			},
+			level: 0,
+			maxLevel: 1,
+			active: false,
+			canBeTrained: function(){
+				return monster.abilities.fakeAbility.level < monster.abilities.fakeAbility.maxLevel;
+			},
+			upgrade: {
+				elementId: 'fake-ability-train',
+				description: "Cost: 0 spirit",
+				cost: [],
+				shouldStart: false,
+				running: 0,
+				runTime: 500,
+				start: function(){
+					addLog('green', "Started training Fake Ability.");
+				},
+				finish: function(){
+					addLog('green', "Finished training Fake Ability.");
 				}				
 			}
 		}
