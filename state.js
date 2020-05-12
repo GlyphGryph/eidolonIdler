@@ -49,7 +49,9 @@ var monster = {
 			},
 			upgrade: {
 				elementId: 'shared-healing-train',
-				description: "Cost: 0 spirit",
+				description:  function(){
+					return "Cost: 0 spirit. Takes "+monster.abilities.sharedHealing.upgrade.runTime/1000+" seconds.";
+				},
 				cost: [],
 				shouldStart: false,
 				running: 0,
@@ -78,11 +80,13 @@ var monster = {
 			},
 			upgrade: {
 				elementId: 'fake-ability-train',
-				description: "Cost: 0 spirit",
+				description:  function(){
+					return "Cost: 0 spirit. Takes "+monster.abilities.fakeAbility.upgrade.runTime/1000+" seconds.";
+				},
 				cost: [],
 				shouldStart: false,
 				running: 0,
-				runTime: 500,
+				runTime: 5000,
 				start: function(){
 					addLog('green', "Started training Fake Ability.");
 				},
@@ -107,7 +111,9 @@ var monster = {
 			},
 			upgrade: {
 				elementId: 'assist-train',
-				description: "Cost: 0 spirit",
+				description: function(){
+					return "Cost: 0 spirit. Takes "+monster.abilities.assist.upgrade.runTime/1000+" seconds.";
+				},
 				cost: [],
 				shouldStart: false,
 				running: 0,

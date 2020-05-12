@@ -67,8 +67,10 @@ var prepareAbilityToTrain = function(ability){
 }
 
 var activateAbility = function(ability){
-	monster.activeAbilities.push(ability.id);
-	ability.active = true;
+	if(monster.activeAbilities.length < monster.maxActiveAbilities()){
+		monster.activeAbilities.push(ability.id);
+		ability.active = true;
+	}
 }
 
 var deactivateAbility = function(ability){

@@ -157,7 +157,11 @@ var updateAbility = function(ability){
 		}else{
 			abilityElement.removeClass('active');
 			deactivateElement.hide();
-			activateElement.show();
+			if(monster.activeAbilities.length < monster.maxActiveAbilities()){
+				activateElement.show();
+			}else{
+				activateElement.hide();
+			}
 		}
 	}else{
 		abilityElement.removeClass('active');
@@ -182,13 +186,15 @@ var updateAbility = function(ability){
 	upgrade.running -= state.timeSinceLastUpdate;
 	if(upgrade.running >= 1){
 		progress = Math.floor(100 - (upgrade.running / upgrade.runTime) * 100)
-		upgradeElement.find('.progress-bar').css('width', ''+progress+'%');
+		upgradeElement.find('.progress-bar').css('width', ''+progress+'%')
+		upgradeElement.find('.progress-bar-text').text(""+(upgrade.running/1000).toFixed(2)+" seconds");
 	}
 	if(upgrade.running < 1){
 		upgrade.running = 0;
 		ability.trained = true;
 		monster.abilitiesAreTraining = false
 		upgradeElement.find('.progress-bar').css('width', '0%');
+		upgradeElement.find('.progress-bar-text').text("");
 		upgradeElement.find('button').show();
 		upgrade.finish();
 	}
