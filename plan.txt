@@ -73,9 +73,9 @@ Mousing over the train description should say how many seconds/minutes/hours the
 
 While training, the progress bar should also contain a countdown for how many seconds remain. 
 
---
+When Shared Healing is activated a new tab is added, Orphan.
 
-When Shared Healing is unlocked a new tab is added, Orphan.
+--
 
 Selecting this tab shows the player and their stats, and has a section for Wounds. Under the wounds area is "Knocked Out" with a "3" next to it. This number represents how much spirit is required to heal the wound.
 

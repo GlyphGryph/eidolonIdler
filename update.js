@@ -224,8 +224,8 @@ var updateProgress = function(){
 			addLog('green', "The monster has grown in strength and may improve his skills.")
 		}
 	}
-	if(!gameProgress.orphanTabIsUnlocked){
-		if(monster.unlockedAbilities.length > 0){
+	if(!gameProgress.orphanIsUnlocked){
+		if(monster.abilities.sharedHealing.active){
 			gameProgress.orphanIsUnlocked = true;
 			$("#orphan-view-tab").show();
 			addLog('red', "A new tab has become available.")
