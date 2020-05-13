@@ -75,6 +75,7 @@ var setup = function(){
 	$("#action-view-tab").click(function(){selectView('action')});
 	$("#monster-view-tab").click(function(){selectView('monster')});
 	$("#orphan-view-tab").click(function(){selectView('orphan')});
+	$("#region-view-tab").click(function(){selectView('region')});
 
 	selectView('action');
 	if(gameProgress.tabsAreUnlocked){
@@ -87,6 +88,12 @@ var setup = function(){
 		$("#orphan-view-tab").show();
 	}else{
 		$("#orphan-view-tab").hide();
+	}
+	
+	if(gameProgress.regionsAreUnlocked){
+		$("#region-view-tab").show();
+	}else{
+		$("#region-view-tab").hide();
 	}
 	
 	// First run of the update loop

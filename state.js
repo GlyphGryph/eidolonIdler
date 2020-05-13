@@ -10,6 +10,7 @@ var log = [];
 var gameProgress = {
 	tabsAreUnlocked: false,
 	orphanIsUnlocked: false,
+	regionsAreUnlocked: false
 }
 
 var resources = {
@@ -18,8 +19,29 @@ var resources = {
 		name: "Spirit",
 		value: 0,
 		visible: false
+	},
+	affection: {
+		id: 'monster-affection',
+		name: "Love",
+		value: 0,
+		visible: false
 	}
 }
+
+var currentRegion = "blackenedWasteland";
+var unlockedRegions = [];
+var lockedRegions = [
+	'blackenedWasteland'
+];
+var regions = {
+	blackenedWasteland: {
+		id: "blackenedWasteland",
+		name: "Blackened Wasteland",
+		size: 4,
+		awareness: 0,
+		unlockedConditionsMet: function(){ return true; },
+	}
+};
 
 var character = {
 	name: "Wayward Orphan",
@@ -43,10 +65,14 @@ var character = {
 			running: 0,
 			runTime: 100,
 			start: function(){
-				addLog('green', "Fake Action started");
+				addLog('red', "Exploring region...");
 			},
 			finish: function(){
-				addLog('green', "Fake Action finished.");
+				reg = regions[currentRegion];
+				if(reg.awareness < reg.size){
+					reg.awareness+=1;
+				}
+				addLog('red', "Explored region.");
 			}
 		},
 		care: {
@@ -58,11 +84,12 @@ var character = {
 			visible: true,
 			shouldStart: false,
 			running: 0,
-			runTime: 100,
+			runTime: 2000,
 			start: function(){
 				addLog('green', "Fake Action started");
 			},
 			finish: function(){
+				changeResource('affection', 1);
 				addLog('green', "Fake Action finished.");
 			}
 		}

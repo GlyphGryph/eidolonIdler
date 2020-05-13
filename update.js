@@ -259,4 +259,11 @@ var updateProgress = function(){
 			$("#abilities").show();
 		}
 	}
+	
+	if(!gameProgress.regionsAreUnlocked){
+		if(regions.blackenedWasteland.awareness > 0){
+			gameProgress.regionsAreUnlocked = true;
+			$("#region-view-tab").show();
+		}
+	}
 }

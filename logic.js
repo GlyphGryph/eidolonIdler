@@ -3,29 +3,10 @@ removeFromArray = function(array, value){
 };
 
 var selectView = function(id){
-	if('action'==id){
-		$('#monster-view').hide();
-		$('#action-view').show();
-		$('#orphan-view').hide();
-		$('#action-view-tab').addClass('selected');
-		$('#monster-view-tab').removeClass('selected');
-		$('#orphan-view-tab').removeClass('selected');	
-	}else if('monster'==id){
-		$('#action-view').hide();
-		$('#monster-view').show();
-		$('#orphan-view').hide();
-		$('#monster-view-tab').addClass('selected');
-		$('#action-view-tab').removeClass('selected');
-		$('#orphan-view-tab').removeClass('selected');
-	}else if('orphan'==id){
-		$('#action-view').hide();
-		$('#monster-view').hide();
-		$('#orphan-view').show();
-		$('#monster-view-tab').removeClass('selected');
-		$('#action-view-tab').removeClass('selected');
-		$('#orphan-view-tab').addClass('selected');
-
-	}
+	$(".view").hide();
+	$('#'+id+'-view').show();
+	$('.tab').removeClass('selected');
+	$('#'+id+'-view-tab').addClass('selected');
 }
 
 var addLog = function(color, message){

@@ -91,21 +91,50 @@ When the Orphan is no longer Diminished a new action family "Player" is added to
 
 The player family has two actions, "Explore" and "Care".
 
--- 
+Care increases the monster's Affinity resource.
 
-Care increases the monster's Affinity resource, while Explore raises Awareness of the local area.
+Add a "regions" object, with a currentRegion value and a regions list, which includes the current region - "Blackened Wasteland".
 
-Note that the Affinity resource decays over time.
+Explore raises Awareness of the local area.
 
-Exploring adds a new tab "Region". Clicking on the Region tab displays a list of 1 item, that says the name of the current region "Blasted Barrens" and a percentage, currently 25% and "Current Location".
+Exploring adds a new tab "Region". 
 
-Every time the player explores, the percentage raises, in this region by 25%. Reaching 50% reveals an item on a skeleton - "Old Scabbard", which has no current use. Reaching 75% reveals another skeleton and the item Broken Music Box, which also has no current use, as well as 2@, a currency which also currently has no use.
+--
 
-At 100%, an Exit is revealed, and a new Region is added to the Region list, "Tangled Jungle", which does not display "Current Location" and instead displays a button, "Travel", and the words: Travel Time: 20 seconds. Traveling is not enabled for Phase 1, but would disable some actions.
+Clicking on the Region tab displays a list of 1 item, that says the name of the current region and a percentage of aware to explored (1/4 so 25%) and the words "Current Location".
 
-With Affinity and Spirit, the player may start train the Monsters stats. Every stat trained increases the cost to train all other stats.
+Every time the player explores, the percentage raises.
+
+Reaching 50% reveals an item on a skeleton and gives the player an "Item", the "Old Scabbard", which has no current use.
+
+Getting this item adds the Inventory tab, where the item is displayed.
+
+Reaching 75% reveals another skeleton and the item Broken Music Box, which also has no current use.
+
+Reaching 75% also gives the 2 of the resource @, a currency which also currently has no use.
+
+At 100%, an Exit is revealed, and a new Region is added to the Region list, "Tangled Jungle".
+
+Tangled Jungle does not display "Current Location" and instead displays a button, "Travel", and the words: Travel Time: 20 seconds.
+
+Selecting travel sets the currentRegion to "inTransit" and sets all player and monster actions to Busy.
+
+Implement the travel button as a standard timer.
+
+When it finishes, the player's current region becomes Tangled Jungle and their actions are re-enabled.
+
+The region Tangled Jungle is displayed as the Current Region in the list, and the Wasteland now has Travel next to it with the same 20 second countdown.
+
+Refactor stats so they are added to the stat list dynamically instead of hardcoded on the page.
+
+Allow each stat to be raised up to level 3, and require Affinity to level up a stat as well as Spirit.
+
+Increasing the player's Power increases the effect of both Shared Healing (1 point siphoned per point of power) and Assist (an additional 10% improvement to player speed per point of Power)
+
+Implement "Assist" ability.
 
 Save state of the application in a cookie so it's not lost if the player closes the tab 
 
-
 Get a Github
+
+END PHASE 1
