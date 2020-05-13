@@ -23,10 +23,54 @@ var resources = {
 
 var character = {
 	name: "Wayward Orphan",
-	diminished: 3
+	diminished: 3,
+	actionsElementId: 'character-family',
+	actionsAreBusy: false,
+	unlockedActions:[],
+	lockedActions:[
+		'explore',
+		'care'
+	],
+	actions: {
+		explore: {
+			id: 'explore',
+			elementId: 'explore-action',
+			name: "Explore",
+			description: "--",
+			unlockedConditionsMet: function(){ return character.diminished <= 0},
+			visible: true,
+			shouldStart: false,
+			running: 0,
+			runTime: 100,
+			start: function(){
+				addLog('green', "Fake Action started");
+			},
+			finish: function(){
+				addLog('green', "Fake Action finished.");
+			}
+		},
+		care: {
+			id: 'care',
+			elementId: 'care-action',
+			name: "Care",
+			description: "--",
+			unlockedConditionsMet: function(){ return character.diminished <= 0},
+			visible: true,
+			shouldStart: false,
+			running: 0,
+			runTime: 100,
+			start: function(){
+				addLog('green', "Fake Action started");
+			},
+			finish: function(){
+				addLog('green', "Fake Action finished.");
+			}
+		}
+	}
 }
 
 var monster = {
+	name: 'Monster',
 	maxActiveAbilities: function(){ return monster.stats.intellect.level; },
 	abilitiesAreUnlocked: false,
 	abilitiesAreTraining: false,
@@ -218,87 +262,50 @@ var monster = {
 				}
 			}
 		}
-	}
-}
-
-var actions = {
-	huntWisp: {
-		id: 'hunt-wisp',
-		family: 'monster',
-		description: "Hunt for wild wisps to gain Spirit.",
-		visible: true,
-		shouldStart: false,
-		running: 0,
-		runTime: 100,
-		progressBarElement: $("#templates .progress-bar").clone(),
-		start: function(){
-			addLog('green', "Monster starts hunting Wisps");
-		},
-		finish: function(){
-			gainSpirit(2);
-			addLog('green', "Monster caught a Wisp.");
-		}
 	},
-	fakeAction: {
-		id: 'fake-action',
-		family: 'monster',
-		description: "--",
-		visible: true,
-		shouldStart: false,
-		running: 0,
-		runTime: 1000,
-		progressBarElement: $("#templates .progress-bar").clone(),
-		start: function(){
-			addLog('green', "Fake Action started");
+	actionsElementId: 'monster-family',
+	actionsAreBusy: false,
+	unlockedActions:[
+		'huntWisp',
+		'fakeAction'
+	],
+	lockedActions:[
+	],
+	actions: {
+		huntWisp: {
+			id: 'huntWisp',
+			elementId: 'hunt-wisp-action',
+			name: "Hunt Wisp",
+			description: "Hunt for wild wisps to gain Spirit.",
+			visible: true,
+			shouldStart: false,
+			running: 0,
+			runTime: 100,
+			progressBarElement: $("#templates .progress-bar").clone(),
+			start: function(){
+				addLog('green', "Monster starts hunting Wisps");
+			},
+			finish: function(){
+				gainSpirit(2);
+				addLog('green', "Monster caught a Wisp.");
+			}
 		},
-		finish: function(){
-			addLog('green', "Fake Action finished.");
-		}
-	},
-	explore: {
-		id: 'explore',
-		family: 'character',
-		description: "--",
-		visible: true,
-		shouldStart: false,
-		running: 0,
-		runTime: 100,
-		progressBarElement: $("#templates .progress-bar").clone(),
-		start: function(){
-			addLog('green', "Fake Action started");
+		fakeAction: {
+			id: 'huntWisp',
+			elementId: 'fake-action',
+			name: "Fake Action",
+			description: "--",
+			visible: true,
+			shouldStart: false,
+			running: 0,
+			runTime: 1000,
+			progressBarElement: $("#templates .progress-bar").clone(),
+			start: function(){
+				addLog('green', "Fake Action started");
+			},
+			finish: function(){
+				addLog('green', "Fake Action finished.");
+			}
 		},
-		finish: function(){
-			addLog('green', "Fake Action finished.");
-		}
-	},
-	care: {
-		id: 'care',
-		family: 'character',
-		description: "--",
-		visible: true,
-		shouldStart: false,
-		running: 0,
-		runTime: 100,
-		progressBarElement: $("#templates .progress-bar").clone(),
-		start: function(){
-			addLog('green', "Fake Action started");
-		},
-		finish: function(){
-			addLog('green', "Fake Action finished.");
-		}
-	}
-};
-
-var actionFamilies = {
-	monster: {
-		id: 'monster-family',
-		visible: true,
-		busy: false,
-		actions: ['huntWisp', 'fakeAction']
-	},
-	character: {
-		id: 'character-family',
-		visible: false,
-		actions: ['explore', 'care']
 	}
 };

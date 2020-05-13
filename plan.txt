@@ -83,11 +83,17 @@ The value for diminished is tracked as part of the player object.
 
 The player may now return to hunting Wisps. While Shared Healing is active, #{power} points of spirit, up to the Spirit gained, by the monster from each hunt (up to the maximum amount to heal the orphan) goes towards reducing the Orphan's diminished status.
 
---
+Move monster actions to the monster object, and character actions to the character object
+
+Have the views generated instead of hardcoded
 
 When the Orphan is no longer Diminished a new action family "Player" is added to the Actions page.
 
-The player family has two actions, "Explore" and "Care". Care increases the monster's Affinity resource, while Explore raises Awareness of the local area.
+The player family has two actions, "Explore" and "Care".
+
+-- 
+
+Care increases the monster's Affinity resource, while Explore raises Awareness of the local area.
 
 Note that the Affinity resource decays over time.
 

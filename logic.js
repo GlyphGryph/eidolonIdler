@@ -76,6 +76,13 @@ var changeResource = function(id, value){
 	addLog('black', "Gained "+value+" "+resource.name+".");
 };
 
+var unlockAction = function(context, action){
+	context.lockedActions = removeFromArray(context.lockedActions, action.id);
+	context.unlockedActions.push(action.id);
+	setupAction(context, action);
+	addLog('black', "Action "+action.name+" unlocked.");
+}
+
 var unlockStat = function(stat){
 	monster.lockedStats = removeFromArray(monster.lockedStats, stat.id);
 	monster.unlockedStats.push(stat.id);
@@ -109,11 +116,10 @@ var deactivateAbility = function(ability){
 	ability.active = false;
 }
 
-var prepareActionToStart = function(action){
-	var actionFamily = actionFamilies[action.family];
-	if(!actionFamily.busy){
+var prepareActionToStart = function(context, action){
+	if(!context.actionsAreBusy){
 		action.shouldStart=true;
-		actionFamily.busy=true;
+		context.actionsAreBusy=true;
 	}
 }
 

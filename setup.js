@@ -8,6 +8,17 @@ var setupStat = function(stat){
 	$("#"+stat.upgrade.elementId).click(function(){upgradeStat(stat)});	
 }
 
+var setupAction = function(context, action){
+	contextElement = $("#"+context.actionsElementId);
+	actionElement = $("#action-template").clone();
+	actionElement.attr('id', action.elementId);
+	actionElement.find('.name').text(action.name);
+	contextElement.append(actionElement);
+	actionElement.mouseenter(function(){openDescription(this, action)});
+	actionElement.mouseleave(function(){closeDescription()});
+	actionElement.click(function(){prepareActionToStart(context, action)});
+}
+
 // Attach handlers when a stat is loaded or unlocked
 var setupAbility = function(ability){
 	abilityElement = $("#ability-template").clone();
@@ -26,16 +37,7 @@ var setupAbility = function(ability){
 }
 
 // Runs once at game start / on game load
-var setup = function(){
-	$.each(actionFamilies, function(key, actionFamily){
-		actionFamily.actions.forEach(function(id){
-			var action = actions[id];
-			if(action.start){
-				$("#"+action.id).click(function(){prepareActionToStart(action)});
-			}
-		});
-	});
-	
+var setup = function(){	
 	// Setup stats
 	monster.unlockedStats.forEach(function(id){
 		var stat = monster.stats[id];
@@ -61,10 +63,12 @@ var setup = function(){
 		$("#abilities").hide();
 	}
 	
-	// Setup actions	
-	$.each(actions, function(key, action){
-		$("#"+action.id).mouseenter(function(){openDescription(this, action)});
-		$("#"+action.id).mouseleave(function(){closeDescription()});
+	// Setup actions
+	[character, monster].forEach(function(context){
+		context.unlockedActions.forEach(function(id){
+			var action = monster.actions[id];
+			setupAction(monster, action);
+		});
 	});
 	
 	//Setup Tabs

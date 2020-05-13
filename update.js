@@ -7,7 +7,7 @@ var update = function(timestamp){
 	}
 	state.currentTime = timestamp;
 	state.timeSinceLastUpdate = state.currentTime - state.lastTime;
-	updateActionFamilies();
+	updateActions();
 	updateResources();
 	updateStats();
 	updateAbilities();
@@ -36,53 +36,55 @@ var updateCharacter = function(){
 	}
 }
 
-var updateAction = function(id){
-	var action = actions[id];
-	var actionElement = $("#"+action.id);
-	var family = actionFamilies[action.family];
-	if(action.visible){
-		actionElement.show();
-	}else{
-		actionElement.hide();
-	}
+var updateAction = function(context, action){
+	var actionElement = $("#"+action.elementId);
 	if(true==action.shouldStart){
 		action.start();
 		action.running = action.runTime;
 		action.shouldStart=false;
 		actionElement.find('button').hide();
 	}
-	if(family.busy){
+	if(context.actionsAreBusy){
 		actionElement.find('button').prop('disabled', true);
 	}else{
 		actionElement.find('button').prop('disabled', false);
 	}
 	
-	// Return early if the action does not need to be run
-	if(action.running < 1){ return; }
-	action.running -= state.timeSinceLastUpdate;
+	// If this action is currently running...
 	if(action.running >= 1){
-		progress = Math.floor(100 - (action.running / action.runTime) * 100)
-		actionElement.find('.progress-bar').css('width', ''+progress+'%');
-	}
-	if(action.running < 1){
-		action.running = 0;
-		var family = actionFamilies[action.family];
-		family.busy = false;
-		actionElement.find('.progress-bar').css('width', '0%');
-		actionElement.find('button').show();
-		action.finish();
+		action.running -= state.timeSinceLastUpdate;
+		if(action.running >= 1){
+			progress = Math.floor(100 - (action.running / action.runTime) * 100)
+			actionElement.find('.progress-bar').css('width', ''+progress+'%');
+		}
+		if(action.running < 1){
+			action.running = 0;
+			context.actionsAreBusy = false;
+			actionElement.find('.progress-bar').css('width', '0%');
+			actionElement.find('button').show();
+			action.finish();
+		}
 	}
 };
 
-var updateActionFamilies = function(){
-	$.each(actionFamilies, function(key, actionFamily){
-		if(actionFamily.visible){
-			$("#"+actionFamily.id).show();
+var updateActions = function(){
+	[character, monster].forEach(function(context){
+		if(context.unlockedActions.length > 0){
+			$("#"+context.actionsElementId).show();
 		}else{
-			$("#"+actionFamily.id).hide();
+			$("#"+context.actionsElementId).hide();
 		}
-		actionFamily.actions.forEach(updateAction);
-	});
+		context.lockedActions.forEach(function(id){
+			var action = context.actions[id];
+			if(action.unlockedConditionsMet()){
+				unlockAction(context, action);
+			}
+		});
+		context.unlockedActions.forEach(function(id){
+			var action = context.actions[id];
+			updateAction(context, action);
+		});
+	})
 };
 
 var updateResources = function(){
