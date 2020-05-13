@@ -219,14 +219,22 @@ var updateProgress = function(){
 	// Unlock tabs at 4 spirit
 	if(!gameProgress.tabsAreUnlocked){
 		if(resources.monsterSpirit.value > 3){
-			gameProgress.tabsAreUnlocked=true;
+			gameProgress.tabsAreUnlocked = true;
 			$("#view-select-menu").show();
 			addLog('green', "The monster has grown in strength and may improve his skills.")
 		}
 	}
+	if(!gameProgress.orphanTabIsUnlocked){
+		if(monster.unlockedAbilities.length > 0){
+			gameProgress.orphanIsUnlocked = true;
+			$("#orphan-view-tab").show();
+			addLog('red', "A new tab has become available.")
+
+		}
+	}
 	if(!monster.abilitiesAreUnlocked){
 		if(monster.unlockedAbilities.length > 0){
-			monster.abilitiesAreUnlocked=true;
+			monster.abilitiesAreUnlocked = true;
 			$("#abilities").show();
 		}
 	}

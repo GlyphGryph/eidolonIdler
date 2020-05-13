@@ -70,11 +70,19 @@ var setup = function(){
 	//Setup Tabs
 	$("#action-view-tab").click(function(){selectView('action')});
 	$("#monster-view-tab").click(function(){selectView('monster')});
+	$("#orphan-view-tab").click(function(){selectView('orphan')});
+
 	selectView('action');
 	if(gameProgress.tabsAreUnlocked){
 		$("#view-select-menu").show();
 	}else{
 		$("#view-select-menu").hide();
+	}
+	
+	if(gameProgress.orphanIsUnlocked){
+		$("#orphan-view-tab").show();
+	}else{
+		$("#orphan-view-tab").hide();
 	}
 	
 	// First run of the update loop

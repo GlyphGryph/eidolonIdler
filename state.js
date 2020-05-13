@@ -9,6 +9,7 @@ var log = [];
 
 var gameProgress = {
 	tabsAreUnlocked: false,
+	orphanIsUnlocked: false,
 }
 
 var resources = {
@@ -67,7 +68,7 @@ var monster = {
 		fakeAbility: {
 			id: 'fakeAbility',
 			elementId: 'fake-ability',
-			name: 'Fake Ability',
+			name: 'Jump Boost',
 			description: "Does nothing.",
 			locked: true,
 			unlockedConditionsMet: function(){
