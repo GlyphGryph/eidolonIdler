@@ -50,6 +50,25 @@ var upgradeMultiplier = function(){
 	}
 }
 
+var gainSpirit = function(value){
+	if(monster.abilities.sharedHealing.active && character.diminished > 0){
+		var amountToSiphon = monster.stats.power.level;
+		if(amountToSiphon > value){
+			amountToSiphon = value;
+		}
+		if(amountToSiphon > character.diminished){
+			amountToSiphon = character.diminished;
+		}
+		character.diminished -= amountToSiphon;
+		addLog('red', "Orphan healed "+amountToSiphon+" points of damage.");
+		if(character.diminished <= 0){
+			addLog('red', "Orphan fully healed.");
+		}
+		value = value - amountToSiphon;
+	}
+	changeResource('monsterSpirit', value);
+}
+
 var changeResource = function(id, value){
 	var resource = resources[id];
 	resource.value += value;

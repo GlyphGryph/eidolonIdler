@@ -21,6 +21,11 @@ var resources = {
 	}
 }
 
+var character = {
+	name: "Wayward Orphan",
+	diminished: 3
+}
+
 var monster = {
 	maxActiveAbilities: function(){ return monster.stats.intellect.level; },
 	abilitiesAreUnlocked: false,
@@ -230,7 +235,7 @@ var actions = {
 			addLog('green', "Monster starts hunting Wisps");
 		},
 		finish: function(){
-			changeResource('monsterSpirit', 2);
+			gainSpirit(2);
 			addLog('green', "Monster caught a Wisp.");
 		}
 	},

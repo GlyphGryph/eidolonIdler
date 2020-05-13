@@ -12,9 +12,28 @@ var update = function(timestamp){
 	updateStats();
 	updateAbilities();
 	updateProgress();
+	updateCharacter();
 	updateLog();
 	
 	window.requestAnimationFrame(update);
+}
+
+var updateCharacter = function(){
+	var characterElement = $('#orphan-view');
+	var characterNameElement = characterElement.find('#orphan-name');
+	var characterDiminishedElement = characterElement.find('#orphan-diminished');
+	if(characterNameElement.text()!=character.name){
+		characterNameElement.text(character.name);
+	}
+	if(character.diminished > 0){
+		characterDiminishedElement.show();
+		var characterDiminishedValueElement = characterDiminishedElement.find('#diminished-value');
+		if(characterDiminishedValueElement.text()!=character.diminished){
+			characterDiminishedValueElement.text(character.diminished);
+		}
+	} else {
+		characterDiminishedElement.hide();
+	}
 }
 
 var updateAction = function(id){

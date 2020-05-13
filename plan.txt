@@ -44,7 +44,6 @@ Finishing increases the level of the skill.
 
 Since the ability is now at max level, the Train button is removed.
 
-
 Change the "levels" of abilities to simply whether or not the ability has been "Learned"
 
 When the timer finishes, the "Activate" ability button appears.
@@ -75,13 +74,18 @@ While training, the progress bar should also contain a countdown for how many se
 
 When Shared Healing is activated a new tab is added, Orphan.
 
+
+Selecting this tab shows the player name, currently "Wayward Orphan", and will later show their stats but doesn't right now.
+
+It says the player is "Diminished" with a value of 3. Mousing over shows the description "The Orphan is unconscious, injured, and drained of energy. Requires {diminished} Spirit to revive."
+
+The value for diminished is tracked as part of the player object.
+
+The player may now return to hunting Wisps. While Shared Healing is active, #{power} points of spirit, up to the Spirit gained, by the monster from each hunt (up to the maximum amount to heal the orphan) goes towards reducing the Orphan's diminished status.
+
 --
 
-Selecting this tab shows the player and their stats, and has a section for Wounds. Under the wounds area is "Knocked Out" with a "3" next to it. This number represents how much spirit is required to heal the wound.
-
-The player may now return to hunting Wisps. The monster gains 1 less Spirit from each fight, as it instead goes to heal the player.
-
-After hunting three times, the player is no longer Knocked Out, and a new action family "Player" is added to the Actions page.
+When the Orphan is no longer Diminished a new action family "Player" is added to the Actions page.
 
 The player family has two actions, "Explore" and "Care". Care increases the monster's Affinity resource, while Explore raises Awareness of the local area.
 
