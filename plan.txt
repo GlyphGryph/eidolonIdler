@@ -99,11 +99,11 @@ Explore raises Awareness of the local area.
 
 Exploring adds a new tab "Region". 
 
---
-
 Clicking on the Region tab displays a list of 1 item, that says the name of the current region and a percentage of aware to explored (1/4 so 25%) and the words "Current Location".
 
 Every time the player explores, the percentage raises.
+
+--
 
 Reaching 50% reveals an item on a skeleton and gives the player an "Item", the "Old Scabbard", which has no current use.
 

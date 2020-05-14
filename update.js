@@ -13,6 +13,7 @@ var update = function(timestamp){
 	updateAbilities();
 	updateProgress();
 	updateCharacter();
+	updateRegions();
 	updateLog();
 	
 	window.requestAnimationFrame(update);
@@ -85,6 +86,30 @@ var updateActions = function(){
 			updateAction(context, action);
 		});
 	})
+};
+
+var updateRegion = function(region){
+	regionElement = $("#"+region.elementId);
+	var exploredElement = regionElement.find(".explored");
+	var exploredPercent = (region.awareness/region.size*100).toFixed(1)
+	var exploredText = ""+exploredPercent+"%"
+	if(exploredElement.text() != exploredText){
+		exploredElement.text(""+exploredPercent+"%");
+	}
+	
+};
+
+var updateRegions = function(){
+	lockedRegions.forEach(function(id){
+		var region = regions[id];
+		if(region.unlockedConditionsMet()){
+			unlockRegion(region);
+		}
+	});
+	unlockedRegions.forEach(function(id){
+		var region = regions[id];
+		updateRegion(region);
+	});
 };
 
 var updateResources = function(){

@@ -57,6 +57,13 @@ var changeResource = function(id, value){
 	addLog('black', "Gained "+value+" "+resource.name+".");
 };
 
+var unlockRegion = function(region){
+	lockedRegions = removeFromArray(lockedRegions, region.id);
+	unlockedRegions.push(region.id);
+	setupRegion(region);
+	addLog('black', "Region "+region.name+" unlocked.");
+}
+
 var unlockAction = function(context, action){
 	context.lockedActions = removeFromArray(context.lockedActions, action.id);
 	context.unlockedActions.push(action.id);

@@ -36,10 +36,12 @@ var lockedRegions = [
 var regions = {
 	blackenedWasteland: {
 		id: "blackenedWasteland",
+		elementId: "blackened-wasteland-region",
 		name: "Blackened Wasteland",
+		description: "A barren wasteland, the spirits here are sparse and weak. Something terrible must have happened here long ago.",
 		size: 4,
 		awareness: 0,
-		unlockedConditionsMet: function(){ return true; },
+		unlockedConditionsMet: function(){ return (regions.blackenedWasteland.awareness > 0); },
 	}
 };
 

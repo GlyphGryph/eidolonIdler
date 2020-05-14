@@ -1,3 +1,15 @@
+// Attach handlers when a region is loaded or unlocked
+var setupRegion = function(region){
+	var regionElement = $("#region-template").clone();
+	regionElement.attr('id', region.elementId);
+	var nameElement = regionElement.find('.name')
+	nameElement.text(region.name);
+	$("#region-view").append(regionElement);
+	regionElement.show();
+	nameElement.mouseenter(function(){openDescription(this, region)});
+	nameElement.mouseleave(closeDescription);
+}
+
 // Attach handlers when a stat is loaded or unlocked
 var setupStat = function(stat){
 	$("#"+stat.elementId).show();
@@ -8,8 +20,9 @@ var setupStat = function(stat){
 	$("#"+stat.upgrade.elementId).click(function(){upgradeStat(stat)});	
 }
 
+// Attach handlers when an action is loaded or unlocked
 var setupAction = function(context, action){
-	contextElement = $("#"+context.actionsElementId);
+	var contextElement = $("#"+context.actionsElementId);
 	actionElement = $("#action-template").clone();
 	actionElement.attr('id', action.elementId);
 	actionElement.find('.name').text(action.name);
@@ -21,7 +34,7 @@ var setupAction = function(context, action){
 
 // Attach handlers when a stat is loaded or unlocked
 var setupAbility = function(ability){
-	abilityElement = $("#ability-template").clone();
+	var abilityElement = $("#ability-template").clone();
 	abilityElement.attr('id', ability.elementId);
 	abilityElement.find('#trainer-template').attr('id', ability.upgrade.elementId);
 	abilityElement.find('.name').text(ability.name);
@@ -37,7 +50,13 @@ var setupAbility = function(ability){
 }
 
 // Runs once at game start / on game load
-var setup = function(){	
+var setup = function(){
+	// Setup regionsAreUnlocked
+	unlockedRegions.forEach(function(id){
+		var region = regions[id];
+		setupRegion(region);
+	});
+	
 	// Setup stats
 	monster.unlockedStats.forEach(function(id){
 		var stat = monster.stats[id];
