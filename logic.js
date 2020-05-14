@@ -50,6 +50,16 @@ var gainSpirit = function(value){
 	changeResource('monsterSpirit', value);
 }
 
+var exploreRegion = function(){
+	var region = regions[currentRegion]
+	if(region.awareness < region.size){
+		region.awareness+=1;
+		if(region.awareness in region.discoveries){
+			region.discoveries[region.awareness]();
+		}
+	}
+}
+
 var changeResource = function(id, value){
 	var resource = resources[id];
 	resource.value += value;

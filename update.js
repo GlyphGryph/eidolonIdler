@@ -96,7 +96,13 @@ var updateRegion = function(region){
 	if(exploredElement.text() != exploredText){
 		exploredElement.text(""+exploredPercent+"%");
 	}
-	
+	if(region.id==currentRegion){
+		regionElement.find('.travel-button').hide();
+		regionElement.find('.current-location').show();
+	}else{
+		regionElement.find('.travel-button').show();
+		regionElement.find('.current-location').hide();
+	}
 };
 
 var updateRegions = function(){
