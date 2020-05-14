@@ -16,7 +16,11 @@ var setupRegion = function(region){
 
 // Attach handlers when a stat is loaded or unlocked
 var setupStat = function(stat){
-	$("#"+stat.elementId).show();
+	var statElement = $("#stat-template").clone();
+	statElement.attr('id', stat.elementId);
+	statElement.find('#upgrade-template').attr('id', stat.upgrade.elementId);
+	statElement.find('.name').text(stat.name);
+	$("#monster-stats").append(statElement);
 	$("#"+stat.elementId+" .name").mouseenter(function(){openDescription(this, stat)});
 	$("#"+stat.elementId+" .name").mouseleave(closeDescription);
 	$("#"+stat.upgrade.elementId).mouseenter(function(){openDescription(this, stat.upgrade)});
@@ -27,7 +31,7 @@ var setupStat = function(stat){
 // Attach handlers when an action is loaded or unlocked
 var setupAction = function(context, action){
 	var contextElement = $("#"+context.actionsElementId);
-	actionElement = $("#action-template").clone();
+	var actionElement = $("#action-template").clone();
 	actionElement.attr('id', action.elementId);
 	actionElement.find('.name').text(action.name);
 	contextElement.append(actionElement);
