@@ -8,6 +8,10 @@ var setupRegion = function(region){
 	regionElement.show();
 	nameElement.mouseenter(function(){openDescription(this, region)});
 	nameElement.mouseleave(closeDescription);
+	var travelElement = regionElement.find('.travel-button')
+	travelElement.mouseenter(function(){openDescription(this, region.travel)});
+	travelElement.mouseleave(closeDescription);
+	travelElement.click(function(){prepareTravelToStart(region)});
 }
 
 // Attach handlers when a stat is loaded or unlocked

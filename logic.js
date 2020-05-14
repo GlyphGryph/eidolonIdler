@@ -114,6 +114,14 @@ var deactivateAbility = function(ability){
 	ability.active = false;
 }
 
+var prepareTravelToStart = function(region){
+	if(!monster.actionsAreBusy && !character.actionsAreBusy){
+		region.travel.shouldStart=true;
+		monster.actionsAreBusy=true;
+		character.actionsAreBusy=true;
+	}
+}
+
 var prepareActionToStart = function(context, action){
 	if(!context.actionsAreBusy){
 		action.shouldStart=true;

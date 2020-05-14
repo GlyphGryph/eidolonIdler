@@ -111,13 +111,15 @@ At 4 awareness, an Exit is revealed, and a new Region is added to the Region lis
 
 At 8 awareness, an Exit is revealed, and a new Region is added to the Region list, "Forgotten Village".
 
---
-
 Tangled Jungle does not display "Current Location" and instead displays a button, "Travel".
 
 Travel buttons are disabled if either the player or monster are busy (abilities being trained is fine!).
 
-Selecting travel sets the currentRegion to "inTransit" using the same logic as actions except it sets both player and monster actions to Busy.
+Travel button mouseover description should say time it takes to travel.
+
+Travel button mouseover description should say why it's disabled, if it's disabled.
+
+Selecting travel works like an action does, setting both monster and character to busy and then running a countup clock.
 
 Implement the travel button as a standard timer.
 
@@ -125,6 +127,8 @@ When it finishes, the player's current region becomes the region they clicked to
 
 Displays should correctly say which region the player is in and where they can travel to.
 
+--
+ 
 Refactor stats so they are added to the stat list dynamically instead of hardcoded on the page.
 
 Allow each stat to be raised up to level 3.
@@ -133,7 +137,7 @@ Require Affinity to level up a stat as well as Spirit.
 
 Increasing the player's Power increases the effect of both Shared Healing (1 point siphoned per point of power) and Assist (an additional 10% improvement to player speed per point of Power)
 
-Increasing intellect allows equipping more abilities.
+Increasing intellect allows equipping more abilities. 
 
 Implement "Assist" ability.
 

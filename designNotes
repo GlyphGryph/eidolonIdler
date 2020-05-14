@@ -1,3 +1,11 @@
+
+Pitch:
+An orphan stranged in another world bonds with a young monster. As it grows in power, they travel from place to place, first exploring and learning and eventually challenging and defeating the nefarious boss monsters that rot the heart of each region. Each one they defeat gives their monster incredible new powers, or allows them to add a new baby monster to their team. They eventually discover a city full of sentient non-human beings, which allows them to earn and spend money on unlocking the secrets of those who came before. When all of the boss monsters have been defeated, the player may return to the area they started to challenge the final boss, the man who offered them their first monster in his boss monster form, and beat the game.
+
+
+
+---
+
 Monster classes and governing stats:
 
 Each stat is fed by the following:
@@ -5,8 +13,6 @@ Power: Passion, Strength
 Will: Faith, Persistence
 Intellect: Fear, Cunning
 Bond: pure Spirit
-
-
 
 Player can choose 1 of 3 starting monsters, or decline to get a fourth monster.
 
@@ -38,3 +44,26 @@ Intro:
 Player sees an old man sprite against a black background page, who offers him the choice of the three monsters above, or the option to reject his offer. If reject is chosen, he asks twice if you're sure. Then he says he insists you pick one of the available monsters. If you reject another time he tells you will regret your choice, and then the monsters blink out one by one and then so does he. After a short while staring at blackness, the bond-based monster will appear.
 
 Once the player has a monster, a gif of footsteps against a stone floor plays. Then a view of a cave, with the orphan jumping with joy and the chosen monster beside him. Then the screen shakes once, twice, three times, and the image transforms to the monster being impaled by a giant leg and the orphan looking shocked. Cuts to image of the sun behind a giant shadow figure, which gets hazy and wavy as things fade to darkness. Show image of monster coalescing out of the players unconscious body, fade out, and then the standard UI fades in.
+
+Things to Do List:
+Challenge Boss (challenge the boss monster of a region. Note that sometimes the boss monster might challenge YOU before you're ready, this just trigges the fight!)
+Hunt Ghost (takes longer than Wisps and can cause damage, but gives "flavoured" resources in addition to more Spirit, which is needed for upgrading to higher level stats)
+Identify Items (when at city, unlocks lore snippets about previous adventurers)
+Collect Resources (get money, get more if the areas has been purified)
+Decipher Books? (when at city, unlocks new abilities)
+
+Boss Fights:
+Fight (damage done is based on POWER)
+Run Away
+Use abilities (number of times available to used based on WILL, health is also based on WILL)
+When they start the battle, only the monster or character they attacked participates.
+Whether you start the battle, everyone not currently taking an action participates.
+
+Abilities:
+Strengthen Player: Some of the spirit this monster collect is siphoned to the orphan, allowing the orphan to increase their own stats.
+Persistence: Actions get a "repeat" icon next to them that when activated automatically triggers the action each time it's completed, saving the player from managing and clicking. 
+
+Map:
+The map is a ring shape.
+
+Barren Wastes <-> Passion Monster <-> Persistence <-> Fear <-> CITY <-> Strength <-> Cunning <-> Faith <-> Barren Wastes

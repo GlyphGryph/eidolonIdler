@@ -61,6 +61,13 @@
 	width: 100%;
 	height: 100%;
 }
+.travel-bar{
+	position: relative;
+	display: inline-block;
+	width: 200px;
+	height: 25px;
+	border: 1px solid black;
+}
 #templates{
 	display: none;
 }

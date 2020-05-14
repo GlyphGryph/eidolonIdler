@@ -91,17 +91,55 @@ var updateActions = function(){
 var updateRegion = function(region){
 	regionElement = $("#"+region.elementId);
 	var exploredElement = regionElement.find(".explored");
-	var exploredPercent = (region.awareness/region.size*100).toFixed(1)
-	var exploredText = ""+exploredPercent+"%"
+	var exploredPercent = (region.awareness/region.size*100).toFixed(1);
+	var exploredText = ""+exploredPercent+"%";
+	var travel = region.travel;
+	var travelElement = regionElement.find('.travel-button');
+	
 	if(exploredElement.text() != exploredText){
 		exploredElement.text(""+exploredPercent+"%");
 	}
-	if(region.id==currentRegion){
+	
+	if(monster.actionsAreBusy || character.actionsAreBusy){
+		travelElement.find('button').prop('disabled', true);
+	}else{
+		travelElement.find('button').prop('disabled', false);
+	}
+	
+	if(true==region.travel.shouldStart){
+		travel.traveling = travel.travelTime;
+		travel.shouldStart=false;
+		travelElement.hide();
+	}
+	
+	// If this action is currently running...
+	if(travel.traveling >= 1){
+		travel.traveling -= state.timeSinceLastUpdate;
+		if(travel.traveling >= 1){
+			progress = Math.floor(100 - (travel.traveling / travel.travelTime) * 100)
+			regionElement.find('.progress-bar').css('width', ''+progress+'%');
+		}
+		if(travel.traveling < 1){
+			travel.traveling = 0;
+			monster.actionsAreBusy = false;
+			character.actionsAreBusy = false;
+			regionElement.find('.progress-bar').css('width', '0%');
+			currentRegion = region.id;
+		}
+	}
+	
+	if(travel.traveling > 0){
+		regionElement.find('.travel-button').hide();
+		regionElement.find('.current-location').hide();
+		regionElement.find('.travel-bar').show();
+	}else if(region.id==currentRegion){
 		regionElement.find('.travel-button').hide();
 		regionElement.find('.current-location').show();
+		regionElement.find('.travel-bar').hide();
 	}else{
 		regionElement.find('.travel-button').show();
 		regionElement.find('.current-location').hide();
+		regionElement.find('.travel-bar').hide();
 	}
 };
 
