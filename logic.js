@@ -163,19 +163,18 @@ var canStatBeUpgraded = function(stat){
 	return (
 		stat.level < stat.maxLevel &&
 		resources.monsterSpirit.value >= stat.upgrade.spiritCost() &&
-		resources[stat.upgrade.specialCostType].value >= stat.upgrade.specialCost()
+		resources.affection.value >= stat.upgrade.affectionCost()
 	);
 }
 
 var upgradeStat = function(stat){
 	if(canStatBeUpgraded(stat)){
-		var specialResource = resources[stat.upgrade.specialCostType]
 		resources.monsterSpirit.value -= stat.upgrade.spiritCost();
-		specialResource.value -= stat.upgrade.specialCost();
+		resources.affection.value -= stat.upgrade.affectionCost();
 		stat.level += 1;
-		addLog('black', "Spent "+stat.upgrade.spiritCost()+" Spirit and "+stat.upgrade.specialCost()+" "+specialResource.name);
+		addLog('black', "Spent "+stat.upgrade.spiritCost()+" Spirit and "+stat.upgrade.affectionCost()+" Love");
+		openDescription($("#"+stat.upgrade.elementId),stat.upgrade);
 	}
-	openDescription($("#"+stat.upgrade.elementId),stat.upgrade);
 }
 
 

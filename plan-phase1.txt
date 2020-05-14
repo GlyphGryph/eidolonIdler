@@ -127,19 +127,19 @@ When it finishes, the player's current region becomes the region they clicked to
 
 Displays should correctly say which region the player is in and where they can travel to.
 
---
- 
 Refactor stats so they are added to the stat list dynamically instead of hardcoded on the page.
 
+Increasing intellect allows equipping more abilities. 
+ 
 Allow each stat to be raised up to level 3.
 
-Require Affinity to level up a stat as well as Spirit.
+Require Love to level up a stat as well as Spirit.
 
-Increasing the player's Power increases the effect of both Shared Healing (1 point siphoned per point of power) and Assist (an additional 10% improvement to player speed per point of Power)
-
-Increasing intellect allows equipping more abilities. 
+--
 
 Implement "Assist" ability.
+
+Increasing the player's Power increases the effect of both Shared Healing (1 point siphoned per point of power) and Assist (an additional 10% improvement to player speed per point of Power)
 
 Save state of the application in a cookie so it's not lost if the player closes the tab 
 

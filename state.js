@@ -287,16 +287,19 @@ var monster = {
 			name: 'Bond',
 			description: "Strengthens the connection between a character and their monster.",
 			level: 0,
-			maxLevel: 1,
+			maxLevel: 3,
 			unlockedConditionsMet: function(){true},
 			upgrade: {
 				elementId: 'bond-upgrade',
 				spiritCost: function(){ return 4+4*upgradeMultiplier()+2*monster.stats.bond.level },
-				specialCostType: 'monsterSpirit',
-				specialCost: function(){ return 0 },
+				affectionCost: function(){ return monster.stats.bond.level },
 				description: function(){
 					if(monster.stats.bond.level == monster.stats.bond.maxLevel){ return "At Max Level" };
-					return "Cost is "+monster.stats.bond.upgrade.spiritCost()+" Spirit";
+					var txt = "Cost is "+monster.stats.bond.upgrade.spiritCost()+" Spirit";
+					if(monster.stats.bond.upgrade.affectionCost() > 0){
+						txt += " and "+monster.stats.bond.upgrade.affectionCost()+" Love";
+					}
+					return txt;
 				}
 			}
 		},
@@ -306,16 +309,19 @@ var monster = {
 			name: "Will",
 			description: "--",
 			level: 1,
-			maxLevel: 2,
+			maxLevel: 3,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'will-upgrade',
 				spiritCost: function(){ return 4+4*upgradeMultiplier()+2*monster.stats.will.level },
-				specialCostType: 'monsterSpirit',
-				specialCost: function(){ return 0 },
+				affectionCost: function(){ return monster.stats.will.level },
 				description: function(){
 					if(monster.stats.will.level == monster.stats.will.maxLevel){ return "At Max Level" };
-					return "Cost is "+monster.stats.will.upgrade.spiritCost()+" Spirit";
+					var txt = "Cost is "+monster.stats.will.upgrade.spiritCost()+" Spirit";
+					if(monster.stats.will.upgrade.affectionCost() > 0){
+						txt += " and "+monster.stats.will.upgrade.affectionCost()+" Love";
+					}
+					return txt;
 				}
 			}
 		},
@@ -325,16 +331,19 @@ var monster = {
 			name: "Intellect",
 			description: "--",
 			level: 1,
-			maxLevel: 2,
+			maxLevel: 3,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'intellect-upgrade',
 				spiritCost: function(){ return 4+4*upgradeMultiplier()+2*monster.stats.intellect.level },
-				specialCostType: 'monsterSpirit',
-				specialCost: function(){ return 0 },
+				affectionCost: function(){ return monster.stats.intellect.level },
 				description: function(){
 					if(monster.stats.intellect.level == monster.stats.intellect.maxLevel){ return "At Max Level" };
-					return "Cost is "+monster.stats.intellect.upgrade.spiritCost()+" Spirit";
+					var txt = "Cost is "+monster.stats.intellect.upgrade.spiritCost()+" Spirit";
+					if(monster.stats.intellect.upgrade.affectionCost() > 0){
+						txt += " and "+monster.stats.intellect.upgrade.affectionCost()+" Love";
+					}
+					return txt;
 				}
 			}
 		},
@@ -344,16 +353,19 @@ var monster = {
 			name: "Power",
 			description: "--",
 			level: 1,
-			maxLevel: 2,
+			maxLevel: 3,
 			unlockedConditionsMet: function(){ return monster.stats.bond.level > 0},
 			upgrade: {
 				elementId: 'power-upgrade',
 				spiritCost: function(){ return 4+4*upgradeMultiplier()+2*monster.stats.power.level },
-				specialCostType: 'monsterSpirit',
-				specialCost: function(){ return 0 },
+				affectionCost: function(){ return monster.stats.power.level },
 				description: function(){
 					if(monster.stats.power.level == monster.stats.power.maxLevel){ return "At Max Level" };
-					return "Cost is "+monster.stats.power.upgrade.spiritCost()+" Spirit";
+					var txt = "Cost is "+monster.stats.power.upgrade.spiritCost()+" Spirit";
+					if(monster.stats.power.upgrade.affectionCost() > 0){
+						txt += " and "+monster.stats.power.upgrade.affectionCost()+" Love";
+					}
+					return txt;
 				}
 			}
 		}
