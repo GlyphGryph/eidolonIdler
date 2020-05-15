@@ -124,8 +124,7 @@ var prepareTravelToStart = function(region){
 
 var prepareActionToStart = function(context, action){
 	if(!context.actionsAreBusy){
-		action.shouldStart=true;
-		context.actionsAreBusy=true;
+		action.shouldStart = true;
 	}
 }
 

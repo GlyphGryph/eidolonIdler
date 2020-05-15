@@ -93,7 +93,7 @@ var setup = function(){
 	// Setup actions
 	[character, monster].forEach(function(context){
 		context.unlockedActions.forEach(function(id){
-			var action = monster.actions[id];
+			var action = actions[id];
 			setupAction(monster, action);
 		});
 	});

@@ -1,0 +1,8 @@
+
+--
+
+Refactor all code to use objects and inheritence
+
+Save state of the application in a cookie so it's not lost if the player closes the tab 
+
+Get a Github

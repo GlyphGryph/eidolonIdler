@@ -114,59 +114,11 @@ var regions = {
 	}
 };
 
-var character = {
-	name: "Wayward Orphan",
-	diminished: 3,
-	actionsElementId: 'character-family',
-	actionsAreBusy: false,
-	unlockedActions:[],
-	lockedActions:[
-		'explore',
-		'care'
-	],
-	actions: {
-		explore: {
-			id: 'explore',
-			elementId: 'explore-action',
-			name: "Explore",
-			description: "--",
-			unlockedConditionsMet: function(){ return character.diminished <= 0},
-			visible: true,
-			shouldStart: false,
-			running: 0,
-			runTime: 100,
-			start: function(){
-				addLog('red', "Exploring region...");
-			},
-			finish: function(){
-				exploreRegion();
-				addLog('red', "Explored region.");
-			}
-		},
-		care: {
-			id: 'care',
-			elementId: 'care-action',
-			name: "Care",
-			description: "--",
-			unlockedConditionsMet: function(){ return character.diminished <= 0},
-			visible: true,
-			shouldStart: false,
-			running: 0,
-			runTime: 2000,
-			start: function(){
-				addLog('green', "Fake Action started");
-			},
-			finish: function(){
-				changeResource('affection', 1);
-				addLog('green', "Fake Action finished.");
-			}
-		}
-	}
-}
-
 var monster = {
 	name: 'Monster',
 	maxActiveAbilities: function(){ return monster.stats.intellect.level; },
+	actionRunningDuration: 0,
+	actionRunning: null,
 	abilitiesAreUnlocked: false,
 	abilitiesAreTraining: false,
 	unlockedAbilities:[
@@ -377,42 +329,5 @@ var monster = {
 		'fakeAction'
 	],
 	lockedActions:[
-	],
-	actions: {
-		huntWisp: {
-			id: 'huntWisp',
-			elementId: 'hunt-wisp-action',
-			name: "Hunt Wisp",
-			description: "Hunt for wild wisps to gain Spirit.",
-			visible: true,
-			shouldStart: false,
-			running: 0,
-			runTime: 100,
-			progressBarElement: $("#templates .progress-bar").clone(),
-			start: function(){
-				addLog('green', "Monster starts hunting Wisps");
-			},
-			finish: function(){
-				gainSpirit(2);
-				addLog('green', "Monster caught a Wisp.");
-			}
-		},
-		fakeAction: {
-			id: 'huntWisp',
-			elementId: 'fake-action',
-			name: "Fake Action",
-			description: "--",
-			visible: true,
-			shouldStart: false,
-			running: 0,
-			runTime: 1000,
-			progressBarElement: $("#templates .progress-bar").clone(),
-			start: function(){
-				addLog('green', "Fake Action started");
-			},
-			finish: function(){
-				addLog('green', "Fake Action finished.");
-			}
-		},
-	}
+	]
 };

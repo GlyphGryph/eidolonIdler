@@ -41,7 +41,9 @@ var updateAction = function(context, action){
 	var actionElement = $("#"+action.elementId);
 	if(true==action.shouldStart){
 		action.start();
-		action.running = action.runTime;
+		context.actionsAreBusy = true;
+		context.actionRunning = action.id;
+		context.actionRunningDuration = action.runTime;
 		action.shouldStart=false;
 		actionElement.find('button').hide();
 	}
@@ -52,15 +54,16 @@ var updateAction = function(context, action){
 	}
 	
 	// If this action is currently running...
-	if(action.running >= 1){
-		action.running -= state.timeSinceLastUpdate;
-		if(action.running >= 1){
-			progress = Math.floor(100 - (action.running / action.runTime) * 100)
+	if(context.actionRunning == action.id){
+		context.actionRunningDuration -= state.timeSinceLastUpdate;
+		if(context.actionRunningDuration >= 1){
+			progress = Math.floor(100 - (context.actionRunningDuration / action.runTime) * 100)
 			actionElement.find('.progress-bar').css('width', ''+progress+'%');
 		}
-		if(action.running < 1){
-			action.running = 0;
+		if(context.actionRunningDuration < 1){
+			context.actionRunningDuration = 0;
 			context.actionsAreBusy = false;
+			context.actionRunning = null;
 			actionElement.find('.progress-bar').css('width', '0%');
 			actionElement.find('button').show();
 			action.finish();
@@ -76,13 +79,13 @@ var updateActions = function(){
 			$("#"+context.actionsElementId).hide();
 		}
 		context.lockedActions.forEach(function(id){
-			var action = context.actions[id];
+			var action = actions[id];
 			if(action.unlockedConditionsMet()){
 				unlockAction(context, action);
 			}
 		});
 		context.unlockedActions.forEach(function(id){
-			var action = context.actions[id];
+			var action = actions[id];
 			updateAction(context, action);
 		});
 	})
