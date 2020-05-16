@@ -7,6 +7,12 @@ Remove the "shouldStart" logic on actions and replace with something context agn
 
 Remove the "shouldStart" logic on abilities and replace with something context agnostic
 
+move update logic to individual objects
+
+move setup logic to individual objects
+
+move unlock logic to individual objects
+
 Start with 2 monsters, and have all code work functionally
 
 Save state of the application in a cookie so it's not lost if the player closes the tab

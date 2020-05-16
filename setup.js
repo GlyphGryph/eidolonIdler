@@ -28,23 +28,6 @@ var setupStat = function(stat){
 	$("#"+stat.upgradeElementId).click(function(){stat.upgrade()});	
 }
 
-// Attach handlers when a stat is loaded or unlocked
-var setupAbility = function(ability){
-	var abilityElement = $("#ability-template").clone();
-	abilityElement.attr('id', ability.elementId);
-	abilityElement.find('#trainer-template').attr('id', ability.upgradeElementId);
-	abilityElement.find('.name').text(ability.name);
-	$("#abilities").append(abilityElement);
-	$("#"+ability.elementId).show();
-	$("#"+ability.elementId+" .text").mouseenter(function(){openDescription(this, ability.description())});
-	$("#"+ability.elementId+" .text").mouseleave(closeDescription);
-	$("#"+ability.upgradeElementId).mouseenter(function(){openDescription(this, ability.upgradeDescription())});
-	$("#"+ability.upgradeElementId).mouseleave(closeDescription);
-	$("#"+ability.upgradeElementId).click(function(){prepareAbilityToTrain(ability)});
-	abilityElement.find('.activate').click(function(){activateAbility(ability)});
-	abilityElement.find('.deactivate').click(function(){deactivateAbility(ability)});	
-}
-
 // Runs once at game start / on game load
 var setup = function(){
 	// Setup regionsAreUnlocked

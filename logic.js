@@ -16,7 +16,7 @@ var addLog = function(color, message){
 
 
 var gainSpirit = function(value){
-	if(abilities.sharedHealing.active && character.diminished > 0){
+	if(abilities.sharedHealing.isActive(monster) && character.diminished > 0){
 		var amountToSiphon = monster.stats.power.level;
 		if(amountToSiphon > value){
 			amountToSiphon = value;
@@ -58,29 +58,10 @@ var unlockStat = function(stat){
 	addLog('black', "Stat "+stat.name+" unlocked.");
 }
 
-var unlockAbility = function(ability){
-	monster.lockedAbilities = removeFromArray(monster.lockedAbilities, ability.id);
-	monster.unlockedAbilities.push(ability.id);
-	setupAbility(ability);
-	addLog('black', "Ability "+ability.name+" unlocked.");
-}
-
 var prepareAbilityToTrain = function(ability){
 	if(!monster.abilitiesAreTraining && ability.canBeTrained()){
 		ability.shouldStart=true;
 	}
-}
-
-var activateAbility = function(ability){
-	if(monster.activeAbilities.length < monster.maxActiveAbilities()){
-		monster.activeAbilities.push(ability.id);
-		ability.active = true;
-	}
-}
-
-var deactivateAbility = function(ability){
-	monster.activeAbilities = removeFromArray(monster.activeAbilities, ability.id);
-	ability.active = false;
 }
 
 var prepareTravelToStart = function(region){

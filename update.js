@@ -170,102 +170,18 @@ var updateStats = function(){
 	});
 }
 
-var updateAbility = function(ability){
-	var abilityElement = $("#"+ability.elementId);
-	var statusElement = abilityElement.find('.status');
-	var upgradeElement = $("#"+ability.upgradeElementId);
-	var activateElement = abilityElement.find('.activate');
-	var deactivateElement = abilityElement.find('.deactivate');
-
-	
-	if(monster.trainedAbilities.includes(ability.id)){
-		if(statusElement.text()!=''){
-			statusElement.text('');
-		}
-	}else{
-		if(statusElement.text()!='(Untrained)'){
-			statusElement.text('(Untrained)');
-		}
-	}
-	
-	if(monster.abilitiesAreTraining){
-		upgradeElement.find('button').prop('disabled', true);
-	}else{
-		upgradeElement.find('button').prop('disabled', false);	
-	}
-	
-	if(ability.canBeTrained()){
-		upgradeElement.show();
-	}else{
-		upgradeElement.hide();	
-	}
-	
-	if(monster.trainedAbilities.includes(ability.id)){
-		if(monster.activeAbilities.includes(ability.id)){
-			abilityElement.addClass('active');
-			activateElement.hide();
-			deactivateElement.show();
-		}else{
-			abilityElement.removeClass('active');
-			deactivateElement.hide();
-			if(monster.activeAbilities.length < monster.maxActiveAbilities()){
-				activateElement.show();
-			}else{
-				activateElement.hide();
-			}
-		}
-	}else{
-		abilityElement.removeClass('active');
-		activateElement.hide();
-		deactivateElement.hide();
-	}
-	
-	if(true==ability.shouldStart){
-		monster.abilitiesAreTraining=true;
-		ability.start();
-		monster.abilityTrainingDuration = ability.trainTime;
-		monster.abilityTraining = ability.id;
-		ability.shouldStart=false;
-		upgradeElement.find('button').hide();
-	}
-	if(monster.abilitiesAreTraining){
-		upgradeElement.find('button').prop('disabled', true);
-	}else{
-		upgradeElement.find('button').prop('disabled', false);
-	}
-	
-	if(monster.abilityTraining==ability.id){
-		monster.abilityTrainingDuration -= state.timeSinceLastUpdate;
-		if(monster.abilityTrainingDuration >= 1){
-			progress = Math.floor(100 - (monster.abilityTrainingDuration / ability.trainTime) * 100)
-			upgradeElement.find('.progress-bar').css('width', ''+progress+'%')
-			upgradeElement.find('.progress-bar-text').text(""+(monster.abilityTrainingDuration/1000).toFixed(2)+" seconds");
-		}
-		if(monster.abilityTrainingDuration < 1){
-			monster.abilityTrainingDuration = 0;
-			monster.trainedAbilities.push(ability.id);
-			monster.abilityTraining = null;
-			monster.abilitiesAreTraining = false;
-			upgradeElement.find('.progress-bar').css('width', '0%');
-			upgradeElement.find('.progress-bar-text').text("");
-			upgradeElement.find('button').show();
-			ability.finish();
-		}
-	}
-}
-
 var updateAbilities = function(){
 	$('#currently-active-abilities').text(monster.activeAbilities.length);
 	$('#max-active-abilities').text(monster.maxActiveAbilities());
 	monster.lockedAbilities.forEach(function(id){
 		var ability = abilities[id];
-		if(ability.unlockedConditionsMet()){
-			unlockAbility(ability);
+		if(ability.unlockedConditionsMet(monster)){
+			ability.unlock(monster);
 		}
 	});
 	monster.unlockedAbilities.forEach(function(id){
 		var ability = abilities[id];
-		updateAbility(ability);
+		ability.update(monster);
 	});
 }
 

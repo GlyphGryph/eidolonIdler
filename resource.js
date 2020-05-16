@@ -5,10 +5,10 @@ var Resource = function(id, name, value){
 	this.value = value;
 }
 
-Resource.prototype.change = function(value){
-	this.value += value;
+Resource.prototype.change = function(amount){
+	this.value += amount;
 	this.unlock();
-	addLog('black', "Gained "+this.value+" "+this.name+".");
+	addLog('black', "Gained "+amount+" "+this.name+".");
 };
 
 Resource.prototype.update = function(){
