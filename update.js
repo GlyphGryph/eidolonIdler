@@ -37,40 +37,6 @@ var updateCharacter = function(){
 	}
 }
 
-var updateAction = function(context, action){
-	var actionElement = $("#"+action.elementId);
-	if(true==action.shouldStart){
-		action.start();
-		context.actionsAreBusy = true;
-		context.actionRunning = action.id;
-		context.actionRunningDuration = action.runTime;
-		action.shouldStart=false;
-		actionElement.find('button').hide();
-	}
-	if(context.actionsAreBusy){
-		actionElement.find('button').prop('disabled', true);
-	}else{
-		actionElement.find('button').prop('disabled', false);
-	}
-	
-	// If this action is currently running...
-	if(context.actionRunning == action.id){
-		context.actionRunningDuration -= state.timeSinceLastUpdate;
-		if(context.actionRunningDuration >= 1){
-			progress = Math.floor(100 - (context.actionRunningDuration / action.runTime) * 100)
-			actionElement.find('.progress-bar').css('width', ''+progress+'%');
-		}
-		if(context.actionRunningDuration < 1){
-			context.actionRunningDuration = 0;
-			context.actionsAreBusy = false;
-			context.actionRunning = null;
-			actionElement.find('.progress-bar').css('width', '0%');
-			actionElement.find('button').show();
-			action.finish();
-		}
-	}
-};
-
 var updateActions = function(){
 	[character, monster].forEach(function(context){
 		if(context.unlockedActions.length > 0){
@@ -80,13 +46,12 @@ var updateActions = function(){
 		}
 		context.lockedActions.forEach(function(id){
 			var action = actions[id];
-			if(action.unlockedConditionsMet()){
-				unlockAction(context, action);
+			if(action.unlockedConditionsMet(context)){
+				action.unlock(context);
 			}
 		});
 		context.unlockedActions.forEach(function(id){
-			var action = actions[id];
-			updateAction(context, action);
+			actions[id].update(context);
 		});
 	})
 };

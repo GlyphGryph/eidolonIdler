@@ -28,18 +28,6 @@ var setupStat = function(stat){
 	$("#"+stat.upgradeElementId).click(function(){stat.upgrade()});	
 }
 
-// Attach handlers when an action is loaded or unlocked
-var setupAction = function(context, action){
-	var contextElement = $("#"+context.actionsElementId);
-	var actionElement = $("#action-template").clone();
-	actionElement.attr('id', action.elementId);
-	actionElement.find('.name').text(action.name);
-	contextElement.append(actionElement);
-	actionElement.mouseenter(function(){openDescription(this, action.description)});
-	actionElement.mouseleave(function(){closeDescription()});
-	actionElement.click(function(){prepareActionToStart(context, action)});
-}
-
 // Attach handlers when a stat is loaded or unlocked
 var setupAbility = function(ability){
 	var abilityElement = $("#ability-template").clone();
@@ -74,7 +62,7 @@ var setup = function(){
 	// Setup abilities
 	monster.unlockedAbilities.forEach(function(id){
 		var ability = abilities[id];
-		setupStat(ability);
+		setupAbility(ability);
 	});
 	if(monster.abilitiesAreUnlocked){
 		$("#abilities").show();
@@ -92,7 +80,7 @@ var setup = function(){
 	[character, monster].forEach(function(context){
 		context.unlockedActions.forEach(function(id){
 			var action = actions[id];
-			setupAction(monster, action);
+			action.setup(context);
 		});
 	});
 	

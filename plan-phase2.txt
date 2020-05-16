@@ -1,9 +1,11 @@
 
---
-
 Refactor all code to use objects and inheritence
 
-Remove the "shouldStart" logic on abilities and actions and replace with something definition agnostic
+Remove the "shouldStart" logic on actions and replace with something context agnostic
+
+--
+
+Remove the "shouldStart" logic on abilities and replace with something context agnostic
 
 Start with 2 monsters, and have all code work functionally
 

@@ -51,13 +51,6 @@ var unlockRegion = function(region){
 	addLog('black', "Region "+region.name+" unlocked.");
 }
 
-var unlockAction = function(context, action){
-	context.lockedActions = removeFromArray(context.lockedActions, action.id);
-	context.unlockedActions.push(action.id);
-	setupAction(context, action);
-	addLog('black', "Action "+action.name+" unlocked.");
-}
-
 var unlockStat = function(stat){
 	monster.lockedStats = removeFromArray(monster.lockedStats, stat.id);
 	monster.unlockedStats.push(stat.id);
@@ -95,12 +88,6 @@ var prepareTravelToStart = function(region){
 		region.travel.shouldStart=true;
 		monster.actionsAreBusy=true;
 		character.actionsAreBusy=true;
-	}
-}
-
-var prepareActionToStart = function(context, action){
-	if(!context.actionsAreBusy){
-		action.shouldStart = true;
 	}
 }
 
