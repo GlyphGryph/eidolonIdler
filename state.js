@@ -13,20 +13,8 @@ var gameProgress = {
 	regionsAreUnlocked: false
 }
 
-var resources = {
-	spirit: {
-		id: 'monster-spirit',
-		name: "Spirit",
-		value: 0,
-		visible: false
-	},
-	affection: {
-		id: 'monster-affection',
-		name: "Love",
-		value: 0,
-		visible: false
-	}
-}
+var unlockedResources = [
+]
 
 var currentRegion = "blackenedWasteland";
 var unlockedRegions = [];

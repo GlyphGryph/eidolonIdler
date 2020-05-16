@@ -53,15 +53,4 @@ Monster.prototype.totalLevels = function(){
 	return total;
 }
 
-//TODO: DELETE THIS
-upgradeMultiplier = function(){
-	// We don't count the first three levels into the multiplier
-	var levels = monster.totalLevels()-3;
-	if( levels < 0){
-		return 0
-	}else{
-		return levels;
-	}
-}
-
 var monster = new Monster({});

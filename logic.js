@@ -31,7 +31,7 @@ var gainSpirit = function(value){
 		}
 		value = value - amountToSiphon;
 	}
-	changeResource('spirit', value);
+	resources.spirit.change(value);
 }
 
 var exploreRegion = function(){
@@ -43,13 +43,6 @@ var exploreRegion = function(){
 		}
 	}
 }
-
-var changeResource = function(id, value){
-	var resource = resources[id];
-	resource.value += value;
-	resource.visible = true;
-	addLog('black', "Gained "+value+" "+resource.name+".");
-};
 
 var unlockRegion = function(region){
 	lockedRegions = removeFromArray(lockedRegions, region.id);

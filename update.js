@@ -160,15 +160,9 @@ var updateRegions = function(){
 };
 
 var updateResources = function(){
-	$.each(resources, function(key, resource){
-		if(resource.visible){
-			var resourceElement = $("#"+resource.id)
-			resourceElement.show();
-			resourceElement.html(resource.name +": "+resource.value);
-		} else {
-			$("#"+resource.id).hide()
-		}
-	})
+	unlockedResources.forEach(function(id){
+		resources[id].update();
+	});
 };
 
 var updateLog = function(){

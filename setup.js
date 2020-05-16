@@ -70,25 +70,23 @@ var setup = function(){
 		var stat = monster.stats[id];
 		setupStat(stat);
 	});
-	monster.lockedStats.forEach(function(id){
-		var stat = monster.stats[id];
-		$("#"+stat.elementId).hide();
-	});
 	
 	// Setup abilities
 	monster.unlockedAbilities.forEach(function(id){
 		var ability = abilities[id];
 		setupStat(ability);
 	});
-	monster.lockedAbilities.forEach(function(id){
-		var ability = abilities[id];
-		$("#"+ability.elementId).hide();
-	});
 	if(monster.abilitiesAreUnlocked){
 		$("#abilities").show();
 	}else{
 		$("#abilities").hide();
 	}
+	
+	// Setup resources
+	unlockedResources.forEach(function(id){
+		var ability = abilities[id];
+		ability.setup;
+	});
 	
 	// Setup actions
 	[character, monster].forEach(function(context){
