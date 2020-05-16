@@ -13,26 +13,10 @@ var addLog = function(color, message){
 	log.push([color, message]);
 };
 
-var totalLevels = function(){
-	var total = 0;
-	$.each(monster.stats, function(key, monsterStat){
-		total += monsterStat.level;
-	});
-	return total;
-}
 
-var upgradeMultiplier = function(){
-	// We don't count the first three levels into the multiplier
-	var levels = totalLevels()-3;
-	if( levels < 0){
-		return 0
-	}else{
-		return levels;
-	}
-}
 
 var gainSpirit = function(value){
-	if(monster.abilities.sharedHealing.active && character.diminished > 0){
+	if(abilities.sharedHealing.active && character.diminished > 0){
 		var amountToSiphon = monster.stats.power.level;
 		if(amountToSiphon > value){
 			amountToSiphon = value;
@@ -47,7 +31,7 @@ var gainSpirit = function(value){
 		}
 		value = value - amountToSiphon;
 	}
-	changeResource('monsterSpirit', value);
+	changeResource('spirit', value);
 }
 
 var exploreRegion = function(){
@@ -97,8 +81,7 @@ var unlockAbility = function(ability){
 
 var prepareAbilityToTrain = function(ability){
 	if(!monster.abilitiesAreTraining && ability.canBeTrained()){
-		ability.upgrade.shouldStart=true;
-		monster.abilitiesAreTraining=true;
+		ability.shouldStart=true;
 	}
 }
 
@@ -128,14 +111,11 @@ var prepareActionToStart = function(context, action){
 	}
 }
 
-var openDescription = function(elem, describer){
+var openDescription = function(elem, description){
 	var describerElement = jQuery(elem);
 	var descriptionElement = $("#description")
-	var description;
-	if('function' == typeof describer.description){
-		description = describer.description();
-	}else{
-		description = describer.description;
+	if('function' == typeof description){
+		description = description();
 	}
 	var gutter = 15;
 	var raise = 15;
@@ -157,26 +137,6 @@ var canMeetCost = function(costArray){
 var payCost = function(costArray){
 	// TODO: For ability training and actions
 }
-
-var canStatBeUpgraded = function(stat){
-	return (
-		stat.level < stat.maxLevel &&
-		resources.monsterSpirit.value >= stat.upgrade.spiritCost() &&
-		resources.affection.value >= stat.upgrade.affectionCost()
-	);
-}
-
-var upgradeStat = function(stat){
-	if(canStatBeUpgraded(stat)){
-		resources.monsterSpirit.value -= stat.upgrade.spiritCost();
-		resources.affection.value -= stat.upgrade.affectionCost();
-		stat.level += 1;
-		addLog('black', "Spent "+stat.upgrade.spiritCost()+" Spirit and "+stat.upgrade.affectionCost()+" Love");
-		openDescription($("#"+stat.upgrade.elementId),stat.upgrade);
-	}
-}
-
-
 
 var startScript = function(){
 	setup();

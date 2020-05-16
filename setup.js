@@ -6,10 +6,10 @@ var setupRegion = function(region){
 	nameElement.text(region.name);
 	$("#region-view").append(regionElement);
 	regionElement.show();
-	nameElement.mouseenter(function(){openDescription(this, region)});
+	nameElement.mouseenter(function(){openDescription(this, region.description)});
 	nameElement.mouseleave(closeDescription);
 	var travelElement = regionElement.find('.travel-button')
-	travelElement.mouseenter(function(){openDescription(this, region.travel)});
+	travelElement.mouseenter(function(){openDescription(this, region.travel.description())});
 	travelElement.mouseleave(closeDescription);
 	travelElement.click(function(){prepareTravelToStart(region)});
 }
@@ -18,14 +18,14 @@ var setupRegion = function(region){
 var setupStat = function(stat){
 	var statElement = $("#stat-template").clone();
 	statElement.attr('id', stat.elementId);
-	statElement.find('#upgrade-template').attr('id', stat.upgrade.elementId);
+	statElement.find('#upgrade-template').attr('id', stat.upgradeElementId);
 	statElement.find('.name').text(stat.name);
 	$("#monster-stats").append(statElement);
-	$("#"+stat.elementId+" .name").mouseenter(function(){openDescription(this, stat)});
+	$("#"+stat.elementId+" .name").mouseenter(function(){openDescription(this, stat.description())});
 	$("#"+stat.elementId+" .name").mouseleave(closeDescription);
-	$("#"+stat.upgrade.elementId).mouseenter(function(){openDescription(this, stat.upgrade)});
-	$("#"+stat.upgrade.elementId).mouseleave(closeDescription);
-	$("#"+stat.upgrade.elementId).click(function(){upgradeStat(stat)});	
+	$("#"+stat.upgradeElementId).mouseenter(function(){openDescription(this, stat.upgradeDescription())});
+	$("#"+stat.upgradeElementId).mouseleave(closeDescription);
+	$("#"+stat.upgradeElementId).click(function(){stat.upgrade()});	
 }
 
 // Attach handlers when an action is loaded or unlocked
@@ -35,7 +35,7 @@ var setupAction = function(context, action){
 	actionElement.attr('id', action.elementId);
 	actionElement.find('.name').text(action.name);
 	contextElement.append(actionElement);
-	actionElement.mouseenter(function(){openDescription(this, action)});
+	actionElement.mouseenter(function(){openDescription(this, action.description)});
 	actionElement.mouseleave(function(){closeDescription()});
 	actionElement.click(function(){prepareActionToStart(context, action)});
 }
@@ -44,15 +44,15 @@ var setupAction = function(context, action){
 var setupAbility = function(ability){
 	var abilityElement = $("#ability-template").clone();
 	abilityElement.attr('id', ability.elementId);
-	abilityElement.find('#trainer-template').attr('id', ability.upgrade.elementId);
+	abilityElement.find('#trainer-template').attr('id', ability.upgradeElementId);
 	abilityElement.find('.name').text(ability.name);
 	$("#abilities").append(abilityElement);
 	$("#"+ability.elementId).show();
-	$("#"+ability.elementId+" .text").mouseenter(function(){openDescription(this, ability)});
+	$("#"+ability.elementId+" .text").mouseenter(function(){openDescription(this, ability.description())});
 	$("#"+ability.elementId+" .text").mouseleave(closeDescription);
-	$("#"+ability.upgrade.elementId).mouseenter(function(){openDescription(this, ability.upgrade)});
-	$("#"+ability.upgrade.elementId).mouseleave(closeDescription);
-	$("#"+ability.upgrade.elementId).click(function(){prepareAbilityToTrain(ability)});
+	$("#"+ability.upgradeElementId).mouseenter(function(){openDescription(this, ability.upgradeDescription())});
+	$("#"+ability.upgradeElementId).mouseleave(closeDescription);
+	$("#"+ability.upgradeElementId).click(function(){prepareAbilityToTrain(ability)});
 	abilityElement.find('.activate').click(function(){activateAbility(ability)});
 	abilityElement.find('.deactivate').click(function(){deactivateAbility(ability)});	
 }
@@ -77,11 +77,11 @@ var setup = function(){
 	
 	// Setup abilities
 	monster.unlockedAbilities.forEach(function(id){
-		var ability = monster.abilities[id];
+		var ability = abilities[id];
 		setupStat(ability);
 	});
 	monster.lockedAbilities.forEach(function(id){
-		var ability = monster.abilities[id];
+		var ability = abilities[id];
 		$("#"+ability.elementId).hide();
 	});
 	if(monster.abilitiesAreUnlocked){
