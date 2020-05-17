@@ -1,17 +1,3 @@
-// Attach handlers when a stat is loaded or unlocked
-var setupStat = function(stat){
-	var statElement = $("#stat-template").clone();
-	statElement.attr('id', stat.elementId);
-	statElement.find('#upgrade-template').attr('id', stat.upgradeElementId);
-	statElement.find('.name').text(stat.name);
-	$("#monster-stats").append(statElement);
-	$("#"+stat.elementId+" .name").mouseenter(function(){openDescription(this, stat.description())});
-	$("#"+stat.elementId+" .name").mouseleave(closeDescription);
-	$("#"+stat.upgradeElementId).mouseenter(function(){openDescription(this, stat.upgradeDescription())});
-	$("#"+stat.upgradeElementId).mouseleave(closeDescription);
-	$("#"+stat.upgradeElementId).click(function(){stat.upgrade()});	
-}
-
 // Runs once at game start / on game load
 var setup = function(){
 	// Create all regions
@@ -28,7 +14,7 @@ var setup = function(){
 	// Setup stats
 	monster.unlockedStats.forEach(function(id){
 		var stat = monster.stats[id];
-		setupStat(stat);
+		stat.setup();
 	});
 	
 	// Setup abilities

@@ -85,33 +85,16 @@ var updateLog = function(){
 	});
 };
 
-var updateStat = function(stat){
-	var statElement = $("#"+stat.elementId);
-	var levelElement = statElement.find('.level');
-	var maxLevelElement = statElement.find('.max-level');
-	if(levelElement.html()!=stat.level.toString){
-		levelElement.html(stat.level);
-	}
-	if(maxLevelElement.html()!=stat.maxLevel.toString){
-		maxLevelElement.html(stat.maxLevel);
-	}
-	if(stat.level==stat.maxLevel || !stat.canBeUpgraded()){
-		statElement.find('.upgrade-button button').prop('disabled', true);
-	} else {
-		statElement.find('.upgrade-button button').prop('disabled', false);	
-	}
-}
-
 var updateStats = function(){
 	monster.lockedStats.forEach(function(id){
 		var stat = monster.stats[id];
 		if(stat.unlockedConditionsMet()){
-			unlockStat(stat);
+			stat.unlock();
 		}
 	});
 	monster.unlockedStats.forEach(function(id){
 		var stat = monster.stats[id];
-		updateStat(stat);
+		stat.update();
 	});
 }
 

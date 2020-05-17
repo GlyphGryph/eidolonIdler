@@ -44,13 +44,6 @@ var exploreRegion = function(){
 	}
 }
 
-var unlockStat = function(stat){
-	monster.lockedStats = removeFromArray(monster.lockedStats, stat.id);
-	monster.unlockedStats.push(stat.id);
-	setupStat(stat);
-	addLog('black', "Stat "+stat.name+" unlocked.");
-}
-
 var prepareTravelToStart = function(region){
 	if(!monster.actionsAreBusy && !character.actionsAreBusy){
 		region.travel.shouldStart=true;

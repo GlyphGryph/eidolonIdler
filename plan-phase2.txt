@@ -7,8 +7,6 @@ Get a Github
 
 Remove the "shouldStart" logic on abilities and replace with something context agnostic
 
---
-
 Move region update and setup code to region object
 
 Switch region away from the shouldStart logic to the standard way of doing things now
@@ -18,6 +16,8 @@ move all update logic to individual objects
 move all setup logic to individual objects
 
 move all  unlock logic to individual objects
+
+--
 
 Start with 2 monsters, and have all code work functionally
 

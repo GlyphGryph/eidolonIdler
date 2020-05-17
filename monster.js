@@ -4,7 +4,8 @@ var Monster = function(state){
 	// Actions
 	this.actionRunningDuration = 0;
 	this.actionRunning = null;
-	this.actionsElementId = 'monster-family',
+	this.actionsElementId = 'monster-family';
+	this.statsElementId = 'monster-stats';
 	this.actionsAreBusy = false;
 	this.unlockedActions = [
 		'huntWisp',

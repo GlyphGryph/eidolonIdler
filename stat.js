@@ -46,7 +46,29 @@ Stat.prototype.canBeUpgraded = function(){
 		}
 	});
 	return canBe;
-}
+};
+
+Stat.prototype.unlock = function(){
+	this.owner.lockedStats = removeFromArray(this.owner.lockedStats, this.id);
+	this.owner.unlockedStats.push(this.id);
+	this.setup();
+	addLog('black', "Stat "+this.name+" unlocked.");
+};
+
+
+Stat.prototype.setup = function(){
+	var that = this;
+	var statElement = $("#stat-template").clone();
+	statElement.attr('id', this.elementId);
+	statElement.find('#upgrade-template').attr('id', this.upgradeElementId);
+	statElement.find('.name').text(this.name);
+	$("#"+this.owner.statsElementId).append(statElement);
+	$("#"+this.elementId+" .name").mouseenter(function(){openDescription(this, that.description())});
+	$("#"+this.elementId+" .name").mouseleave(closeDescription);
+	$("#"+this.upgradeElementId).mouseenter(function(){openDescription(this, that.upgradeDescription())});
+	$("#"+this.upgradeElementId).mouseleave(closeDescription);
+	$("#"+this.upgradeElementId).click(function(){that.upgrade()});
+};
 
 Stat.prototype.upgrade = function(){
 	var that = this;
@@ -61,6 +83,23 @@ Stat.prototype.upgrade = function(){
 		openDescription($("#"+this.upgradeElementId), this.upgradeDescription());
 	}
 }
+
+Stat.prototype.update = function(){
+	var statElement = $("#"+this.elementId);
+	var levelElement = statElement.find('.level');
+	var maxLevelElement = statElement.find('.max-level');
+	if(levelElement.html()!=this.level.toString){
+		levelElement.html(this.level);
+	}
+	if(maxLevelElement.html()!=this.maxLevel.toString){
+		maxLevelElement.html(this.maxLevel);
+	}
+	if(this.level==this.maxLevel || !this.canBeUpgraded()){
+		statElement.find('.upgrade-button button').prop('disabled', true);
+	} else {
+		statElement.find('.upgrade-button button').prop('disabled', false);	
+	}
+};
 
 
 var BondStat = function(owner, level){
