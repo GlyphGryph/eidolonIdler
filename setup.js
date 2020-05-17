@@ -1,19 +1,3 @@
-// Attach handlers when a region is loaded or unlocked
-var setupRegion = function(region){
-	var regionElement = $("#region-template").clone();
-	regionElement.attr('id', region.elementId);
-	var nameElement = regionElement.find('.name')
-	nameElement.text(region.name);
-	$("#region-view").append(regionElement);
-	regionElement.show();
-	nameElement.mouseenter(function(){openDescription(this, region.description)});
-	nameElement.mouseleave(closeDescription);
-	var travelElement = regionElement.find('.travel-button')
-	travelElement.mouseenter(function(){openDescription(this, region.travel.description())});
-	travelElement.mouseleave(closeDescription);
-	travelElement.click(function(){prepareTravelToStart(region)});
-}
-
 // Attach handlers when a stat is loaded or unlocked
 var setupStat = function(stat){
 	var statElement = $("#stat-template").clone();
@@ -30,10 +14,15 @@ var setupStat = function(stat){
 
 // Runs once at game start / on game load
 var setup = function(){
+	// Create all regions
+	regionDefinitions.forEach(function(definition){
+		regions[definition.id] = new Region(definition, 0, 0);
+	})
+
 	// Setup regionsAreUnlocked
 	unlockedRegions.forEach(function(id){
 		var region = regions[id];
-		setupRegion(region);
+		region.setup();
 	});
 	
 	// Setup stats

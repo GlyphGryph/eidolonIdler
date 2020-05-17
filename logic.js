@@ -44,13 +44,6 @@ var exploreRegion = function(){
 	}
 }
 
-var unlockRegion = function(region){
-	lockedRegions = removeFromArray(lockedRegions, region.id);
-	unlockedRegions.push(region.id);
-	setupRegion(region);
-	addLog('black', "Region "+region.name+" unlocked.");
-}
-
 var unlockStat = function(stat){
 	monster.lockedStats = removeFromArray(monster.lockedStats, stat.id);
 	monster.unlockedStats.push(stat.id);

@@ -4,15 +4,20 @@ Refactor all code to use objects and inheritence
 Remove the "shouldStart" logic on actions and replace with something context agnostic
 
 Get a Github
---
 
 Remove the "shouldStart" logic on abilities and replace with something context agnostic
 
-move update logic to individual objects
+--
 
-move setup logic to individual objects
+Move region update and setup code to region object
 
-move unlock logic to individual objects
+Switch region away from the shouldStart logic to the standard way of doing things now
+
+move all update logic to individual objects
+
+move all setup logic to individual objects
+
+move all  unlock logic to individual objects
 
 Start with 2 monsters, and have all code work functionally
 

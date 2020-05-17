@@ -3,13 +3,11 @@
 // name: str
 // description : str or function
 // unlockedConditionsMet : function
-// runTime : int,
-// start : function
-// finish : function
+// trainTime : int
 var Ability = function(definition){
 	this.id = definition.id;
 	this.name = definition.name;
-	this.description = function(){ return definition.description };
+	this._description = definition.description;
 	this.unlockedConditionsMet = definition.unlockedConditionsMet;
 	this.trainTime = definition.trainTime;
 
@@ -29,6 +27,8 @@ var Ability = function(definition){
 		console.log(this.id);
 	}
 }
+
+Ability.prototype.description = function(){ return this._description };
 
 Ability.prototype.getElementId = function(context){
 	return this.id+'-ability-of-'+context.actionsElementId;
