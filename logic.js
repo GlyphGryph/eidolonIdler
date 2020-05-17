@@ -58,12 +58,6 @@ var unlockStat = function(stat){
 	addLog('black', "Stat "+stat.name+" unlocked.");
 }
 
-var prepareAbilityToTrain = function(ability){
-	if(!monster.abilitiesAreTraining && ability.canBeTrained()){
-		ability.shouldStart=true;
-	}
-}
-
 var prepareTravelToStart = function(region){
 	if(!monster.actionsAreBusy && !character.actionsAreBusy){
 		region.travel.shouldStart=true;

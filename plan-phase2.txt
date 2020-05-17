@@ -3,6 +3,7 @@ Refactor all code to use objects and inheritence
 
 Remove the "shouldStart" logic on actions and replace with something context agnostic
 
+Get a Github
 --
 
 Remove the "shouldStart" logic on abilities and replace with something context agnostic
@@ -18,5 +19,3 @@ Start with 2 monsters, and have all code work functionally
 Save state of the application in a cookie so it's not lost if the player closes the tab
 
 Add a button to delete the cookie and start over
-
-Get a Github
