@@ -13,24 +13,24 @@ var addLog = function(color, message){
 	log.push([color, message]);
 };
 
-
-
 var gainSpirit = function(value){
-	if(abilities.sharedHealing.isActive(monster) && character.diminished > 0){
-		var amountToSiphon = monster.stats.power.level;
-		if(amountToSiphon > value){
-			amountToSiphon = value;
+	monsters.forEach(function(monster){
+		if(abilities.sharedHealing.isActive(monster) && character.diminished > 0){
+			var amountToSiphon = monster.stats.power.level;
+			if(amountToSiphon > value){
+				amountToSiphon = value;
+			}
+			if(amountToSiphon > character.diminished){
+				amountToSiphon = character.diminished;
+			}
+			character.diminished -= amountToSiphon;
+			addLog('red', "Orphan healed "+amountToSiphon+" points of damage.");
+			if(character.diminished <= 0){
+				addLog('red', "Orphan fully healed.");
+			}
+			value = value - amountToSiphon;
 		}
-		if(amountToSiphon > character.diminished){
-			amountToSiphon = character.diminished;
-		}
-		character.diminished -= amountToSiphon;
-		addLog('red', "Orphan healed "+amountToSiphon+" points of damage.");
-		if(character.diminished <= 0){
-			addLog('red', "Orphan fully healed.");
-		}
-		value = value - amountToSiphon;
-	}
+	})
 	resources.spirit.change(value);
 }
 

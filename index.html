@@ -30,23 +30,11 @@
 					<div class='tab' id='region-view-tab'>Regions</div>
 				</div>
 				<div class='view' id='action-view'>
-					<div id='monster-family'>
-						<h1 class='name'>Monster</h1>
-					</div>
 					<div id='character-family'>
 						<h1 class='name'>Character</h1>
 					</div>
 				</div>
 				<div class='view' id='monster-view'>
-					<div id='monster-stats'>
-						<h1>STATS</h1>
-					</div>
-					<div id='abilities'>
-						<h1>ABILITIES</h2>
-						<div class='ability-tracker'>
-							<span id='currently-active-abilities'>0</span>/<span id='max-active-abilities'>1</span>
-						</div>
-					</div>
 				</div>
 				<div class='view' id='orphan-view'>
 					<div id='orphan-name'></div>
@@ -70,7 +58,19 @@
 		<div id='description'>
 		</div>
 		<div id='templates'>
-			<div id='view-family-template'>
+			<div id='monster-profile-template' class='monster-profile'>
+				<div class='monster-name'></div>
+				<div class='monster-stats'>
+					<h1>STATS</h1>
+				</div>
+				<div class='abilities'>
+					<h1>ABILITIES</h2>
+					<div class='ability-tracker'>
+						<span class='currently-active-abilities'>0</span>/<span class='max-active-abilities'>1</span>
+					</div>
+				</div>
+			</div>
+			<div id='action-family-template'>
 				<h1 class='name'></h1>
 			</div>
 			<div id='resource-template'>

@@ -78,7 +78,7 @@ Ability.prototype.setup = function(context){
 	var upgradeElement = abilityElement.find('#trainer-template');
 	upgradeElement.attr('id', this.getUpgradeElementId(context));
 	abilityElement.find('.name').text(this.name);
-	$("#abilities").append(abilityElement);
+	$("#"+context.profileElementId+" .abilities").append(abilityElement);
 	abilityElement.find(".text").mouseenter(function(){openDescription(this, that.description())});
 	abilityElement.find(".text").mouseleave(closeDescription);
 	upgradeElement.mouseenter(function(){openDescription(this, that.upgradeDescription())});

@@ -11,35 +11,42 @@ var setup = function(){
 		region.setup();
 	});
 	
-	// Setup stats
-	monster.unlockedStats.forEach(function(id){
-		var stat = monster.stats[id];
-		stat.setup();
+	// Setup each monster
+	monsters.forEach(function(monster){
+		monster.setup();
+		
+		// Setup stats
+		monster.unlockedStats.forEach(function(id){
+			monster.stats[id].setup()
+		});
+		
+		// Setup abilities
+		monster.unlockedAbilities.forEach(function(id){
+			abilities[id].setup();
+		});
+		
+		if(monster.abilitiesAreUnlocked){
+			$("#abilities").show();
+		}else{
+			$("#abilities").hide();
+		}
+		
+		monster.unlockedActions.forEach(function(id){
+			var action = actions[id];
+			action.setup(monster);
+		});
 	});
-	
-	// Setup abilities
-	monster.unlockedAbilities.forEach(function(id){
-		var ability = abilities[id];
-		setupAbility(ability);
-	});
-	if(monster.abilitiesAreUnlocked){
-		$("#abilities").show();
-	}else{
-		$("#abilities").hide();
-	}
-	
+
 	// Setup resources
 	unlockedResources.forEach(function(id){
 		var ability = abilities[id];
 		ability.setup;
 	});
 	
-	// Setup actions
-	[character, monster].forEach(function(context){
-		context.unlockedActions.forEach(function(id){
-			var action = actions[id];
-			action.setup(context);
-		});
+	// Setup character actions
+	character.unlockedActions.forEach(function(id){
+		var action = actions[id];
+		action.setup(context);
 	});
 	
 	//Setup Tabs

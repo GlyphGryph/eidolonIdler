@@ -68,6 +68,12 @@
 	height: 25px;
 	border: 1px solid black;
 }
+
+.monster-profile{
+	border: 1px dotted black;
+	padding: 5px;
+	margin: 5px;
+}
 #templates{
 	display: none;
 }

@@ -1,11 +1,11 @@
-var Monster = function(state){
-	this.name = 'Monster';
+var Monster = function(definition){
+	this.name = definition.name;
 	
 	// Actions
 	this.actionRunningDuration = 0;
 	this.actionRunning = null;
-	this.actionsElementId = 'monster-family';
-	this.statsElementId = 'monster-stats';
+	this.actionsElementId = definition.id + '-family';
+	this.profileElementId = definition.id + '-monster-profile';
 	this.actionsAreBusy = false;
 	this.unlockedActions = [
 		'huntWisp',
@@ -15,18 +15,13 @@ var Monster = function(state){
 	]
 	
 	// Abilities
-	this.maxActiveAbilities = function(){ return monster.stats.intellect.level; };
 	this.abilitiesAreUnlocked = false;
 	this.abilitiesAreTraining = false;
 	this.abilityTraining = null;
 	this.abilityTrainingDuration = 0;
 	this.unlockedAbilities = [
 	],
-	this.lockedAbilities = [
-		'sharedHealing',
-		'fakeAbility',
-		'assist'
-	],
+	this.lockedAbilities = definition.abilities;
 	this.activeAbilities = [];
 	this.trainedAbilities = [];
 	
@@ -46,6 +41,11 @@ var Monster = function(state){
 		power: new PowerStat(this, 1),
 	};
 };
+
+Monster.prototype.maxActiveAbilities = function(){
+	return this.stats.intellect.level;
+};
+
 Monster.prototype.totalLevels = function(){
 	var total = 0;
 	$.each(this.stats, function(key, monsterStat){
@@ -54,4 +54,45 @@ Monster.prototype.totalLevels = function(){
 	return total;
 }
 
-var monster = new Monster({});
+Monster.prototype.setup = function(){
+	var monsterActionsElement = $("#action-family-template").clone();
+	monsterActionsElement.attr('id', this.actionsElementId);
+	monsterActionsElement.find('.name').text(this.name);
+	$("#action-view").append(monsterActionsElement);
+		
+	var monsterProfileElement = $("#monster-profile-template").clone();
+	monsterProfileElement.attr('id', this.profileElementId);
+	monsterProfileElement.find('.monster-name').text(this.name);
+	$("#monster-view").append(monsterProfileElement);
+}
+
+Monster.prototype.update = function(){
+	if(!this.abilitiesAreUnlocked){
+		if(this.unlockedAbilities.length > 0){
+			this.abilitiesAreUnlocked = true;
+			$("#abilities").show();
+		}
+	}	
+}
+
+var monsters = [
+	new Monster({
+		id: 'monster-1',
+		name: "Monster One",
+		abilities: [
+			'sharedHealing',
+			'fakeAbility',
+			'assist'
+		],
+		
+	}),
+	new Monster({
+		id: 'monster-2',
+		name: "Monster Two",
+		abilities: [
+			'fakeAbility',
+			'fakeAbilityTwo',
+			'assist'
+		],
+	})
+];

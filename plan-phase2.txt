@@ -17,9 +17,15 @@ move all setup logic to individual objects
 
 move all  unlock logic to individual objects
 
+Start with 2 monsters
+
+See both monsters actions, works functionally
+
+See both monsters stats, works functionally
+
 --
 
-Start with 2 monsters, and have all code work functionally
+See both monsters abilities, works functionally
 
 Save state of the application in a cookie so it's not lost if the player closes the tab
 

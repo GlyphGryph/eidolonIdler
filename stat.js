@@ -1,10 +1,10 @@
 var Stat = function(id, owner, level, maxLevel){
 	this.id = id;
-	this.elementId = this.id + '-stat';
-	this.upgradeElementId = this.id + '-upgrade';
 	this.owner = owner;
 	this.level = level;
 	this.maxLevel = maxLevel;
+	this.elementId = this.id + '-stat-for-' + this.owner.profileElementId;
+	this.upgradeElementId = this.id + '-upgrade-for-' + this.owner.profileElementId;
 	this.upgradeCost = [
 		['spirit', function(stat){ return 4+4*stat.upgradeMultiplier()+2*stat.level; }],
 		['affection', function(stat){ return stat.level; }]
@@ -62,13 +62,14 @@ Stat.prototype.setup = function(){
 	statElement.attr('id', this.elementId);
 	statElement.find('#upgrade-template').attr('id', this.upgradeElementId);
 	statElement.find('.name').text(this.name);
-	$("#"+this.owner.statsElementId).append(statElement);
+	$("#"+this.owner.profileElementId+" .monster-stats").append(statElement);
 	$("#"+this.elementId+" .name").mouseenter(function(){openDescription(this, that.description())});
 	$("#"+this.elementId+" .name").mouseleave(closeDescription);
 	$("#"+this.upgradeElementId).mouseenter(function(){openDescription(this, that.upgradeDescription())});
 	$("#"+this.upgradeElementId).mouseleave(closeDescription);
 	$("#"+this.upgradeElementId).click(function(){that.upgrade()});
 };
+
 
 Stat.prototype.upgrade = function(){
 	var that = this;
@@ -109,7 +110,7 @@ var BondStat = function(owner, level){
 	this.unlockedConditionsMet = function(){true};
 }
 
-BondStat.prototype = new Stat();
+BondStat.prototype = Object.create(Stat.prototype);
 BondStat.prototype.constructor = BondStat;
 
 var WillStat = function(owner, level){
@@ -119,7 +120,7 @@ var WillStat = function(owner, level){
 	this.unlockedConditionsMet = function(){ return owner.stats.bond.level > 0};
 }
 
-WillStat.prototype = new Stat();
+WillStat.prototype =  Object.create(Stat.prototype);
 WillStat.prototype.constructor = WillStat;
 
 var PowerStat = function(owner, level){
@@ -129,7 +130,7 @@ var PowerStat = function(owner, level){
 	this.unlockedConditionsMet = function(){ return owner.stats.bond.level > 0};
 }
 
-PowerStat.prototype = new Stat();
+PowerStat.prototype = Object.create(Stat.prototype);
 PowerStat.prototype.constructor = PowerStat;
 
 var IntellectStat = function(owner, level){
@@ -139,5 +140,5 @@ var IntellectStat = function(owner, level){
 	this.unlockedConditionsMet = function(){ return owner.stats.bond.level > 0};
 }
 
-IntellectStat.prototype = new Stat();
+IntellectStat.prototype = Object.create(Stat.prototype);	
 IntellectStat.prototype.constructor = IntellectStat;

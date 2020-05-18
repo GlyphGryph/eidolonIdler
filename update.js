@@ -38,7 +38,7 @@ var updateCharacter = function(){
 }
 
 var updateActions = function(){
-	[character, monster].forEach(function(context){
+	[character, ...monsters].forEach(function(context){
 		if(context.unlockedActions.length > 0){
 			$("#"+context.actionsElementId).show();
 		}else{
@@ -86,32 +86,42 @@ var updateLog = function(){
 };
 
 var updateStats = function(){
-	monster.lockedStats.forEach(function(id){
-		var stat = monster.stats[id];
-		if(stat.unlockedConditionsMet()){
-			stat.unlock();
-		}
-	});
-	monster.unlockedStats.forEach(function(id){
-		var stat = monster.stats[id];
-		stat.update();
+	monsters.forEach(function(monster){
+		monster.lockedStats.forEach(function(id){
+			var stat = monster.stats[id];
+			if(stat.unlockedConditionsMet()){
+				stat.unlock();
+			}
+		});
+		monster.unlockedStats.forEach(function(id){
+			var stat = monster.stats[id];
+			stat.update();
+		});
 	});
 }
 
 var updateAbilities = function(){
-	$('#currently-active-abilities').text(monster.activeAbilities.length);
-	$('#max-active-abilities').text(monster.maxActiveAbilities());
-	monster.lockedAbilities.forEach(function(id){
-		var ability = abilities[id];
-		if(ability.unlockedConditionsMet(monster)){
-			ability.unlock(monster);
-		}
-	});
-	monster.unlockedAbilities.forEach(function(id){
-		var ability = abilities[id];
-		ability.update(monster);
+	monsters.forEach(function(monster){
+		$('#'+monster.profileElementId+' .currently-active-abilities').text(monster.activeAbilities.length);
+		$('#'+monster.profileElementId+' .max-active-abilities').text(monster.maxActiveAbilities());
+		monster.lockedAbilities.forEach(function(id){
+			var ability = abilities[id];
+			if(ability.unlockedConditionsMet(monster)){
+				ability.unlock(monster);
+			}
+		});
+		monster.unlockedAbilities.forEach(function(id){
+			var ability = abilities[id];
+			ability.update(monster);
+		});
 	});
 }
+
+var updateMonsters = function(){
+	monsters.forEach(function(monster){
+		monster.update();
+	});
+};
 
 var updateProgress = function(){
 	// Unlock tabs at 4 spirit
@@ -128,12 +138,6 @@ var updateProgress = function(){
 			$("#orphan-view-tab").show();
 			addLog('red', "A new tab has become available.")
 
-		}
-	}
-	if(!monster.abilitiesAreUnlocked){
-		if(monster.unlockedAbilities.length > 0){
-			monster.abilitiesAreUnlocked = true;
-			$("#abilities").show();
 		}
 	}
 	
