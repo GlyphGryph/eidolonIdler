@@ -20,7 +20,7 @@ abilities.fakeAbility = new Ability({
 	trainTime: 5000
 });
 
-abilities.fakeAbilityTwo = new Ability({
+abilities.fakeAbility2 = new Ability({
 	id: 'fakeAbility2',
 	name: 'Test Ability #2',
 	description: "Does nothing.",

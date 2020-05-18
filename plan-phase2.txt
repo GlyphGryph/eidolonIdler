@@ -23,9 +23,11 @@ See both monsters actions, works functionally
 
 See both monsters stats, works functionally
 
+See both monsters abilities, works functionally
+
 --
 
-See both monsters abilities, works functionally
+Fix region travel for multiple monsters
 
 Save state of the application in a cookie so it's not lost if the player closes the tab
 

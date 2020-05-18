@@ -90,8 +90,9 @@ var monsters = [
 		id: 'monster-2',
 		name: "Monster Two",
 		abilities: [
+			'sharedHealing',
 			'fakeAbility',
-			'fakeAbilityTwo',
+			'fakeAbility2',
 			'assist'
 		],
 	})

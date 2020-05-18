@@ -133,12 +133,13 @@ var updateProgress = function(){
 		}
 	}
 	if(!gameProgress.orphanIsUnlocked){
-		if(abilities.sharedHealing.active){
-			gameProgress.orphanIsUnlocked = true;
-			$("#orphan-view-tab").show();
-			addLog('red', "A new tab has become available.")
-
-		}
+		monsters.forEach(function(monster){
+			if(abilities.sharedHealing.isActive(monster)){
+				gameProgress.orphanIsUnlocked = true;
+				$("#orphan-view-tab").show();
+				addLog('red', "A new tab has become available.")
+			}
+		});
 	}
 	
 	if(!gameProgress.regionsAreUnlocked){
