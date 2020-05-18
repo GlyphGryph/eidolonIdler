@@ -1,5 +1,7 @@
 // Runs once at game start / on game load
 var setup = function(){
+
+	
 	// Create all regions
 	regionDefinitions.forEach(function(definition){
 		regions[definition.id] = new Region(definition, 0, 0);
@@ -12,6 +14,26 @@ var setup = function(){
 	});
 	
 	// Setup each monster
+	// Create all monsters
+	monsters.push(new Monster({
+		id: 'monster-1',
+		name: "Monster One",
+		abilities: [
+			'sharedHealing',
+			'fakeAbility',
+			'assist'
+		]
+	}));
+	monsters.push(new Monster({
+		id: 'monster-2',
+		name: "Monster Two",
+		abilities: [
+			'sharedHealing',
+			'fakeAbility',
+			'fakeAbility2',
+			'assist'
+		],
+	}));
 	monsters.forEach(function(monster){
 		monster.setup();
 		

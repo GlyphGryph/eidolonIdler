@@ -1,3 +1,5 @@
+var monsters = [];
+
 var state = {
 	currentTime: null,
 	lastTime: null,

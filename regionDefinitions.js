@@ -14,14 +14,7 @@ var regionDefinitions = [
 			4: function(){addLog('purple', "You discover an exit that leads to the Tangled Jungle!");},
 			8: function(){addLog('purple', "You discover an exit that leads to the Forgotten Village!");},
 		},
-		travelTime: 1000,
-		travelDescription: function(){
-			var txt="<div>Time to Travel to this location: "+this.travelTime/1000+" seconds.</div>";
-			if(anyActionsAreBusy()){
-				txt+="<div>You or one of your monsters are too busy to travel. Wait until all actions have been completed.</div>";
-			}
-			return txt;
-		}
+		travelTime: 1000
 	},
 	{
 		id: "tangledJungle",
@@ -32,14 +25,7 @@ var regionDefinitions = [
 		unlockedConditionsMet: function(){ return (regions.blackenedWasteland.awareness == 4); },
 		discoveries: {
 		},
-		travelTime: 1000,
-		travelDescription: function(){
-			var txt="<div>Time to Travel to this location: "+this.travelTime/1000+" seconds.</div>";
-			if(anyActionsAreBusy()){
-				txt+="<div>You or one of your monsters are too busy to travel. Wait until all actions have been completed.</div>";
-			}
-			return txt;
-		}
+		travelTime: 1000
 	},
 	{
 		id: "forgottenVillage",
@@ -50,13 +36,6 @@ var regionDefinitions = [
 		unlockedConditionsMet: function(){ return (regions.blackenedWasteland.awareness == 8); },
 		discoveries: {
 		},
-		travelTime: 1000,
-		travelDescription: function(){
-			var txt="<div>Time to Travel to this location: "+this.travelTime/1000+" seconds.</div>";
-			if(anyActionsAreBusy()){
-				txt+="<div>You or one of your monsters are too busy to travel. Wait until all actions have been completed.</div>";
-			}
-			return txt;
-		}
+		travelTime: 1000
 	}
 ];

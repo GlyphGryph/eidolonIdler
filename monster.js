@@ -74,26 +74,3 @@ Monster.prototype.update = function(){
 		}
 	}	
 }
-
-var monsters = [
-	new Monster({
-		id: 'monster-1',
-		name: "Monster One",
-		abilities: [
-			'sharedHealing',
-			'fakeAbility',
-			'assist'
-		],
-		
-	}),
-	new Monster({
-		id: 'monster-2',
-		name: "Monster Two",
-		abilities: [
-			'sharedHealing',
-			'fakeAbility',
-			'fakeAbility2',
-			'assist'
-		],
-	})
-];

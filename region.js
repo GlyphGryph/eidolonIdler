@@ -13,10 +13,18 @@ var Region = function(definition, awareness, traveling){
 	this.unlockedConditionsMet = definition.unlockedConditionsMet;
 	this.discoveries = definition.discoveries;
 	this.travelTime = 1000;
-	this.travelDescription = definition.travelDescription;
 	
 	this.awareness = awareness;
 	this.traveling = traveling;
+}
+
+
+Region.prototype.travelDescription = function(){
+	var txt="<div>Time to Travel to this location: "+this.travelTime/1000+" seconds.</div>";
+	if(anyActionsAreBusy()){
+		txt+="<div>You or one of your monsters are too busy to travel. Wait until all actions have been completed.</div>";
+	}
+	return txt;
 }
 
 Region.prototype.beginTravel = function(){
