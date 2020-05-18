@@ -13,6 +13,18 @@ var addLog = function(color, message){
 	log.push([color, message]);
 };
 
+var anyMonsterActionsAreBusy = function(){
+	busy = false
+	monsters.forEach(function(monster){
+		busy = busy || monster.actionsAreBusy
+	});
+	return busy;
+}
+
+var anyActionsAreBusy = function(){
+	return anyMonsterActionsAreBusy() || character.actionsAreBusy
+}
+
 var gainSpirit = function(value){
 	monsters.forEach(function(monster){
 		if(abilities.sharedHealing.isActive(monster) && character.diminished > 0){

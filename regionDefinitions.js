@@ -17,7 +17,7 @@ var regionDefinitions = [
 		travelTime: 1000,
 		travelDescription: function(){
 			var txt="<div>Time to Travel to this location: "+this.travelTime/1000+" seconds.</div>";
-			if(monster.actionsAreBusy || character.actionsAreBusy){
+			if(anyActionsAreBusy()){
 				txt+="<div>You or one of your monsters are too busy to travel. Wait until all actions have been completed.</div>";
 			}
 			return txt;
@@ -35,7 +35,7 @@ var regionDefinitions = [
 		travelTime: 1000,
 		travelDescription: function(){
 			var txt="<div>Time to Travel to this location: "+this.travelTime/1000+" seconds.</div>";
-			if(monster.actionsAreBusy || character.actionsAreBusy){
+			if(anyActionsAreBusy()){
 				txt+="<div>You or one of your monsters are too busy to travel. Wait until all actions have been completed.</div>";
 			}
 			return txt;
@@ -53,7 +53,7 @@ var regionDefinitions = [
 		travelTime: 1000,
 		travelDescription: function(){
 			var txt="<div>Time to Travel to this location: "+this.travelTime/1000+" seconds.</div>";
-			if(monster.actionsAreBusy || character.actionsAreBusy){
+			if(anyActionsAreBusy()){
 				txt+="<div>You or one of your monsters are too busy to travel. Wait until all actions have been completed.</div>";
 			}
 			return txt;

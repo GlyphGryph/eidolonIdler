@@ -20,11 +20,13 @@ var Region = function(definition, awareness, traveling){
 }
 
 Region.prototype.beginTravel = function(){
-	if(!monster.actionsAreBusy && !character.actionsAreBusy){
+	if(!anyActionsAreBusy()){
 		this.traveling = this.travelTime;
 		travelElement = $("#"+this.elementId+" .travel-button");
 		travelElement.hide();
-		monster.actionsAreBusy=true;
+		monsters.forEach(function(monster){
+			monster.actionsAreBusy=true;
+		});
 		character.actionsAreBusy=true;
 	}
 };
@@ -66,7 +68,7 @@ Region.prototype.update = function(){
 		exploredElement.text(""+exploredPercent+"%");
 	}
 	
-	if(monster.actionsAreBusy || character.actionsAreBusy){
+	if(anyActionsAreBusy()){
 		travelElement.find('button').prop('disabled', true);
 	}else{
 		travelElement.find('button').prop('disabled', false);
@@ -81,7 +83,9 @@ Region.prototype.update = function(){
 		}
 		if(this.traveling < 1){
 			this.traveling = 0;
-			monster.actionsAreBusy = false;
+			monsters.forEach(function(monster){
+				monster.actionsAreBusy = false;
+			});
 			character.actionsAreBusy = false;
 			regionElement.find('.progress-bar').css('width', '0%');
 			currentRegion = this.id;
