@@ -21,6 +21,10 @@
 		<link href="style.css" rel="stylesheet" type="text/css" media="all">
 	</head>
 	<body>
+		<div id='save-and-load-controls'>
+			<button id='save-button'>SAVE</button>
+			<button id='load-button'>LOAD</button>
+		</div>
 		<div id='play-area' style='display:none'>
 			<div id='interactions'>
 				<div id='view-select-menu'>
@@ -30,34 +34,29 @@
 					<div class='tab' id='region-view-tab'>Regions</div>
 				</div>
 				<div class='view' id='action-view'>
-					<div id='character-family'>
-						<h1 class='name'>Character</h1>
-					</div>
 				</div>
 				<div class='view' id='monster-view'>
 				</div>
 				<div class='view' id='orphan-view'>
-					<div id='orphan-name'></div>
-					<div id='orphan-diminished'>
-						<span id='diminished-label'>Diminished:</span>
-						<span id='diminished-value'></span>
-					</div>
 				</div>
 				<div class='view' id='region-view'>
-					<h1>REGIONS</h2>
 				</div>
 			</div>
 			<div id='resources'>
-				<h1>RESOURCES</h1>
 			</div>
 			<div id='log'>
-				<h1>LOG</h1>
-				<div id='log-text'>This is where updates happen</div>
 			</div>
 		</div>
 		<div id='description'>
 		</div>
 		<div id='templates'>
+			<div id='orphan-profile-template'>
+				<div class='orphan-name'></div>
+				<div class='orphan-diminished'>
+					<span class='diminished-label'>Diminished:</span>
+					<span class='diminished-value'></span>
+				</div>
+			</div>
 			<div id='monster-profile-template' class='monster-profile'>
 				<div class='monster-name'></div>
 				<div class='monster-stats'>

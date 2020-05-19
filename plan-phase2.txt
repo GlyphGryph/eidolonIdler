@@ -35,4 +35,6 @@ Save state of the application in a cookie so it's not lost if the player closes 
 
 Have the log cut off after 50 items.
 
+Have update not run so frequently, set to something like 30 fps.
+
 Add a button to delete the cookie and start over

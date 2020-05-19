@@ -1,6 +1,20 @@
+var clearOldElements = function(){
+	$('#action-view').html('');
+	$('#monster-view').html('');
+	$('#orphan-view').html('');
+	$('#region-view').html('');
+};
+
 // Runs once at game start / on game load
-var setup = function(){
-	state = newGameState();
+var setup = function(saveState){
+	if(saveState){
+		state = new State(saveState);
+	}else{
+		state = newGameState();
+	}
+	
+	clearOldElements();
+	
 	// Setup unlocked regions
 	state.unlockedRegions.forEach(function(id){
 		var region = state.regions[id];
@@ -32,14 +46,9 @@ var setup = function(){
 			action.setup(monster);
 		});
 	});
-
-	// Setup resources
-	state.unlockedResources.forEach(function(id){
-		var ability = abilities[id];
-		ability.setup;
-	});
 	
 	// Setup character actions
+	state.character.setup();
 	state.character.unlockedActions.forEach(function(id){
 		var action = actions[id];
 		action.setup(context);
@@ -69,6 +78,11 @@ var setup = function(){
 	}else{
 		$("#region-view-tab").hide();
 	}
+	
+	//Setup Save/Load buttons
+	$("#save-button").click(function(){save()});
+	$("#load-button").click(function(){load()});
+
 	
 	// First run of the update loop
 	update();

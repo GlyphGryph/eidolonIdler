@@ -17,6 +17,15 @@ var Region = function(definition){
 	this.traveling = 0;
 }
 
+Region.prototype.toSaveState = function(){
+	var thing = {
+		id: this.id,
+		awareness: this.awareness,
+		traveling: this.traveling
+	}
+	return thing;
+}
+
 
 Region.prototype.travelDescription = function(){
 	var txt="<div>Time to Travel to this location: "+this.travelTime/1000+" seconds.</div>";

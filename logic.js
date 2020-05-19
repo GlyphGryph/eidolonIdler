@@ -1,4 +1,20 @@
-removeFromArray = function(array, value){
+var fakeCookie = null;
+
+var save = function(){
+	var json = JSON.stringify(state.toSaveState());
+	fakeCookie = json;
+}
+
+var load = function(){
+	if(fakeCookie){
+		var saveState = JSON.parse(fakeCookie);
+		setup(saveState);
+	} else {
+		alert('no save game data detected');
+	}
+}
+
+var removeFromArray = function(array, value){
 	return array.filter(function(elem){ return elem != value; }); 
 };
 

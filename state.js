@@ -50,7 +50,7 @@ var State = function(saveState){
 	this.character = new Character(saveState.character)
 };
 
-State.prototype.toJSON = function(){
+State.prototype.toSaveState = function(){
 	thing = {
 		currentTime: this.currentTime,
 		lastTime: this.lastTime,
@@ -67,13 +67,13 @@ State.prototype.toJSON = function(){
 	}
 	thing.monsters = [];
 	this.monsters.forEach(function(monster){
-		thing.monsters.push(monster.toJSON());
+		thing.monsters.push(monster.toSaveState());
 	});
 	thing.regions = [];
 	this.regions.forEach(function(region){
-		thing.regions.push(region.toJSON());
+		thing.regions.push(region.toSaveState());
 	});
-	thing.character = character.toJSON();
+	thing.character = state.character.toSaveState();
 	return thing;
 }
 
@@ -89,7 +89,7 @@ var newGameState = function(){
 	var monsters = [{
 		id: 'monster-1',
 		name: "Monster One",
-		abilities: [
+		lockedAbilities: [
 			'sharedHealing',
 			'fakeAbility',
 			'assist'
