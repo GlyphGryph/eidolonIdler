@@ -10,57 +10,49 @@ var selectView = function(id){
 }
 
 var addLog = function(color, message){
-	log.push([color, message]);
+	state.log.push([color, message]);
 };
 
 var anyMonsterActionsAreBusy = function(){
 	busy = false
-	monsters.forEach(function(monster){
+	state.monsters.forEach(function(monster){
 		busy = busy || monster.actionsAreBusy
 	});
 	return busy;
 }
 
 var anyActionsAreBusy = function(){
-	return anyMonsterActionsAreBusy() || character.actionsAreBusy
+	return anyMonsterActionsAreBusy() || state.character.actionsAreBusy
 }
 
 var gainSpirit = function(value){
-	monsters.forEach(function(monster){
-		if(abilities.sharedHealing.isActive(monster) && character.diminished > 0){
+	state.monsters.forEach(function(monster){
+		if(abilities.sharedHealing.isActive(monster) && state.character.diminished > 0){
 			var amountToSiphon = monster.stats.power.level;
 			if(amountToSiphon > value){
 				amountToSiphon = value;
 			}
-			if(amountToSiphon > character.diminished){
-				amountToSiphon = character.diminished;
+			if(amountToSiphon > state.character.diminished){
+				amountToSiphon = state.character.diminished;
 			}
-			character.diminished -= amountToSiphon;
+			state.character.diminished -= amountToSiphon;
 			addLog('red', "Orphan healed "+amountToSiphon+" points of damage.");
-			if(character.diminished <= 0){
+			if(state.character.diminished <= 0){
 				addLog('red', "Orphan fully healed.");
 			}
 			value = value - amountToSiphon;
 		}
 	})
-	resources.spirit.change(value);
+	state.resources.spirit.change(value);
 }
 
 var exploreRegion = function(){
-	var region = regions[currentRegion]
+	var region = state.regions[state.currentRegion]
 	if(region.awareness < region.size){
 		region.awareness+=1;
 		if(region.awareness in region.discoveries){
 			region.discoveries[region.awareness]();
 		}
-	}
-}
-
-var prepareTravelToStart = function(region){
-	if(!monster.actionsAreBusy && !character.actionsAreBusy){
-		region.travel.shouldStart=true;
-		monster.actionsAreBusy=true;
-		character.actionsAreBusy=true;
 	}
 }
 
@@ -81,14 +73,6 @@ var openDescription = function(elem, description){
 
 var closeDescription = function(){
 	$("#description").html("").hide();
-}
-
-var canMeetCost = function(costArray){
-	// TODO : For ability training and actions
-}
-
-var payCost = function(costArray){
-	// TODO: For ability training and actions
 }
 
 var startScript = function(){

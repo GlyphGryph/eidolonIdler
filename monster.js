@@ -1,45 +1,57 @@
+// Mandatory arguments
+// id
+// name
+// abilities
 var Monster = function(definition){
 	this.name = definition.name;
 	
 	// Actions
-	this.actionRunningDuration = 0;
-	this.actionRunning = null;
+	this.actionRunningDuration = definition.actionRunningDuration || 0;
+	this.actionRunning = definition.actionRunning || null;
 	this.actionsElementId = definition.id + '-family';
 	this.profileElementId = definition.id + '-monster-profile';
-	this.actionsAreBusy = false;
-	this.unlockedActions = [
+	this.actionsAreBusy = definition.actionsAreBusy || false;
+	this.unlockedActions = definition.unlockedActions || [
 		'huntWisp',
 		'fakeAction'
 	];
-	this.lockedActions = [
+	this.lockedActions = definition.lockedActions || [
 	]
 	
 	// Abilities
-	this.abilitiesAreUnlocked = false;
-	this.abilitiesAreTraining = false;
-	this.abilityTraining = null;
-	this.abilityTrainingDuration = 0;
-	this.unlockedAbilities = [
-	],
+	this.abilitiesAreUnlocked = definition.abilitiesAreUnlocked || false;
+	this.abilitiesAreTraining = definition.abilitiesAreTraining || false;
+	this.abilityTraining = definition.abilityTraining || null;
+	this.abilityTrainingDuration = definition.abilityTrainingDuration || 0;
+	this.unlockedAbilities = definition.unlockedAbilities || [],
 	this.lockedAbilities = definition.abilities;
-	this.activeAbilities = [];
-	this.trainedAbilities = [];
+	this.activeAbilities = definition.activeAbilities || [];
+	this.trainedAbilities = definition.trainedAbilities || [];
 	
 	// Stats
-	this.unlockedStats = [
+	this.unlockedStats = definition.unlockedStats || [
 		'bond'
 	];
-	this.lockedStats = [
+	this.lockedStats = definition.lockedStats || [
 		'will',
 		'intellect',
 		'power'
 	];
-	this.stats = {
-		bond: new BondStat(this, 0),
-		will: new WillStat(this, 1),
-		intellect: new IntellectStat(this, 1),
-		power: new PowerStat(this, 1),
-	};
+	if(definition.stats){
+		this.stats = {
+			bond: new BondStat(this, definition.stats.bond),
+			will: new WillStat(this, definition.stats.will),
+			intellect: new IntellectStat(this, definition.stats.intellect),
+			power: new PowerStat(this, definition.stats.power),
+		};
+	}else{
+		this.stats = {
+			bond: new BondStat(this, 0),
+			will: new WillStat(this, 1),
+			intellect: new IntellectStat(this, 1),
+			power: new PowerStat(this, 1),
+		};
+	}
 };
 
 Monster.prototype.maxActiveAbilities = function(){

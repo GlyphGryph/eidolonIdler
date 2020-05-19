@@ -1,40 +1,14 @@
 // Runs once at game start / on game load
 var setup = function(){
-
-	
-	// Create all regions
-	regionDefinitions.forEach(function(definition){
-		regions[definition.id] = new Region(definition, 0, 0);
-	})
-
-	// Setup regionsAreUnlocked
-	unlockedRegions.forEach(function(id){
-		var region = regions[id];
+	state = newGameState();
+	// Setup unlocked regions
+	state.unlockedRegions.forEach(function(id){
+		var region = state.regions[id];
 		region.setup();
 	});
 	
 	// Setup each monster
-	// Create all monsters
-	monsters.push(new Monster({
-		id: 'monster-1',
-		name: "Monster One",
-		abilities: [
-			'sharedHealing',
-			'fakeAbility',
-			'assist'
-		]
-	}));
-	monsters.push(new Monster({
-		id: 'monster-2',
-		name: "Monster Two",
-		abilities: [
-			'sharedHealing',
-			'fakeAbility',
-			'fakeAbility2',
-			'assist'
-		],
-	}));
-	monsters.forEach(function(monster){
+	state.monsters.forEach(function(monster){
 		monster.setup();
 		
 		// Setup stats
@@ -60,13 +34,13 @@ var setup = function(){
 	});
 
 	// Setup resources
-	unlockedResources.forEach(function(id){
+	state.unlockedResources.forEach(function(id){
 		var ability = abilities[id];
 		ability.setup;
 	});
 	
 	// Setup character actions
-	character.unlockedActions.forEach(function(id){
+	state.character.unlockedActions.forEach(function(id){
 		var action = actions[id];
 		action.setup(context);
 	});
@@ -78,19 +52,19 @@ var setup = function(){
 	$("#region-view-tab").click(function(){selectView('region')});
 
 	selectView('action');
-	if(gameProgress.tabsAreUnlocked){
+	if(state.tabsAreUnlocked){
 		$("#view-select-menu").show();
 	}else{
 		$("#view-select-menu").hide();
 	}
 	
-	if(gameProgress.orphanIsUnlocked){
+	if(state.orphanIsUnlocked){
 		$("#orphan-view-tab").show();
 	}else{
 		$("#orphan-view-tab").hide();
 	}
 	
-	if(gameProgress.regionsAreUnlocked){
+	if(state.regionsAreUnlocked){
 		$("#region-view-tab").show();
 	}else{
 		$("#region-view-tab").hide();

@@ -54,7 +54,7 @@ actions.care = new Action({
 		addLog('green', "Fake Action started");
 	},
 	finish: function(){
-		resources.affection.change(1);
+		state.resources.affection.change(1);
 		addLog('green', "Fake Action finished.");
 	}
 });

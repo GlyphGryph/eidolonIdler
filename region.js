@@ -4,7 +4,7 @@
 // description : str or function
 // unlockedConditionsMet : function
 // size : int
-var Region = function(definition, awareness, traveling){
+var Region = function(definition){
 	this.id = definition.id;
 	this.elementId = this.id+'-resource';
 	this.name = definition.name;
@@ -13,9 +13,8 @@ var Region = function(definition, awareness, traveling){
 	this.unlockedConditionsMet = definition.unlockedConditionsMet;
 	this.discoveries = definition.discoveries;
 	this.travelTime = 1000;
-	
-	this.awareness = awareness;
-	this.traveling = traveling;
+	this.awareness = 0;
+	this.traveling = 0;
 }
 
 
@@ -32,17 +31,17 @@ Region.prototype.beginTravel = function(){
 		this.traveling = this.travelTime;
 		travelElement = $("#"+this.elementId+" .travel-button");
 		travelElement.hide();
-		monsters.forEach(function(monster){
+		state.monsters.forEach(function(monster){
 			monster.actionsAreBusy=true;
 		});
-		character.actionsAreBusy=true;
+		state.character.actionsAreBusy=true;
 	}
 };
 
 
 Region.prototype.unlock = function(){
-	lockedRegions = removeFromArray(lockedRegions, this.id);
-	unlockedRegions.push(this.id);
+	state.lockedRegions = removeFromArray(state.lockedRegions, this.id);
+	state.unlockedRegions.push(this.id);
 	this.setup();
 	addLog('black', "Region "+this.name+" unlocked.");
 }
@@ -91,12 +90,12 @@ Region.prototype.update = function(){
 		}
 		if(this.traveling < 1){
 			this.traveling = 0;
-			monsters.forEach(function(monster){
+			state.monsters.forEach(function(monster){
 				monster.actionsAreBusy = false;
 			});
-			character.actionsAreBusy = false;
+			state.character.actionsAreBusy = false;
 			regionElement.find('.progress-bar').css('width', '0%');
-			currentRegion = this.id;
+			state.currentRegion = this.id;
 		}
 	}
 	
@@ -104,7 +103,7 @@ Region.prototype.update = function(){
 		regionElement.find('.travel-button').hide();
 		regionElement.find('.current-location').hide();
 		regionElement.find('.travel-bar').show();
-	}else if(this.id==currentRegion){
+	}else if(this.id==state.currentRegion){
 		regionElement.find('.travel-button').hide();
 		regionElement.find('.current-location').show();
 		regionElement.find('.travel-bar').hide();

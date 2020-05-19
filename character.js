@@ -6,26 +6,16 @@
 // lockedActions
 // actionRunning
 // actionRunningDuration
-var Character = function(state){
-	this.name = state.name;
-	this.diminished = state.diminished;
-	this.actionsAreBusy = state.actionsAreBusy;
-	this.unlockedActions = state.unlockedActions;
-	this.lockedActions = state.lockedActions;
-	this.actionsElementId = 'character-family';
-	this.actionRunning = state.actionRunning;
-	this.actionRunningDuration = state.actionRunningDuration;
-}
-
-var character =	new Character({
-	name: "Wayward Orphan",
-	diminished: 3,
-	actionsAreBusy: false,
-	unlockedActions:[],
-	lockedActions:[
+var Character = function(definition){
+	this.name = definition.name;
+	this.diminished = definition.diminished || 3;
+	this.actionsAreBusy = definition.actionsAreBusy || false;
+	this.unlockedActions = definition.unlockedActions || [];
+	this.lockedActions = definition.lockedActions || [
 		'explore',
 		'care'
-	],
-	actionRunningDuration: 0,
-	actionRunning: null
-});
+	];
+	this.actionsElementId = 'character-family';
+	this.actionRunning = definition.actionRunning || null;
+	this.actionRunningDuration = definition.actionRunningDuration || 0;
+}

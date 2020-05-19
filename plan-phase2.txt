@@ -33,4 +33,6 @@ Refactor region travel descriptions. DRY
 
 Save state of the application in a cookie so it's not lost if the player closes the tab
 
+Have the log cut off after 50 items.
+
 Add a button to delete the cookie and start over

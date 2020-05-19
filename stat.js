@@ -29,7 +29,7 @@ Stat.prototype.upgradeDescription = function(){
 	
 	var body = "<p>Cost is:</p>"
 	this.upgradeCost.forEach( function(costPair){
-		resource = resources[costPair[0]];
+		resource = state.resources[costPair[0]];
 		body += resource.name+": "+costPair[1](that)+"<br />";
 	});
 	return body;
@@ -39,7 +39,7 @@ Stat.prototype.canBeUpgraded = function(){
 	var that = this;
 	var canBe = true;
 	this.upgradeCost.forEach( function(costPair){
-		resource = resources[costPair[0]];
+		resource = state.resources[costPair[0]];
 		needs = costPair[1](that);
 		if(resource.value < needs){
 			canBe = false;
@@ -75,7 +75,7 @@ Stat.prototype.upgrade = function(){
 	var that = this;
 	if(this.canBeUpgraded()){
 		this.upgradeCost.forEach( function(costPair){
-			resource = resources[costPair[0]];
+			resource = state.resources[costPair[0]];
 			needs = costPair[1](that);
 			resource.value -= needs;
 		});

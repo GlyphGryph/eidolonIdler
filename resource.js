@@ -1,8 +1,8 @@
-var Resource = function(id, name, value){
+var Resource = function(id, name){
 	this.id = id;
 	this.elementId = this.id+'-resource';
 	this.name = name;
-	this.value = value;
+	this.value = 0;
 }
 
 Resource.prototype.change = function(amount){
@@ -23,8 +23,8 @@ Resource.prototype.unlockedConditionsMet = function(){
 };
 
 Resource.prototype.unlock = function(){
-	if(!unlockedResources.includes(this.id)){
-		unlockedResources.push(this.id);
+	if(!state.unlockedResources.includes(this.id)){
+		state.unlockedResources.push(this.id);
 		this.setup();
 	}
 }
