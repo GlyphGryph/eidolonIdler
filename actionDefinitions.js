@@ -19,12 +19,13 @@ actions.fakeAction = new Action({
 	id: 'fakeAction',
 	name: "Fake Action",
 	description: "--",
-	runTime: 1000,
+	runTime: 5000,
 	unlockedConditionsMet: function(){ return true; },
 	start: function(){
 		addLog('green', "Fake Action started");
 	},
-	finish: function(){
+	finish: function(){	
+		gainSpirit(2);
 		addLog('green', "Fake Action finished.");
 	}
 })

@@ -3,48 +3,48 @@
 // name
 // abilities
 //
-// Form of stats in definition: {bond: value, will: value, intellect: value, power: value}
-var Monster = function(definition){
-	this.name = definition.name;
+// Form of stats in saveState: {bond: value, will: value, intellect: value, power: value}
+var Monster = function(saveState){
+	this.name = saveState.name;
 	
 	// Actions
-	this.actionRunningDuration = definition.actionRunningDuration || 0;
-	this.actionRunning = definition.actionRunning || null;
-	this.id = definition.id;
+	this.actionRunningDuration = (saveState.actionRunningDuration !== undefined) ? saveState.actionRunningDuration : 0;
+	this.actionRunning = (saveState.actionRunning !== undefined) ? saveState.actionRunning : null;
+	this.id = saveState.id;
 	this.actionsElementId = this.id + '-action-family';
 	this.profileElementId = this.id + '-monster-profile';
-	this.actionsAreBusy = definition.actionsAreBusy || false;
-	this.unlockedActions = definition.unlockedActions || [
+	this.actionsAreBusy = (saveState.actionsAreBusy !== undefined) ? saveState.actionsAreBusy : false;
+	this.unlockedActions = (saveState.unlockedActions !== undefined) ? saveState.unlockedActions : [
 		'huntWisp',
 		'fakeAction'
 	];
-	this.lockedActions = definition.lockedActions || [];
+	this.lockedActions = (saveState.lockedActions !== undefined) ? saveState.lockedActions : [];
 	
 	// Abilities
-	this.abilitiesAreUnlocked = definition.abilitiesAreUnlocked || false;
-	this.abilitiesAreTraining = definition.abilitiesAreTraining || false;
-	this.abilityTraining = definition.abilityTraining || null;
-	this.abilityTrainingDuration = definition.abilityTrainingDuration || 0;
-	this.unlockedAbilities = definition.unlockedAbilities || [];
-	this.lockedAbilities = definition.lockedAbilities;
-	this.activeAbilities = definition.activeAbilities || [];
-	this.trainedAbilities = definition.trainedAbilities || [];
+	this.abilitiesAreUnlocked = (saveState.abilitiesAreUnlocked !== undefined) ? saveState.abilitiesAreUnlocked : false;
+	this.abilitiesAreTraining = (saveState.abilitiesAreTraining !== undefined) ? saveState.abilitiesAreTraining : false;
+	this.abilityTraining = (saveState.abilityTraining !== undefined) ? saveState.abilityTraining : null;
+	this.abilityTrainingDuration = (saveState.abilityTrainingDuration !== undefined) ? saveState.abilityTrainingDuration : 0;
+	this.unlockedAbilities = (saveState.unlockedAbilities !== undefined) ? saveState.unlockedAbilities : [];
+	this.lockedAbilities = saveState.lockedAbilities;
+	this.activeAbilities = (saveState.activeAbilities !== undefined) ? saveState.activeAbilities : [];
+	this.trainedAbilities = (saveState.trainedAbilities !== undefined) ? saveState.trainedAbilities : [];
 	
 	// Stats
-	this.unlockedStats = definition.unlockedStats || [
+	this.unlockedStats = (saveState.unlockedStats !== undefined) ? saveState.unlockedStats : [
 		'bond'
 	];
-	this.lockedStats = definition.lockedStats || [
+	this.lockedStats = (saveState.lockedStats !== undefined) ? saveState.lockedStats : [
 		'will',
 		'intellect',
 		'power'
 	];
-	if(definition.stats){
+	if(saveState.stats){
 		this.stats = {
-			bond: new BondStat(this, definition.stats.bond),
-			will: new WillStat(this, definition.stats.will),
-			intellect: new IntellectStat(this, definition.stats.intellect),
-			power: new PowerStat(this, definition.stats.power),
+			bond: new BondStat(this, saveState.stats.bond),
+			will: new WillStat(this, saveState.stats.will),
+			intellect: new IntellectStat(this, saveState.stats.intellect),
+			power: new PowerStat(this, saveState.stats.power),
 		};
 	}else{
 		this.stats = {

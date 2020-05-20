@@ -29,7 +29,23 @@ Fix region travel for multiple monsters
 
 Refactor region travel descriptions. DRY
 
+Save state in a json object and allow reloading state
+
+Fix region explore percentage not saving/loading
+
+Fix player actions not saving/loading
+
+Fix player diminished value not saving/loading
+
+Fix "train" button being visible after reload on a skill currently being trained
+
+Fix region travel progress not loading
+
 --
+
+Fix action button being visible after reload on an action currently being executed
+
+Fix slowdown when repeatedly saving and loading
 
 Save state of the application in a cookie so it's not lost if the player closes the tab
 

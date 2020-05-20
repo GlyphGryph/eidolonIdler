@@ -2,48 +2,48 @@ var state = {}
 
 var State = function(saveState){
 	var that = this;
-	this.currentTime = saveState.currentTime || null;
-	this.lastTime = saveState.lastTime || null;
-	this.timeSinceLastUpdate = saveState.timeSinceLastUpdate || null;
-	this.selectedTab = saveState.selectedTab || 'action';
+	this.currentTime = (saveState.currentTime !== undefined) ? saveState.currentTime : null;
+	this.lastTime = (saveState.lastTime !== undefined) ? saveState.lastTime : null;
+	this.timeSinceLastUpdate = (saveState.timeSinceLastUpdate !== undefined) ? saveState.timeSinceLastUpdate : null;
+	this.selectedTab = (saveState.selectedTab !== undefined) ? saveState.selectedTab : 'action';
 	
 	// Simple Trackers
-	this.log = saveState.log || [];
-	this.unlockedResources = saveState.unlockedResources || [];
-	this.currentRegion = saveState.currentRegion || null;
-	this.unlockedRegions = saveState.unlockedRegions || [];
-	this.lockedRegions = saveState.lockedRegions || [];
+	this.log = (saveState.log !== undefined) ? saveState.log : [];
+	this.unlockedResources = (saveState.unlockedResources !== undefined) ? saveState.unlockedResources : [];
+	this.currentRegion = (saveState.currentRegion !== undefined) ? saveState.currentRegion : null;
+	this.unlockedRegions = (saveState.unlockedRegions !== undefined) ? saveState.unlockedRegions : [];
+	this.lockedRegions = (saveState.lockedRegions !== undefined) ? saveState.lockedRegions : [];
 	
 	// Game Progress
-	this.tabsAreUnlocked = saveState.tabsAreUnlockedfalse;
-	this.orphanIsUnlocked = saveState.orphanIsUnlockedfalse;
-	this.regionsAreUnlocked = saveState.regionsAreUnlockedfalse;
+	this.tabsAreUnlocked = (saveState.tabsAreUnlocked !== undefined) ? saveState.tabsAreUnlocked : false;
+	this.orphanIsUnlocked = (saveState.orphanIsUnlocked !== undefined) ? saveState.orphanIsUnlocked : false;
+	this.regionsAreUnlocked = (saveState.regionsAreUnlocked !== undefined) ? saveState.regionsAreUnlocked : false;
 	
-	
+	 
 	// Complex Trackers
 	this.monsters = [];
 	saveState.monsters.forEach(function(monsterState){
 		that.monsters.push(new Monster(monsterState));
 	});
 	
-	this.regions = [];
+	this.regions = {};
 	regionDefinitions.forEach(function(definition){
 		that.regions[definition.id] = new Region(definition);
 	});
 	if(saveState.regions){
 		saveState.regions.forEach(function(regionState){
-			regions[regionState.id].awareness = regionState.awareness;
-			regions[regionState.id].traveling = regionState.traveling;
+			that.regions[regionState.id].awareness = regionState.awareness;
+			that.regions[regionState.id].traveling = regionState.traveling;
 		});
 	}
 
-	this.resources = [];
+	this.resources = {};
 	resourceDefinitions.forEach(function(definition){
 		that.resources[definition.id] = new Resource(definition.id, definition.name);
 	});
 	if(saveState.resources){
 		saveState.resources.forEach(function(resourceState){
-			resources[resourceState.id].value = resourceState.value;
+			that.resources[resourceState.id].value = resourceState.value;
 		});
 	}
 	
@@ -51,6 +51,7 @@ var State = function(saveState){
 };
 
 State.prototype.toSaveState = function(){
+	var that = this;
 	thing = {
 		currentTime: this.currentTime,
 		lastTime: this.lastTime,
@@ -70,8 +71,13 @@ State.prototype.toSaveState = function(){
 		thing.monsters.push(monster.toSaveState());
 	});
 	thing.regions = [];
-	this.regions.forEach(function(region){
+	regionDefinitions.forEach(function(definition){
+		region = that.regions[definition.id];
 		thing.regions.push(region.toSaveState());
+	});
+	thing.resources = [];
+	resourceDefinitions.forEach(function(resource){
+		thing.resources.push({id: resource.id, value: that.resources[resource.id].value}); 
 	});
 	thing.character = state.character.toSaveState();
 	return thing;

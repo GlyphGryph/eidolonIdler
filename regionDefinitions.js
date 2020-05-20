@@ -11,8 +11,7 @@ var regionDefinitions = [
 			3: function(){addLog('purple', "You discover another skeleton in bleached rags. A broken music box is clasped in its hand.");},
 			4: function(){addLog('purple', "You discover an exit that leads to the Tangled Jungle!");},
 			8: function(){addLog('purple', "You discover an exit that leads to the Forgotten Village!");},
-		},
-		travelTime: 1000
+		}
 	},
 	{
 		id: "tangledJungle",
@@ -22,8 +21,7 @@ var regionDefinitions = [
 		size: 1,
 		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness == 4); },
 		discoveries: {
-		},
-		travelTime: 1000
+		}
 	},
 	{
 		id: "forgottenVillage",
@@ -33,7 +31,6 @@ var regionDefinitions = [
 		size: 1,
 		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness == 8); },
 		discoveries: {
-		},
-		travelTime: 1000
+		}
 	}
 ];

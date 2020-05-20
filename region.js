@@ -12,7 +12,7 @@ var Region = function(definition){
 	this.size = definition.size;
 	this.unlockedConditionsMet = definition.unlockedConditionsMet;
 	this.discoveries = definition.discoveries;
-	this.travelTime = 1000;
+	this.travelTime = 10000;
 	this.awareness = 0;
 	this.traveling = 0;
 }

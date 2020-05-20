@@ -76,7 +76,7 @@ var updateResources = function(){
 };
 
 var updateLog = function(){
-	var logElement = $('#log-text');
+	var logElement = $('#log');
 	logElement.html("");
 	[...state.log].reverse().forEach(function(message){
 		messageElement = $("<p>"+message[1]+"</p>");

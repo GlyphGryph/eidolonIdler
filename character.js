@@ -6,18 +6,18 @@
 // lockedActions
 // actionRunning
 // actionRunningDuration
-var Character = function(definition){
-	this.name = definition.name;
-	this.diminished = definition.diminished || 3;
-	this.actionsAreBusy = definition.actionsAreBusy || false;
-	this.unlockedActions = definition.unlockedActions || [];
-	this.lockedActions = definition.lockedActions || [
+var Character = function(saveState){
+	this.name = saveState.name;
+	this.diminished = (saveState.diminished !== undefined) ? saveState.diminished :3;
+	this.actionsAreBusy = (saveState.actionsAreBusy !== undefined) ? saveState.actionsAreBusy :false;
+	this.unlockedActions = (saveState.unlockedActions !== undefined) ? saveState.unlockedActions :[];
+	this.lockedActions = (saveState.lockedActions !== undefined) ? saveState.lockedActions :[
 		'explore',
 		'care'
 	];
 	this.actionsElementId = 'character-action-family';
-	this.actionRunning = definition.actionRunning || null;
-	this.actionRunningDuration = definition.actionRunningDuration || 0;
+	this.actionRunning = (saveState.actionRunning !== undefined) ? saveState.actionRunning :null;
+	this.actionRunningDuration = (saveState.actionRunningDuration !== undefined) ? saveState.actionRunningDuration :0;
 }
 
 Character.prototype.toSaveState = function(){

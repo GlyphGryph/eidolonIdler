@@ -3,6 +3,9 @@ var clearOldElements = function(){
 	$('#monster-view').html('');
 	$('#orphan-view').html('');
 	$('#region-view').html('');
+	$('#resources').html('');
+	$('#log').html('');
+	$('#description').html('');
 };
 
 // Runs once at game start / on game load
@@ -21,6 +24,11 @@ var setup = function(saveState){
 		region.setup();
 	});
 	
+	state.unlockedResources.forEach(function(id){
+		var resource = state.resources[id];
+		resource.setup();
+	});
+	
 	// Setup each monster
 	state.monsters.forEach(function(monster){
 		monster.setup();
@@ -32,7 +40,7 @@ var setup = function(saveState){
 		
 		// Setup abilities
 		monster.unlockedAbilities.forEach(function(id){
-			abilities[id].setup();
+			abilities[id].setup(monster);
 		});
 		
 		if(monster.abilitiesAreUnlocked){
@@ -51,7 +59,7 @@ var setup = function(saveState){
 	state.character.setup();
 	state.character.unlockedActions.forEach(function(id){
 		var action = actions[id];
-		action.setup(context);
+		action.setup(state.character);
 	});
 	
 	//Setup Tabs
@@ -83,10 +91,6 @@ var setup = function(saveState){
 	$("#save-button").click(function(){save()});
 	$("#load-button").click(function(){load()});
 
-	
-	// First run of the update loop
-	update();
-	
 	// Finally, show the play area to the player
 	$('#play-area').show();
 }

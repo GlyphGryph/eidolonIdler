@@ -93,6 +93,8 @@ var closeDescription = function(){
 
 var startScript = function(){
 	setup();
+	// First run of the update loop
+	update();
 };
 
 $(document).ready(startScript);
