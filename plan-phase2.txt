@@ -45,9 +45,11 @@ Fix action button being visible after reload on an action currently being execut
 
 Fix slowdown when repeatedly saving and loading
 
+Save state of the application in a cookie so it's not lost if the player closes the tab
+
 --
 
-Save state of the application in a cookie so it's not lost if the player closes the tab
+Add a button to reset the save state
 
 Have the log cut off after 50 items.
 
