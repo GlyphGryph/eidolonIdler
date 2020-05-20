@@ -1,5 +1,8 @@
+
+
 // The main game loop
 var update = function(timestamp){
+	console.log('foo');
 	if(state.currentTime){
 		state.lastTime = state.currentTime;
 	}else{

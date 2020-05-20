@@ -92,9 +92,12 @@ var closeDescription = function(){
 }
 
 var startScript = function(){
+	//Setup Save/Load buttons
+	$("#save-button").click(function(){save()});
+	$("#load-button").click(function(){load()});
 	setup();
 	// First run of the update loop
-	update();
+	window.requestAnimationFrame(update);
 };
 
 $(document).ready(startScript);

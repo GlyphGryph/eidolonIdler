@@ -85,7 +85,7 @@ Ability.prototype.setup = function(context){
 	upgradeElement.mouseleave(closeDescription);
 	upgradeElement.click(function(){that.begin(context)});
 	abilityElement.find('.activate').click(function(){that.activate(context)});
-	abilityElement.find('.deactivate').click(function(){that.deactivate(context)});	
+	abilityElement.find('.deactivate').click(function(){that.deactivate(context)});
 };
 
 Ability.prototype.update = function(context){

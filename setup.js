@@ -86,10 +86,6 @@ var setup = function(saveState){
 	}else{
 		$("#region-view-tab").hide();
 	}
-	
-	//Setup Save/Load buttons
-	$("#save-button").click(function(){save()});
-	$("#load-button").click(function(){load()});
 
 	// Finally, show the play area to the player
 	$('#play-area').show();

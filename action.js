@@ -42,7 +42,6 @@ Action.prototype.begin = function(context){
 		context.actionRunning = this.id;
 		context.actionRunningDuration = this.runTime;
 		var actionElement = $("#"+this.getElementId(context));
-		actionElement.find('button').hide();
 	}
 };
 
@@ -56,6 +55,7 @@ Action.prototype.update = function(context){
 	
 	// If this action is currently running...
 	if(context.actionRunning == this.id){
+		actionElement.find('button').hide();
 		context.actionRunningDuration -= state.timeSinceLastUpdate;
 		if(context.actionRunningDuration >= 1){
 			progress = Math.floor(100 - (context.actionRunningDuration / this.runTime) * 100)
