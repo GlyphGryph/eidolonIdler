@@ -17,7 +17,7 @@ abilities.fakeAbility = new Ability({
 	unlockedConditionsMet: function(context){
 		return context.stats.bond.level >= 1;
 	},
-	trainTime: 5000
+	trainTime: 50000
 });
 
 abilities.fakeAbility2 = new Ability({

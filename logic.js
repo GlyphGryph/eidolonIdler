@@ -1,5 +1,3 @@
-var fakeCookie = null;
-
 var save = function(){
 	var saveState = JSON.stringify(state.toSaveState());
 	setCookie('saveState', saveState, 360);
@@ -12,6 +10,12 @@ var load = function(){
 	} else {
 		alert('no save game data detected');
 	}
+}
+
+var resetGame = function(){
+	setup();
+	var saveState = JSON.stringify(state.toSaveState());
+	setCookie('saveState', saveState, 360);
 }
 
 function setCookie(name,value,days) {
@@ -118,7 +122,13 @@ var startScript = function(){
 	//Setup Save/Load buttons
 	$("#save-button").click(function(){save()});
 	$("#load-button").click(function(){load()});
-	setup();
+	$("#reset-button").click(function(){resetGame()});
+	if(getCookie('saveState')){
+		var saveState = JSON.parse(getCookie('saveState'));
+		setup(saveState);
+	} else {
+		setup();
+	}
 	// First run of the update loop
 	window.requestAnimationFrame(update);
 };

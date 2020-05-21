@@ -2,7 +2,8 @@
 
 // The main game loop
 var update = function(timestamp){
-	console.log('foo');
+	// We want time to persist between sessions, so we use absolute time instead of the given timestamp
+	timestamp = (new Date()).getTime();
 	if(state.currentTime){
 		state.lastTime = state.currentTime;
 	}else{

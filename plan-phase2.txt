@@ -47,9 +47,22 @@ Fix slowdown when repeatedly saving and loading
 
 Save state of the application in a cookie so it's not lost if the player closes the tab
 
+Add a button to reset the save state.
+
+Fix problem where reloading the page sets the time for behaviours to a much higher value than it should be (loading by button press works fine)
+This is because time counts from the moment the page loads - it's not using actual times. See:
+https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp#The_time_origin
+https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+
 --
 
-Add a button to reset the save state
+Fix bug where cookies don't persist when tab is closed
+
+Ability training buttons should not be visible when loading during training
+
+Automatically save the game once every half second.
+
+Automatically load the game if a saveState exists on first page load.
 
 Have the log cut off after 50 items.
 
