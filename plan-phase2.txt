@@ -62,8 +62,8 @@ Automatically save the game
 
 Automatically load the game if a saveState exists on first page load.
 
----
-
 Have the log cut off after 50 items.
 
 Add a button to delete the cookie and start over
+
+PHASE 2 COMPLETE!

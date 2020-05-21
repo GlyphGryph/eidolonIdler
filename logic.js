@@ -54,6 +54,9 @@ var selectView = function(id){
 
 var addLog = function(color, message){
 	state.log.push([color, message]);
+	if(state.log.length > 20){
+		state.log.shift();
+	}
 };
 
 var anyMonsterActionsAreBusy = function(){
