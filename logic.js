@@ -1,11 +1,11 @@
-var save = function(){
+var save = function(saveName='saveState'){
 	var saveState = JSON.stringify(state.toSaveState());
-	setCookie('saveState', saveState, 360);
+	setCookie(saveName, saveState, 360);
 }
 
-var load = function(){
-	if(getCookie('saveState')){
-		var saveState = JSON.parse(getCookie('saveState'));
+var load = function(saveName='saveState'){
+	if(getCookie(saveName)){
+		var saveState = JSON.parse(getCookie(saveName));
 		setup(saveState);
 	} else {
 		alert('no save game data detected');
@@ -120,8 +120,8 @@ var closeDescription = function(){
 
 var startScript = function(){
 	//Setup Save/Load buttons
-	$("#save-button").click(function(){save()});
-	$("#load-button").click(function(){load()});
+	$("#save-button").click(function(){save('saveState2')});
+	$("#load-button").click(function(){load('saveState2')});
 	$("#reset-button").click(function(){resetGame()});
 	if(getCookie('saveState')){
 		var saveState = JSON.parse(getCookie('saveState'));

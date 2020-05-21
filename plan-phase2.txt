@@ -54,18 +54,16 @@ This is because time counts from the moment the page loads - it's not using actu
 https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp#The_time_origin
 https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
 
---
-
-Fix bug where cookies don't persist when tab is closed
+Fix bug where cookies don't persist when tab is closed - WONTFIX, is due to running locally through file
 
 Ability training buttons should not be visible when loading during training
 
-Automatically save the game once every half second.
+Automatically save the game
 
 Automatically load the game if a saveState exists on first page load.
 
-Have the log cut off after 50 items.
+---
 
-Have update not run so frequently, set to something like 30 fps.
+Have the log cut off after 50 items.
 
 Add a button to delete the cookie and start over

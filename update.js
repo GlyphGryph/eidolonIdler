@@ -19,6 +19,7 @@ var update = function(timestamp){
 	updateCharacter();
 	updateRegions();
 	updateLog();
+	save();
 	
 	window.requestAnimationFrame(update);
 }

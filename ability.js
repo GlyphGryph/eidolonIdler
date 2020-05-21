@@ -45,7 +45,6 @@ Ability.prototype.begin = function(context){
 		context.abilityTraining = this.id;
 		context.abilityTrainingDuration = this.trainTime;
 		var upgradeElement = $("#"+this.getUpgradeElementId(context));
-		upgradeElement.find('button').hide();
 	}
 }
 
@@ -146,6 +145,7 @@ Ability.prototype.update = function(context){
 	
 	if(context.abilityTraining==this.id){
 		context.abilityTrainingDuration -= state.timeSinceLastUpdate;
+		upgradeElement.find('button').hide();
 		if(context.abilityTrainingDuration >= 1){
 			progress = Math.floor(100 - (context.abilityTrainingDuration / this.trainTime) * 100)
 			upgradeElement.find('.progress-bar').css('width', ''+progress+'%')
