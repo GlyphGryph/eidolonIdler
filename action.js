@@ -36,7 +36,7 @@ Action.prototype.setup = function(context){
 
 
 Action.prototype.begin = function(context){
-	if(!context.actionsAreBusy){
+	if(!context.actionsAreBusy  && 'standard' == state.mode){
 		this.start();
 		context.actionsAreBusy = true;
 		context.actionRunning = this.id;
@@ -47,14 +47,14 @@ Action.prototype.begin = function(context){
 
 Action.prototype.update = function(context){
 	var actionElement = $("#"+this.getElementId(context));
-	if(context.actionsAreBusy){
+	if(context.actionsAreBusy || 'standard' != state.mode){
 		actionElement.find('button').prop('disabled', true);
 	}else{
 		actionElement.find('button').prop('disabled', false);
 	}
 	
 	// If this action is currently running...
-	if(context.actionRunning == this.id){
+	if(context.actionRunning == this.id && 'standard' == state.mode){
 		actionElement.find('button').hide();
 		context.actionRunningDuration -= state.timeSinceLastUpdate;
 		if(context.actionRunningDuration >= 1){

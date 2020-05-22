@@ -45,6 +45,10 @@ var removeFromArray = function(array, value){
 	return array.filter(function(elem){ return elem != value; }); 
 };
 
+var eqOr = function(conditional, fallback){
+	return (conditional !== undefined) ? conditional : fallback;
+}
+
 var selectView = function(id){
 	$(".view").hide();
 	$('#'+id+'-view').show();
@@ -102,6 +106,14 @@ var exploreRegion = function(){
 	}
 }
 
+var interrupt = function(){
+	if('standard' == state.mode){
+		state.mode = 'battle';
+	}else{
+		state.mode = 'standard';
+	}
+}
+
 var openDescription = function(elem, description){
 	var describerElement = jQuery(elem);
 	var descriptionElement = $("#description")
@@ -126,6 +138,7 @@ var startScript = function(){
 	$("#save-button").click(function(){save('saveState2')});
 	$("#load-button").click(function(){load('saveState2')});
 	$("#reset-button").click(function(){resetGame()});
+	$("#interrupt-button").click(function(){interrupt()});
 	if(getCookie('saveState')){
 		var saveState = JSON.parse(getCookie('saveState'));
 		setup(saveState);

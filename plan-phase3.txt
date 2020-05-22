@@ -1,0 +1,65 @@
+Add a button that triggers "interrupt" and another that releases it
+
+Make sure interrupt status is saved
+
+Add "interrupt" logic for running action timers that freezes timer progression when a state variable interrupted=true.
+
+Add interrupt logic to training abilities
+
+Add interrupt logic to travel
+
+Do not allow players to trigger new actions, training, or travel, or to upgrade stats, while interrupted.
+
+Disable all such buttons.
+
+Change interrupt button to "Summon Boss".
+
+----
+
+When someone summons the boss, there's a popover that appears that says BOSS FIGHT.
+
+Add "Boss Ambushed [blah]" and have Blah be the first monster.
+
+Add three buttons: Win, Lose, Escape
+
+If Escape is pressed, the popover disappears and the BOSS FIGHT ends, as well as the interruption
+
+If Lose is pressed, as in Escape except the monster is "destroyed".
+
+When a monster is destroyed, cancel any existing actions or training for that monster.
+
+On the monster page, and after their name on the action page, say "Destroyed".
+
+When a monster is destroyed, add a ressurect action to the monsters action list that is NOT disabled.
+
+For a destroyed monster, disable actions (except ressurect), stat upgrades, and training. This does NOT disable travel.
+
+When the ressurection action completes, the monster is no longer destroyed, but the player character is diminished by an amount equal to the total level of all the monster's stats except Bond.
+
+When a player is diminished, cancel any existing actions for that player and any traveling.
+
+For a diminished players, disable actions and disable travel .
+
+Add a button "Summon Boss Against Player", which has the same popup except it says the Boss ambushed the orphan.
+
+If Escape is pressed, as before
+
+If Lose is pressed, the player is Diminished: 30, with all the above diminishing stuff still happening.
+
+Add a button "Summon Boss Against Team", which has the same popup except it says the Boss vs list of team members.
+
+If Escape is pressed, as before.
+
+If Lose is pressed, process loss for entire team.
+
+In any situation, when the Win button is pressed, a new popover screen becomes visible that says Victory!
+
+In it, for each monster on the players screen, there is the option to "Consume Soul".
+
+Consuming a soul gives the player a significant amount of Spirit.
+
+Each boss fight should be associated with a MonsterDefinition.
+
+Consuming a soul adds the abilities from the MonsterDefinition to the consuming monster's lockedAbilities unless it already exists in lockedAbilities or unlockedAbilities.
+
+There is also the option "Bind Soul" if the character is present, which creates a new monster on the player's team based on the MonsterDefinition.

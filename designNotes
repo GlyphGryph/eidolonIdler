@@ -2,6 +2,10 @@
 Pitch:
 An orphan stranged in another world bonds with a young monster. As it grows in power, they travel from place to place, first exploring and learning and eventually challenging and defeating the nefarious boss monsters that rot the heart of each region. Each one they defeat gives their monster incredible new powers, or allows them to add a new baby monster to their team. They eventually discover a city full of sentient non-human beings, which allows them to earn and spend money on unlocking the secrets of those who came before. When all of the boss monsters have been defeated, the player may return to the area they started to challenge the final boss, the man who offered them their first monster in his boss monster form, and beat the game.
 
+Phase 1: Basics - Accumulate resources, monsters and character can take actions, monsters can train abilities, team can explore and travel from region to region
+Phase 2: Saving/Loading - The game state can be saved and loaded from a cookie
+Phase 3: Battle Context - Team or individual fights against boss monsters are generated and interact appropriately with game progress, with wins, losses, and escapes being possible. No battle mechanics.
+Phase 4: Battle Mechanics - Boss monster fights now involve actual player decisions being made, and player/monsters can be ambushed when completing actions or choose to battle a boss in explored regions.
 
 
 ---

@@ -39,7 +39,7 @@ Ability.prototype.getUpgradeElementId = function(context){
 };
 
 Ability.prototype.begin = function(context){
-	if(!context.abilitiesAreTraining){
+	if(!context.abilitiesAreTraining  && 'standard' == state.mode){
 		this.start();
 		context.abilitiesAreTraining = true;
 		context.abilityTraining = this.id;
@@ -56,13 +56,15 @@ Ability.prototype.unlock = function(context){
 };
 
 Ability.prototype.activate = function(context){
-	if(context.activeAbilities.length < context.maxActiveAbilities()){
+	if(context.activeAbilities.length < context.maxActiveAbilities() && 'standard' == state.mode){
 		context.activeAbilities.push(this.id);
 	}
 }
 
 Ability.prototype.deactivate = function(context){
-	context.activeAbilities = removeFromArray(context.activeAbilities, this.id);
+	if('standard' == state.mode){
+		context.activeAbilities = removeFromArray(context.activeAbilities, this.id);
+	}
 }
 
 Ability.prototype.isActive = function(context){
@@ -105,7 +107,7 @@ Ability.prototype.update = function(context){
 		}
 	}
 	
-	if(context.abilitiesAreTraining){
+	if(context.abilitiesAreTraining || 'standard' != state.mode){
 		upgradeElement.find('button').prop('disabled', true);
 	}else{
 		upgradeElement.find('button').prop('disabled', false);	
@@ -137,13 +139,15 @@ Ability.prototype.update = function(context){
 		deactivateElement.hide();
 	}
 	
-	if(context.abilitiesAreTraining){
-		upgradeElement.find('button').prop('disabled', true);
+	if('standard' == state.mode){
+		activateElement.find('button').prop('disabled', false);
+		deactivateElement.find('button').prop('disabled', false);
 	}else{
-		upgradeElement.find('button').prop('disabled', false);
+		activateElement.find('button').prop('disabled', true);
+		deactivateElement.find('button').prop('disabled', true);
 	}
 	
-	if(context.abilityTraining==this.id){
+	if(context.abilityTraining==this.id && 'standard' == state.mode){
 		context.abilityTrainingDuration -= state.timeSinceLastUpdate;
 		upgradeElement.find('button').hide();
 		if(context.abilityTrainingDuration >= 1){

@@ -6,6 +6,7 @@ var State = function(saveState){
 	this.lastTime = (saveState.lastTime !== undefined) ? saveState.lastTime : null;
 	this.timeSinceLastUpdate = (saveState.timeSinceLastUpdate !== undefined) ? saveState.timeSinceLastUpdate : null;
 	this.selectedTab = (saveState.selectedTab !== undefined) ? saveState.selectedTab : 'action';
+	this.mode = eqOr(saveState.mode, 'standard'); // Valid: 'standard', 'battle' 
 	
 	// Simple Trackers
 	this.log = (saveState.log !== undefined) ? saveState.log : [];
@@ -18,7 +19,6 @@ var State = function(saveState){
 	this.tabsAreUnlocked = (saveState.tabsAreUnlocked !== undefined) ? saveState.tabsAreUnlocked : false;
 	this.orphanIsUnlocked = (saveState.orphanIsUnlocked !== undefined) ? saveState.orphanIsUnlocked : false;
 	this.regionsAreUnlocked = (saveState.regionsAreUnlocked !== undefined) ? saveState.regionsAreUnlocked : false;
-	
 	 
 	// Complex Trackers
 	this.monsters = [];
@@ -57,6 +57,7 @@ State.prototype.toSaveState = function(){
 		lastTime: this.lastTime,
 		timeSinceLastUpdate: this.timeSinceLastUpdate,
 		selectedTab: this.selectedTab,
+		mode: this.mode,
 		log: this.log,
 		unlockedResources: this.unlockedResources,
 		currentRegion: this.currentRegion,
@@ -64,7 +65,7 @@ State.prototype.toSaveState = function(){
 		lockedRegions: this.lockedRegions,
 		tabsAreUnlocked: this.tabsAreUnlocked,
 		orphanIsUnlocked: this.orphanIsUnlocked,
-		regionsAreUnlocked: this.regionsAreUnlocked,
+		regionsAreUnlocked: this.regionsAreUnlocked
 	}
 	thing.monsters = [];
 	this.monsters.forEach(function(monster){

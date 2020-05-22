@@ -1,0 +1,3 @@
+Add an "encounter chance" to each action definition, and whenever an action finishes give that chance to have a boss encounter against the action owner. Care should have a chance of zero, explore a high chance, and hunt wisp a moderate chance.
+
+When a boss fight happens, set a boss fight cooldown tracker for the region. When a player is in a region where the boss fight cooldown has not yet finished running, ignore any boss monster ambushes. 

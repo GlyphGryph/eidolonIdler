@@ -36,7 +36,7 @@ Region.prototype.travelDescription = function(){
 }
 
 Region.prototype.beginTravel = function(){
-	if(!anyActionsAreBusy()){
+	if(!anyActionsAreBusy() && 'standard' == state.mode){
 		this.traveling = this.travelTime;
 		travelElement = $("#"+this.elementId+" .travel-button");
 		travelElement.hide();
@@ -84,14 +84,14 @@ Region.prototype.update = function(){
 		exploredElement.text(""+exploredPercent+"%");
 	}
 	
-	if(anyActionsAreBusy()){
+	if(anyActionsAreBusy() || 'standard' != state.mode){
 		travelElement.find('button').prop('disabled', true);
 	}else{
 		travelElement.find('button').prop('disabled', false);
 	}
 	
 	// If this action is currently running...
-	if(this.traveling >= 1){
+	if(this.traveling >= 1 && 'standard' == state.mode){
 		this.traveling -= state.timeSinceLastUpdate;
 		if(this.traveling >= 1){
 			progress = Math.floor(100 - (this.traveling / this.travelTime) * 100)
