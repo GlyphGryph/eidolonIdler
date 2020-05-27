@@ -108,9 +108,9 @@ var exploreRegion = function(){
 
 var interrupt = function(){
 	if('standard' == state.mode){
-		state.mode = 'battle';
+		startBattle();
 	}else{
-		state.mode = 'standard';
+		endBattle();
 	}
 }
 
@@ -131,6 +131,24 @@ var openDescription = function(elem, description){
 
 var closeDescription = function(){
 	$("#description").html("").hide();
+}
+
+var startBattle = function(){
+	if('battle' != state.mode){
+		state.mode = 'battle';
+		var team = [...state.monsters, state.character];
+		state.currentBattle = new Battle(team, ["Enemy Boss"]);
+	}
+}
+
+var endBattle = function(){
+	if('battle' == state.mode){
+		state.mode = 'standard';
+		var battleElement = $('#battle');
+		battleElement.hide();
+		battleElement.html("");
+		state.currentBattle = null;
+	}
 }
 
 var startScript = function(){

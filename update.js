@@ -19,6 +19,9 @@ var update = function(timestamp){
 	updateCharacter();
 	updateRegions();
 	updateLog();
+	if(state.mode == 'battle'){
+		state.currentBattle.update();
+	}
 	save();
 	
 	window.requestAnimationFrame(update);

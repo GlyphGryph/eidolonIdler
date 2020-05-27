@@ -7,6 +7,7 @@
 // actionRunning
 // actionRunningDuration
 var Character = function(saveState){
+	this.id = 'character';
 	this.name = saveState.name;
 	this.diminished = (saveState.diminished !== undefined) ? saveState.diminished :3;
 	this.actionsAreBusy = (saveState.actionsAreBusy !== undefined) ? saveState.actionsAreBusy :false;

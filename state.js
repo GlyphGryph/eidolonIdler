@@ -19,8 +19,9 @@ var State = function(saveState){
 	this.tabsAreUnlocked = (saveState.tabsAreUnlocked !== undefined) ? saveState.tabsAreUnlocked : false;
 	this.orphanIsUnlocked = (saveState.orphanIsUnlocked !== undefined) ? saveState.orphanIsUnlocked : false;
 	this.regionsAreUnlocked = (saveState.regionsAreUnlocked !== undefined) ? saveState.regionsAreUnlocked : false;
-	 
+	
 	// Complex Trackers
+	
 	this.monsters = [];
 	saveState.monsters.forEach(function(monsterState){
 		that.monsters.push(new Monster(monsterState));
@@ -47,7 +48,25 @@ var State = function(saveState){
 		});
 	}
 	
-	this.character = new Character(saveState.character)
+	this.character = new Character(saveState.character);
+	
+	
+	if('battle' == this.mode){
+		var allies= [];
+		saveState.currentBattle.allies.forEach(function(allyId){
+			if('character' == allyId){
+				allies.push(that.character);
+			}else{
+				allies.push(that.getMonster(allyId));
+			}
+		});
+
+		var enemies = saveState.currentBattle.enemies;
+
+		this.currentBattle = new Battle(allies, enemies);
+	}else{
+		this.currentBattle = null;
+	}
 };
 
 State.prototype.toSaveState = function(){
@@ -67,21 +86,32 @@ State.prototype.toSaveState = function(){
 		orphanIsUnlocked: this.orphanIsUnlocked,
 		regionsAreUnlocked: this.regionsAreUnlocked
 	}
+	if('battle' == this.mode){
+		thing.currentBattle = this.currentBattle.toSaveState();
+	}
+	
 	thing.monsters = [];
 	this.monsters.forEach(function(monster){
 		thing.monsters.push(monster.toSaveState());
 	});
+	
 	thing.regions = [];
 	regionDefinitions.forEach(function(definition){
 		region = that.regions[definition.id];
 		thing.regions.push(region.toSaveState());
 	});
+	
 	thing.resources = [];
 	resourceDefinitions.forEach(function(resource){
 		thing.resources.push({id: resource.id, value: that.resources[resource.id].value}); 
 	});
+	
 	thing.character = state.character.toSaveState();
 	return thing;
+}
+
+State.prototype.getMonster = function(id){
+	return this.monsters.find(function(monster){ return monster.id == id });
 }
 
 
