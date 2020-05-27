@@ -16,13 +16,13 @@ Change interrupt button to "Summon Boss".
 
 When someone summons the boss, there's a popover that appears that says BOSS FIGHT.
 
-----
-
 Add "Boss [boss monster] Ambushed [blah]" and have Blah be the first monster.
 
 Make sure the monsters and enemies are being tracked.
 
 Save and load the current setup of the battle.
+
+----
 
 Add three buttons: Win, Lose, Escape
 

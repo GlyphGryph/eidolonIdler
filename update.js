@@ -19,13 +19,19 @@ var update = function(timestamp){
 	updateCharacter();
 	updateRegions();
 	updateLog();
-	if(state.mode == 'battle'){
-		state.currentBattle.update();
-	}
+	updateBattle();
 	save();
 	
 	window.requestAnimationFrame(update);
 }
+
+var updateBattle = function(){
+	if(state.mode == 'battle'){
+		state.currentBattle.update();
+	} else {
+		$("#battle").hide();
+	}
+};
 
 var updateCharacter = function(){
 	var characterElement = $('#orphan-view');
@@ -43,7 +49,7 @@ var updateCharacter = function(){
 	} else {
 		characterDiminishedElement.hide();
 	}
-}
+};
 
 var updateActions = function(){
 	[state.character, ...state.monsters].forEach(function(context){

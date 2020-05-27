@@ -6,6 +6,7 @@ var clearOldElements = function(){
 	$('#resources').html('');
 	$('#log').html('');
 	$('#description').html('');
+	$('#battle').html('');
 };
 
 // Runs once at game start / on game load
