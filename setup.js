@@ -6,7 +6,7 @@ var clearOldElements = function(){
 	$('#resources').html('');
 	$('#log').html('');
 	$('#description').html('');
-	$('#battle').html('');
+	$('#battle .title').html('');
 };
 
 // Runs once at game start / on game load
@@ -90,4 +90,9 @@ var setup = function(saveState){
 
 	// Finally, show the play area to the player
 	$('#play-area').show();
+	
+	// Battle controls
+	$('#win-battle').click(function(){state.currentBattle.win()});
+	$('#lose-battle').click(function(){state.currentBattle.lose()});
+	$('#escape-battle').click(function(){state.currentBattle.escape()});
 }

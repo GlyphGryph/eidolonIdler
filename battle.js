@@ -18,7 +18,7 @@ Battle.prototype.getBattleString = function(){
 Battle.prototype.update = function(){
 	var battleElement = $('#battle');
 	battleElement.show();
-	battleElement.html(this.getBattleString())
+	battleElement.find('.title').html(this.getBattleString());
 }
 
 Battle.prototype.toSaveState = function(){
@@ -34,4 +34,35 @@ Battle.prototype.toSaveState = function(){
 		things.enemies.push(enemy);
 	});
 	return things;
+}
+
+Battle.prototype.win = function(){
+	alert('Not yet');
+}
+
+Battle.prototype.lose = function(){
+	alert('Not yet');
+}
+
+Battle.prototype.escape = function(){
+	addLog('black ', 'You escaped!');
+	this.end();
+}
+
+Battle.start = function(){
+	if('battle' != state.mode){
+		state.mode = 'battle';
+		var team = [...state.monsters, state.character];
+		state.currentBattle = new Battle(team, ["Enemy Boss"]);
+	}
+}
+
+Battle.prototype.end = function(){
+	if('battle' == state.mode){
+		state.mode = 'standard';
+		var battleElement = $('#battle');
+		battleElement.hide();
+		battleElement.find('.title').html("");
+		state.currentBattle = null;
+	}
 }
