@@ -7,6 +7,9 @@
 var Monster = function(saveState){
 	this.name = saveState.name;
 	
+	// Status
+	this.destroyed = eqOr(saveState.alive, false);
+	
 	// Actions
 	this.actionRunningDuration = (saveState.actionRunningDuration !== undefined) ? saveState.actionRunningDuration : 0;
 	this.actionRunning = (saveState.actionRunning !== undefined) ? saveState.actionRunning : null;
@@ -106,7 +109,7 @@ Monster.prototype.totalLevels = function(){
 Monster.prototype.setup = function(){
 	var actionsElement = $("#action-family-template").clone();
 	actionsElement.attr('id', this.actionsElementId);
-	actionsElement.find('.name').text(this.name);
+	actionsElement.find('.monster-name').text(this.name);
 	$("#action-view").append(actionsElement);
 		
 	var profileElement = $("#monster-profile-template").clone();
@@ -115,11 +118,53 @@ Monster.prototype.setup = function(){
 	$("#monster-view").append(profileElement);
 }
 
+Monster.prototype.updateAbilities = function(){
+	var that = this;
+	$('#'+this.profileElementId+' .currently-active-abilities').text(this.activeAbilities.length);
+	$('#'+this.profileElementId+' .max-active-abilities').text(this.maxActiveAbilities());
+
+	this.lockedAbilities.forEach(function(id){
+		var ability = abilities[id];
+		if(ability.unlockedConditionsMet(that)){
+			ability.unlock(that);
+		}
+	});
+	this.unlockedAbilities.forEach(function(id){
+		var ability = abilities[id];
+		ability.update(that);
+	});
+}
+
 Monster.prototype.update = function(){
 	if(!this.abilitiesAreUnlocked){
 		if(this.unlockedAbilities.length > 0){
 			this.abilitiesAreUnlocked = true;
 			$("#abilities").show();
 		}
-	}	
+	}
+	this.updateAbilities();
+	
+	var displayName = this.name;
+	if(this.destroyed){
+		var displayName = this.name + " (Destroyed)";
+	}
+	var actionsNameElement = $("#"+this.actionsElementId+" .monster-name");
+	if(actionsNameElement.text() != displayName){
+		actionsNameElement	 .text(displayName);
+	}
+	var profileNameElement = $("#"+this.profileElementId+" .monster-name");
+	if(profileNameElement.text() != displayName){
+		profileNameElement.text(displayName);
+	}
+}
+
+Monster.prototype.kill = function(){
+	this.destroyed = true;
+	addLog('red', this.name + ' was destroyed!');
+	if(null != this.abilityTraining){
+		abilities[this.abilityTraining].cancelTraining(this);
+	}
+	if(null != this.actionRunning){
+		actions[this.actionRunning].cancel(this);
+	};
 }

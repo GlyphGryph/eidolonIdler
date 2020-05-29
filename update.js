@@ -14,12 +14,12 @@ var update = function(timestamp){
 	updateActions();
 	updateResources();
 	updateStats();
-	updateAbilities();
 	updateProgress();
 	updateCharacter();
 	updateRegions();
 	updateLog();
 	updateBattle();
+	updateMonsters();
 	save();
 	
 	window.requestAnimationFrame(update);
@@ -110,23 +110,6 @@ var updateStats = function(){
 		monster.unlockedStats.forEach(function(id){
 			var stat = monster.stats[id];
 			stat.update();
-		});
-	});
-}
-
-var updateAbilities = function(){
-	state.monsters.forEach(function(monster){
-		$('#'+monster.profileElementId+' .currently-active-abilities').text(monster.activeAbilities.length);
-		$('#'+monster.profileElementId+' .max-active-abilities').text(monster.maxActiveAbilities());
-		monster.lockedAbilities.forEach(function(id){
-			var ability = abilities[id];
-			if(ability.unlockedConditionsMet(monster)){
-				ability.unlock(monster);
-			}
-		});
-		monster.unlockedAbilities.forEach(function(id){
-			var ability = abilities[id];
-			ability.update(monster);
 		});
 	});
 }

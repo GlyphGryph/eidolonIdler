@@ -41,7 +41,11 @@ Battle.prototype.win = function(){
 }
 
 Battle.prototype.lose = function(){
-	alert('Not yet');
+	addLog('black ', 'You lost the fight!');
+	this.allies.forEach(function(ally){
+		ally.kill();
+	});
+	this.end();
 }
 
 Battle.prototype.escape = function(){

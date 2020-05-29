@@ -92,7 +92,7 @@ var setup = function(saveState){
 	$('#play-area').show();
 	
 	// Battle controls
-	$('#win-battle').click(function(){state.currentBattle.win()});
-	$('#lose-battle').click(function(){state.currentBattle.lose()});
-	$('#escape-battle').click(function(){state.currentBattle.escape()});
+	$('#win-battle').click(function(){if(null != state.currentBattle){state.currentBattle.win()}});
+	$('#lose-battle').click(function(){if(null != state.currentBattle){state.currentBattle.lose()}});
+	$('#escape-battle').click(function(){if(null != state.currentBattle){state.currentBattle.escape()}});
 }

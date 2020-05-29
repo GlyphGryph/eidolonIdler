@@ -162,8 +162,19 @@ Ability.prototype.update = function(context){
 			context.abilitiesAreTraining = false;
 			upgradeElement.find('.progress-bar').css('width', '0%');
 			upgradeElement.find('.progress-bar-text').text("");
-			upgradeElement.find('button').show();
+			upgradeElement.find('button').show(); 
 			this.finish();
 		}
 	}
 }
+
+Ability.prototype.cancelTraining = function(context){
+	var upgradeElement = $("#"+this.getUpgradeElementId(context));
+	context.abilityTrainingDuration = 0;
+	context.abilityTraining = null;
+	context.abilitiesAreTraining = false;
+	upgradeElement.find('.progress-bar').css('width', '0%');
+	upgradeElement.find('.progress-bar-text').text("");
+	upgradeElement.find('button').show();
+	addLog('green', "Training was interrupted: "+this.name+".");
+};

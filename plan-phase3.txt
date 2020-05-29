@@ -22,8 +22,6 @@ Make sure the monsters and enemies are being tracked.
 
 Save and load the current setup of the battle.
 
-----
-
 Add three buttons: Win, Lose, Escape
 
 If Escape is pressed, the popover disappears and the BOSS FIGHT ends, as well as the interruption
@@ -33,6 +31,8 @@ If Lose is pressed, as in Escape except the monster is "destroyed".
 When a monster is destroyed, cancel any existing actions or training for that monster.
 
 On the monster page, and after their name on the action page, say "Destroyed".
+
+----
 
 When a monster is destroyed, add a ressurect action to the monsters action list that is NOT disabled.
 

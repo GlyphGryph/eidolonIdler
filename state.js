@@ -123,15 +123,26 @@ var newGameState = function(){
 	var currentRegion = "blackenedWasteland";
 	
 		// Create all monsters
-	var monsters = [{
-		id: 'monster-1',
-		name: "Monster One",
-		lockedAbilities: [
-			'sharedHealing',
-			'fakeAbility',
-			'assist'
-		]
-	}]
+	var monsters = [
+		{
+			id: 'monster-1',
+			name: "Monster One",
+			lockedAbilities: [
+				'sharedHealing',
+				'fakeAbility',
+				'assist'
+			]
+		},
+		{
+			id: 'monster-2',
+			name: "Monster Two",
+			lockedAbilities: [
+				'sharedHealing',
+				'fakeAbility',
+				'assist'
+			]
+		}, 
+	]
 	
 	var character = {
 		name: "Wayward Orphan"

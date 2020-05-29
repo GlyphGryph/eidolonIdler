@@ -78,3 +78,13 @@ Action.prototype.unlock = function(context){
 	this.setup(context);
 	addLog('black', "Action "+this.name+" unlocked.");
 };
+
+Action.prototype.cancel = function(context){
+	var actionElement = $("#"+this.getElementId(context));
+	context.actionRunningDuration = 0;
+	context.actionsAreBusy = false;
+	context.actionRunning = null;
+	actionElement.find('.progress-bar').css('width', '0%');
+	actionElement.find('button').show();
+	addLog('green', "Action was interrupted: "+this.name+".");
+}

@@ -45,3 +45,8 @@ Character.prototype.setup = function(){
 	profileElement.find('.orphan-name').text(this.name);
 	$("#orphan-view").append(profileElement);
 }
+
+Character.prototype.kill = function(){
+	this.abilityTraining = null;
+	this.abilityTrainingDuration = 0;
+}
