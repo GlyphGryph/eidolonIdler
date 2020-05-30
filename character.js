@@ -37,7 +37,7 @@ Character.prototype.toSaveState = function(){
 Character.prototype.setup = function(){
 	var actionsElement = $("#action-family-template").clone();
 	actionsElement.attr('id', this.actionsElementId);
-	actionsElement.find('.name').text(this.name);
+	actionsElement.find('.monster-name').text(this.name);
 	$("#action-view").append(actionsElement);
 		
 	var profileElement = $("#orphan-profile-template").clone();
@@ -46,7 +46,8 @@ Character.prototype.setup = function(){
 	$("#orphan-view").append(profileElement);
 }
 
-Character.prototype.kill = function(){
+Character.prototype.kill = function(amount){
 	this.abilityTraining = null;
 	this.abilityTrainingDuration = 0;
+	this.diminished += eqOr(amount, 1);
 }

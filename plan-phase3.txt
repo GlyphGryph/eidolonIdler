@@ -36,9 +36,9 @@ On the monster page, and after their name on the action page, say "Destroyed".
 
 When a monster is destroyed, add a ressurect action to the monsters action list that is NOT disabled.
 
-For a destroyed monster, disable actions (except ressurect), stat upgrades, and training. This does NOT disable travel.
-
 When the ressurection action completes, the monster is no longer destroyed, but the player character is diminished by an amount equal to the total level of all the monster's stats except Bond.
+
+For a destroyed monster, disable actions (except ressurect), stat upgrades, and training. This does NOT disable travel.
 
 When a player is diminished, cancel any existing actions for that player and any traveling.
 
@@ -52,8 +52,7 @@ If Lose is pressed, the player is Diminished: 30, with all the above diminishing
 
 Add a button "Summon Boss Against Team", which has the same popup except it says the Boss vs list of team members.
 
-If Escape is pressed, as before.
-
+If Escape is pressed, as before. 
 If Lose is pressed, process loss for entire team.
 
 In any situation, when the Win button is pressed, a new popover screen becomes visible that says Victory!

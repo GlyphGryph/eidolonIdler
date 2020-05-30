@@ -8,7 +8,7 @@ var Monster = function(saveState){
 	this.name = saveState.name;
 	
 	// Status
-	this.destroyed = eqOr(saveState.alive, false);
+	this.destroyed = eqOr(saveState.destroyed, false);
 	
 	// Actions
 	this.actionRunningDuration = (saveState.actionRunningDuration !== undefined) ? saveState.actionRunningDuration : 0;
@@ -19,7 +19,8 @@ var Monster = function(saveState){
 	this.actionsAreBusy = (saveState.actionsAreBusy !== undefined) ? saveState.actionsAreBusy : false;
 	this.unlockedActions = (saveState.unlockedActions !== undefined) ? saveState.unlockedActions : [
 		'huntWisp',
-		'fakeAction'
+		'fakeAction',
+		'ressurect'
 	];
 	this.lockedActions = (saveState.lockedActions !== undefined) ? saveState.lockedActions : [];
 	
@@ -63,6 +64,8 @@ Monster.prototype.toSaveState = function(){
 	var thing = {
 		name: this.name,
 		id: this.id,
+		destroyed: this.destroyed,
+		
 		// Actions
 		actionRunningDuration: this.actionRunningDuration,
 		actionRunning: this.actionRunning,

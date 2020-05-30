@@ -37,7 +37,7 @@ Action.prototype.setup = function(context){
 
 Action.prototype.begin = function(context){
 	if(!context.actionsAreBusy  && 'standard' == state.mode){
-		this.start();
+		this.start(context);
 		context.actionsAreBusy = true;
 		context.actionRunning = this.id;
 		context.actionRunningDuration = this.runTime;
@@ -47,6 +47,12 @@ Action.prototype.begin = function(context){
 
 Action.prototype.update = function(context){
 	var actionElement = $("#"+this.getElementId(context));
+	if('ressurect'==this.id && !context.destroyed){
+		actionElement.hide();
+		return;
+	}else{
+		actionElement.show();
+	}
 	if(context.actionsAreBusy || 'standard' != state.mode){
 		actionElement.find('button').prop('disabled', true);
 	}else{
@@ -67,7 +73,7 @@ Action.prototype.update = function(context){
 			context.actionRunning = null;
 			actionElement.find('.progress-bar').css('width', '0%');
 			actionElement.find('button').show();
-			this.finish();
+			this.finish(context);
 		}
 	}
 };
