@@ -51,7 +51,7 @@ Character.prototype.setup = function(){
 };
 
 Character.prototype.kill = function(amount){
-	this.diminished += eqOr(amount, 1);
+	this.diminished += eqOr(amount, 30);
 };
 
 Character.prototype.update = function(){

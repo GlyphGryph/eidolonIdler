@@ -73,6 +73,15 @@ Region.prototype.setup = function(){
 	travelElement.click(function(){that.beginTravel()});
 }
 
+Region.prototype.cancel = function(){
+	this.traveling = 0;
+	state.monsters.forEach(function(monster){
+		monster.actionsAreBusy = false;
+	});
+	state.character.actionsAreBusy = false;
+	regionElement.find('.progress-bar').css('width', '0%');
+};
+
 Region.prototype.update = function(){
 	regionElement = $("#"+this.elementId);
 	var exploredElement = regionElement.find(".explored");
@@ -84,10 +93,15 @@ Region.prototype.update = function(){
 		exploredElement.text(""+exploredPercent+"%");
 	}
 	
-	if(anyActionsAreBusy() || 'standard' != state.mode){
+	if(anyActionsAreBusy() || 'standard' != state.mode || !state.character.isAlive()){
 		travelElement.find('button').prop('disabled', true);
 	}else{
 		travelElement.find('button').prop('disabled', false);
+	}
+	
+	// Cancel travel if the player becomes diminished
+	if(this.traveling >= 1 && !state.character.isAlive()){
+		this.cancel();
 	}
 	
 	// If this action is currently running...

@@ -48,13 +48,8 @@ For a destroyed monster, disable actions (except ressurect), stat upgrades, and 
 
 When a player is diminished, cancel any existing actions for that player and any traveling.
 
+For a diminished players, disable actions and cancel/disable travel.
 ---
-
-For a diminished players, disable actions and disable travel.
-
-Add a button "Summon Boss Against Player", which has the same popup except it says the Boss ambushed the orphan.
-
-If Escape is pressed, as before
 
 If Lose is pressed, the player is Diminished: 30, with all the above diminishing stuff still happening.
 
