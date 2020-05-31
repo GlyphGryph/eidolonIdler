@@ -97,6 +97,10 @@ Monster.prototype.toSaveState = function(){
 	return thing;
 }
 
+Monster.prototype.isAlive = function(){
+	return !this.destroyed;
+};
+
 Monster.prototype.maxActiveAbilities = function(){
 	return this.stats.intellect.level;
 };

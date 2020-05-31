@@ -39,7 +39,7 @@ Ability.prototype.getUpgradeElementId = function(context){
 };
 
 Ability.prototype.begin = function(context){
-	if(!context.abilitiesAreTraining  && 'standard' == state.mode){
+	if(!context.abilitiesAreTraining  && 'standard' == state.mode && context.isAlive()){
 		this.start();
 		context.abilitiesAreTraining = true;
 		context.abilityTraining = this.id;
@@ -107,7 +107,7 @@ Ability.prototype.update = function(context){
 		}
 	}
 	
-	if(context.abilitiesAreTraining || 'standard' != state.mode){
+	if(context.abilitiesAreTraining || 'standard' != state.mode || !context.isAlive()){
 		upgradeElement.find('button').prop('disabled', true);
 	}else{
 		upgradeElement.find('button').prop('disabled', false);	

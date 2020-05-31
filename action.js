@@ -36,7 +36,11 @@ Action.prototype.setup = function(context){
 
 
 Action.prototype.begin = function(context){
-	if(!context.actionsAreBusy  && 'standard' == state.mode){
+	if(
+		!context.actionsAreBusy  
+		&& 'standard' == state.mode 
+		&& (context.isAlive() || (!context.isAlive() && 'ressurect' == this.id))
+	){
 		this.start(context);
 		context.actionsAreBusy = true;
 		context.actionRunning = this.id;
@@ -47,16 +51,23 @@ Action.prototype.begin = function(context){
 
 Action.prototype.update = function(context){
 	var actionElement = $("#"+this.getElementId(context));
-	if('ressurect'==this.id && !context.destroyed){
-		actionElement.hide();
-		return;
+	if(!context.isAlive()){
+		if('ressurect'==this.id){
+			actionElement.show();
+			actionElement.find('button').prop('disabled', false);
+		}else{
+			actionElement.find('button').prop('disabled', true);
+		}
 	}else{
-		actionElement.show();
-	}
-	if(context.actionsAreBusy || 'standard' != state.mode){
-		actionElement.find('button').prop('disabled', true);
-	}else{
-		actionElement.find('button').prop('disabled', false);
+		if('ressurect'==this.id){
+			actionElement.hide();
+		}
+
+		if(context.actionsAreBusy || 'standard' != state.mode){
+			actionElement.find('button').prop('disabled', true);
+		}else{
+			actionElement.find('button').prop('disabled', false);
+		}
 	}
 	
 	// If this action is currently running...

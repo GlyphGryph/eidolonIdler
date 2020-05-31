@@ -34,6 +34,10 @@ Character.prototype.toSaveState = function(){
 	return thing;
 }
 
+Character.prototype.isAlive = function(){
+	return this.diminished < 1;
+};
+
 Character.prototype.setup = function(){
 	var actionsElement = $("#action-family-template").clone();
 	actionsElement.attr('id', this.actionsElementId);

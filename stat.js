@@ -45,6 +45,9 @@ Stat.prototype.canBeUpgraded = function(){
 			canBe = false;
 		}
 	});
+	if(!this.owner.isAlive()){
+		canBe = false;
+	}
 	return canBe;
 };
 
