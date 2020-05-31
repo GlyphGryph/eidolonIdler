@@ -34,21 +34,7 @@ var updateBattle = function(){
 };
 
 var updateCharacter = function(){
-	var characterElement = $('#orphan-view');
-	var characterNameElement = characterElement.find('.orphan-name');
-	var characterDiminishedElement = characterElement.find('.orphan-diminished');
-	if(characterNameElement.text()!=state.character.name){
-		characterNameElement.text(state.character.name);
-	}
-	if(state.character.diminished > 0){
-		characterDiminishedElement.show();
-		var characterDiminishedValueElement = characterDiminishedElement.find('.diminished-value');
-		if(characterDiminishedValueElement.text()!=state.character.diminished){
-			characterDiminishedValueElement.text(state.character.diminished);
-		}
-	} else {
-		characterDiminishedElement.hide();
-	}
+	state.character.update();
 };
 
 var updateActions = function(){

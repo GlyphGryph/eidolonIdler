@@ -32,7 +32,7 @@ Character.prototype.toSaveState = function(){
 		actionRunningDuration: this.actionRunningDuration
 	}
 	return thing;
-}
+};
 
 Character.prototype.isAlive = function(){
 	return this.diminished < 1;
@@ -48,10 +48,29 @@ Character.prototype.setup = function(){
 	profileElement.attr('id', this.profileElementId);
 	profileElement.find('.orphan-name').text(this.name);
 	$("#orphan-view").append(profileElement);
-}
+};
 
 Character.prototype.kill = function(amount){
-	this.abilityTraining = null;
-	this.abilityTrainingDuration = 0;
 	this.diminished += eqOr(amount, 1);
+};
+
+Character.prototype.update = function(){
+	var characterElement = $('#orphan-view');
+	var characterNameElement = characterElement.find('.orphan-name');
+	var characterDiminishedElement = characterElement.find('.orphan-diminished');
+	if(characterNameElement.text()!=this.name){
+		characterNameElement.text(this.name);
+	}
+	if(this.diminished > 0){
+		if(this.actionRunning){
+			actions[this.actionRunning].cancel(this);
+		}
+		characterDiminishedElement.show();
+		var characterDiminishedValueElement = characterDiminishedElement.find('.diminished-value');
+		if(characterDiminishedValueElement.text() != this.diminished){
+			characterDiminishedValueElement.text(this.diminished);
+		}
+	} else {
+		characterDiminishedElement.hide();
+	}
 }
