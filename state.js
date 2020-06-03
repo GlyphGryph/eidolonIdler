@@ -52,20 +52,9 @@ var State = function(saveState){
 	
 	
 	if('battle' == this.mode){
-		var allies= [];
-		saveState.currentBattle.allies.forEach(function(allyId){
-			if('character' == allyId){
-				allies.push(that.character);
-			}else{
-				allies.push(that.getMonster(allyId));
-			}
-		});
-
-		var enemies = saveState.currentBattle.enemies;
-
-		this.currentBattle = new Battle(allies, enemies);
+		this.battle = new Battle(saveState.battle);
 	}else{
-		this.currentBattle = null;
+		this.battle = null;
 	}
 };
 
@@ -87,7 +76,7 @@ State.prototype.toSaveState = function(){
 		regionsAreUnlocked: this.regionsAreUnlocked
 	}
 	if('battle' == this.mode){
-		thing.currentBattle = this.currentBattle.toSaveState();
+		thing.battle = this.battle.toSaveState();
 	}
 	
 	thing.monsters = [];
@@ -110,8 +99,12 @@ State.prototype.toSaveState = function(){
 	return thing;
 }
 
-State.prototype.getMonster = function(id){
-	return this.monsters.find(function(monster){ return monster.id == id });
+State.prototype.getTeammate = function(id){
+	if('character' == id){
+		return this.character;
+	}else{
+		return this.monsters.find(function(monster){ return monster.id == id });
+	}
 }
 
 

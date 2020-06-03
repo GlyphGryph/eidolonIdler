@@ -27,7 +27,7 @@ var update = function(timestamp){
 
 var updateBattle = function(){
 	if(state.mode == 'battle'){
-		state.currentBattle.update();
+		state.battle.update();
 	} else {
 		$("#battle").hide();
 	}

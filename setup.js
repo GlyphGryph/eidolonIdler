@@ -87,12 +87,11 @@ var setup = function(saveState){
 	}else{
 		$("#region-view-tab").hide();
 	}
+	
+	if('battle' == state.mode){
+		state.battle.setup();
+	}
 
 	// Finally, show the play area to the player
 	$('#play-area').show();
-	
-	// Battle controls
-	$('#win-battle').click(function(){if(null != state.currentBattle){state.currentBattle.win()}});
-	$('#lose-battle').click(function(){if(null != state.currentBattle){state.currentBattle.lose()}});
-	$('#escape-battle').click(function(){if(null != state.currentBattle){state.currentBattle.escape()}});
 }

@@ -1,11 +1,28 @@
-var Battle = function(allies, enemies){
-	this.allies = allies;
-	this.enemies = enemies;
+// Mandatory:
+// allies - list of string ids
+// enemies - list of string ids
+// Optional:
+// mode - 'fight' or 'resolution'
+
+
+var Battle = function(saveState){
+	var that = this;
+	this.allyIds = saveState.allyIds;
+	this.enemies = saveState.enemies;
+	this.mode = eqOr(saveState.mode, 'fight'); // Modes are 'fight' and 'resolution'
 }
+
+Battle.prototype.allies = function(){
+	var things = [];
+	this.allyIds.forEach(function(allyId){
+		things.push(state.getTeammate(allyId));
+	});
+	return things;
+};
 
 Battle.prototype.getBattleString = function(){
 	battleString = "";
-	this.allies.forEach(function(ally){
+	this.allies().forEach(function(ally){
 		battleString += ally.name+", ";
 	})
 	battleString += " vs. ";
@@ -13,26 +30,64 @@ Battle.prototype.getBattleString = function(){
 		battleString += enemy+", ";
 	})
 	return battleString;
+};
+
+Battle.prototype.setupFight = function(){
+	var that = this;
+	var battleView = $('#battle .battle-view');
+	var battleControlsElement = $("#battle-controls-template").clone();
+	battleControlsElement.attr('id', 'battle-controls');
+	battleView.append(battleControlsElement);
+
+	// Battle controls
+	battleControlsElement.find('.win-battle').click(function(){that.win()});
+	battleControlsElement.find('.lose-battle').click(function(){that.lose()});
+	battleControlsElement.find('.escape-battle').click(function(){that.escape()});
+};
+
+Battle.prototype.setupResolution = function(){
+	var battleView = $('#battle .battle-view');
+	battleView.html('RESOLUTION');
+}
+
+Battle.prototype.setup = function(){
+	var battleElement = $('#battle');
+	battleElement.find('.battle-title').html(this.getBattleString());
+	var battleView = battleElement.find('.battle-view');
+	battleView.html('');
+	
+	if('fight' == this.mode){
+		this.setupFight();
+	}else{
+		this.setupResolution();
+	}
+	
+	battleElement.show();
+};
+
+Battle.prototype.teardown = function(){
+	var battleElement = $('#battle');
+	battleElement.find('.title').html(this.getBattleString());
+	var battleView = battleElement.find('.battle-view');
+	battleView.html('');
+	battleElement.hide();
 }
 
 Battle.prototype.update = function(){
-	var battleElement = $('#battle');
-	battleElement.show();
-	battleElement.find('.title').html(this.getBattleString());
 }
 
 Battle.prototype.toSaveState = function(){
-	var things = {}
+	var things = {
+		mode: this.mode
+	}
 	
-	things.allies = [];
-	this.allies.forEach(function(ally){
-		things.allies.push(ally.id);
-	});
+	things.allyIds = this.allyIds;
 	
 	things.enemies = [];
 	this.enemies.forEach(function(enemy){
 		things.enemies.push(enemy);
 	});
+
 	return things;
 }
 
@@ -42,7 +97,7 @@ Battle.prototype.win = function(){
 
 Battle.prototype.lose = function(){
 	addLog('black ', 'You lost the fight!');
-	this.allies.forEach(function(ally){
+	this.allies().forEach(function(ally){
 		ally.kill();
 	});
 	this.end();
@@ -56,17 +111,19 @@ Battle.prototype.escape = function(){
 Battle.start = function(){
 	if('battle' != state.mode){
 		state.mode = 'battle';
-		var team = [...state.monsters, state.character];
-		state.currentBattle = new Battle(team, ["Enemy Boss"]);
+		var team = ['character'];
+		state.monsters.forEach(function(monster){
+			team.push(monster.id);
+		});
+		state.battle = new Battle({allyIds: team, enemies: ["Enemy Boss"]});
+		state.battle.setup();
 	}
 }
 
 Battle.prototype.end = function(){
 	if('battle' == state.mode){
 		state.mode = 'standard';
-		var battleElement = $('#battle');
-		battleElement.hide();
-		battleElement.find('.title').html("");
-		state.currentBattle = null;
+		state.battle.teardown();
+		state.battle = null;
 	}
 }

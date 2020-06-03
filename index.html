@@ -53,14 +53,24 @@
 		<div id='description'>
 		</div>
 		<div id='battle'>
-			<div class='title'></div>
-			<div class='controls'>
-				<button id='win-battle'>Win</button>
-				<button id='lose-battle'>Lose</button>
-				<button id='escape-battle'>Escape</button>
-			</div>
+			<div class='battle-title'></div>
+			<div class='battle-view'></div>
 		</div>
 		<div id='templates'>
+			<div id='resolution-monster-row-template'>
+				<div class='monster-name'></div>
+				<div class='consume-resolution'><button>Consume</button></div>
+			</div>
+			<div id='resolution-player-row-template'>
+				<div class='orphan-name'></div>
+				<div class='bind-resolution'><button>Bind</button></div>
+				<div class='leave-resolution'><button>Leave</button></div>
+			</div>
+			<div id='battle-controls-template' class='controls'>
+				<button class='win-battle'>Win</button>
+				<button class='lose-battle'>Lose</button>
+				<button class='escape-battle'>Escape</button>
+			</div>
 			<div id='orphan-profile-template'>
 				<div class='orphan-name'></div>
 				<div class='orphan-diminished'>
