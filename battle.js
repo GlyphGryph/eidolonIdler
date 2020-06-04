@@ -61,8 +61,25 @@ Battle.prototype.setupFight = function(){
 };
 
 Battle.prototype.setupResolution = function(){
+	var that=this;
 	var battleView = $('#battle .battle-view');
 	battleView.html('Victory!');
+	
+	this.allies().forEach(function(ally){
+		if('character' == ally.id){
+			var playerRow = $('#resolution-player-row-template').clone();
+			playerRow.find('.orphan-name').text(ally.name);
+			battleView.append(playerRow);
+		}else{
+			var monsterRow = $('#resolution-monster-row-template').clone();
+			monsterRow.find('.monster-name').text(ally.name);
+			monsterRow.find('.consume-resolution').click(function(){that.resolveConsume(ally)});
+			battleView.append(monsterRow);
+		}
+	});
+	var globalRow = $('#resolution-global-row-template').clone();
+	battleView.append(globalRow); 
+	globalRow.find('.leave-resolution').click(function(){that.escape()});
 }
 
 Battle.prototype.setup = function(){
@@ -89,6 +106,11 @@ Battle.prototype.teardown = function(){
 }
 
 Battle.prototype.update = function(){
+}
+
+Battle.prototype.resolveConsume = function(monster){
+	gainSpirit(100);
+	this.end();
 }
 
 Battle.prototype.win = function(){

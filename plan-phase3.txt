@@ -54,11 +54,11 @@ If Lose is n pressed, the player is Diminished: 30, with all the above diminishi
 
 In any situation, when the Win button is pressed, a new popover screen becomes visible that says Victory!
 
----
-
 In it, for each monster on the players screen, there is the option to "Consume Soul".
 
 Consuming a soul gives the player a significant amount of Spirit.
+
+---
 
 Each boss fight should be associated with a MonsterDefinition - add two, "Monster Boss" and "Monster Minion".
 
@@ -72,7 +72,9 @@ If the monster was a Boss type monster, consuming a soul adds the abilities from
 
 If the monster was a Minion type monster, the button instead says "Consume Remnant".
 
-There is also the option "Bind Soul" if the character is present in a Boss fight, which creates a new monster on the player's team based on the MonsterDefinition.
+There is also the option "Bind Soul" if the character is present in a Boss fight.
+
+Bind Soul creates a new monster on the player's team based on the MonsterDefinition.
 
 When a player is present in a Minion Fight, they only get the option to "leave remnant" which does nothing.
 
