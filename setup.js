@@ -60,7 +60,7 @@ var setup = function(saveState){
 	state.character.setup();
 	state.character.unlockedActions.forEach(function(id){
 		var action = actions[id];
-		action.setup(state.character);
+		action.setup(state.character); 
 	});
 	
 	//Setup Tabs

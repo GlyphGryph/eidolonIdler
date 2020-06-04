@@ -10,7 +10,22 @@ var Battle = function(saveState){
 	this.allyIds = saveState.allyIds;
 	this.enemies = saveState.enemies;
 	this.mode = eqOr(saveState.mode, 'fight'); // Modes are 'fight' and 'resolution'
-}
+};
+
+Battle.prototype.toSaveState = function(){
+	var things = {
+		mode: this.mode
+	}
+	
+	things.allyIds = this.allyIds;
+	
+	things.enemies = [];
+	this.enemies.forEach(function(enemy){
+		things.enemies.push(enemy);
+	});
+
+	return things;
+};
 
 Battle.prototype.allies = function(){
 	var things = [];
@@ -47,7 +62,7 @@ Battle.prototype.setupFight = function(){
 
 Battle.prototype.setupResolution = function(){
 	var battleView = $('#battle .battle-view');
-	battleView.html('RESOLUTION');
+	battleView.html('Victory!');
 }
 
 Battle.prototype.setup = function(){
@@ -76,23 +91,9 @@ Battle.prototype.teardown = function(){
 Battle.prototype.update = function(){
 }
 
-Battle.prototype.toSaveState = function(){
-	var things = {
-		mode: this.mode
-	}
-	
-	things.allyIds = this.allyIds;
-	
-	things.enemies = [];
-	this.enemies.forEach(function(enemy){
-		things.enemies.push(enemy);
-	});
-
-	return things;
-}
-
 Battle.prototype.win = function(){
-	alert('Not yet');
+	this.mode = 'resolution';
+	this.setupResolution();
 }
 
 Battle.prototype.lose = function(){

@@ -51,9 +51,10 @@ When a player is diminished, cancel any existing actions for that player and any
 For a diminished players, disable actions and cancel/disable travel.
 
 If Lose is n pressed, the player is Diminished: 30, with all the above diminishing stuff still happening.
----
 
 In any situation, when the Win button is pressed, a new popover screen becomes visible that says Victory!
+
+---
 
 In it, for each monster on the players screen, there is the option to "Consume Soul".
 
