@@ -64,8 +64,6 @@ When a domestic monster is created, have a "primaryDefinitionId" that references
 
 Add a "GenericMonster" MonsterDefinition and link it to both domestic monsters.
 
----
-
 Add "rampantMonsterDefinitions", which have a type with one of two values: 'boss', and 'minion'.
 
 Each boss fight should be associated with a MonsterDefinition - add two, "Monster Boss" and "Monster Minion".
@@ -75,6 +73,8 @@ The Summon Boss button starts the fight against the Monster Boss.
 A Summon Minion button starts the fight against the Monster Minion.
 
 MonsterDefinitions of the Boss type also have a "domesticId". Link the Monster boss to the GenericMonster.
+
+---
 
 Add a button to Summon Ambush which starts a fight between a random monster or the player character and the "Monster Minion", while Summon Boss starts the fight between everyone and the Boss.
 

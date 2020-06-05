@@ -8,21 +8,18 @@
 var Battle = function(saveState){
 	var that = this;
 	this.allyIds = saveState.allyIds;
-	this.enemies = saveState.enemies;
+	this.enemyId = saveState.enemyId;
+	this.enemy = new Enemy(this.enemyId);
 	this.mode = eqOr(saveState.mode, 'fight'); // Modes are 'fight' and 'resolution'
 };
 
 Battle.prototype.toSaveState = function(){
 	var things = {
-		mode: this.mode
+		mode: this.mode,
+		enemyId: this.enemyId
 	}
 	
 	things.allyIds = this.allyIds;
-	
-	things.enemies = [];
-	this.enemies.forEach(function(enemy){
-		things.enemies.push(enemy);
-	});
 
 	return things;
 };
@@ -40,10 +37,7 @@ Battle.prototype.getBattleString = function(){
 	this.allies().forEach(function(ally){
 		battleString += ally.name+", ";
 	})
-	battleString += " vs. ";
-	this.enemies.forEach(function(enemy){
-		battleString += enemy+", ";
-	})
+	battleString += " vs. "+this.enemy.name;
 	return battleString;
 };
 
@@ -131,14 +125,14 @@ Battle.prototype.escape = function(){
 	this.end();
 }
 
-Battle.start = function(){
+Battle.start = function(enemyId){
 	if('battle' != state.mode){
 		state.mode = 'battle';
 		var team = ['character'];
 		state.monsters.forEach(function(monster){
 			team.push(monster.id);
 		});
-		state.battle = new Battle({allyIds: team, enemies: ["Enemy Boss"]});
+		state.battle = new Battle({allyIds: team, enemyId: enemyId});
 		state.battle.setup();
 	}
 }

@@ -106,12 +106,6 @@ var exploreRegion = function(){
 	}
 }
 
-var interrupt = function(){
-	if('standard' == state.mode){
-		Battle.start();
-	}
-}
-
 
 var openDescription = function(elem, description){
 	var describerElement = jQuery(elem);
@@ -137,7 +131,8 @@ var startScript = function(){
 	$("#save-button").click(function(){save('saveState2')});
 	$("#load-button").click(function(){load('saveState2')});
 	$("#reset-button").click(function(){resetGame()});
-	$("#interrupt-button").click(function(){interrupt()});
+	$("#summon-minion-button").click(function(){Battle.start('basicMinion')});
+	$("#summon-boss-button").click(function(){Battle.start('basicBoss')});
 	if(getCookie('saveState')){
 		var saveState = JSON.parse(getCookie('saveState'));
 		setup(saveState);
