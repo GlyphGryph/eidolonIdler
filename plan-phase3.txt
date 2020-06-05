@@ -80,11 +80,11 @@ If the monster was a Boss type monster, consuming the soul adds a "secondaryDefi
 
 Add display for current templates on monster info page
 
----
-
 Consuming a Boss soul adds the abilities from the MonsterDefinition to the consuming monster's lockedAbilities unless it already exists in lockedAbilities or unlockedAbilities.
 
-If the monster was a Minion type monster, the button instead says "Consume Remnant".
+If the monster was a Minion type monster, only gain some Spirit.
+
+---
 
 There is also the option "Bind Soul" if the character is present in a Boss fight.
 

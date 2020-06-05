@@ -191,6 +191,7 @@ Monster.prototype.kill = function(){
 }
 
 Monster.prototype.consume = function(enemy){
+	var that = this;
 	if('minion' == enemy.type){
 		gainSpirit(100);
 	}else if('boss' == enemy.type){
@@ -200,6 +201,11 @@ Monster.prototype.consume = function(enemy){
 		// Otherwise, gain a secondary template
 		this.secondaryTemplateId = enemy.monsterTemplateId;
 		this.secondaryTemplate = monsterTemplates[this.secondaryTemplateId];
+		this.secondaryTemplate.abilities.forEach(function(ability){
+			if(!that.lockedAbilities.includes(ability) && !that.unlockedAbilities.includes(ability)){
+				that.lockedAbilities.push(ability);
+			}
+		});
 		addLog("green", this.name+" gained additional monster type "+this.secondaryTemplate.name);
 	}
 }
