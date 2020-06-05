@@ -168,6 +168,15 @@ Monster.prototype.update = function(){
 	if(profileNameElement.text() != displayName){
 		profileNameElement.text(displayName);
 	}
+	
+	var displayType = this.primaryTemplate.name;
+	if(this.secondaryTemplate){
+		displayType += "/"+this.secondaryTemplate.name;
+	}
+	var profileTypeElement = $("#"+this.profileElementId+" .monster-type");
+	if(profileTypeElement.text() != displayType){
+		profileTypeElement.text(displayType);
+	}
 }
 
 Monster.prototype.kill = function(){
@@ -179,4 +188,18 @@ Monster.prototype.kill = function(){
 	if(null != this.actionRunning){
 		actions[this.actionRunning].cancel(this);
 	};
+}
+
+Monster.prototype.consume = function(enemy){
+	if('minion' == enemy.type){
+		gainSpirit(100);
+	}else if('boss' == enemy.type){
+		gainSpirit(100);
+		// Do nothing more if we already have a secondary template
+		if(this.secondaryTemplate){return;}
+		// Otherwise, gain a secondary template
+		this.secondaryTemplateId = enemy.monsterTemplateId;
+		this.secondaryTemplate = monsterTemplates[this.secondaryTemplateId];
+		addLog("green", this.name+" gained additional monster type "+this.secondaryTemplate.name);
+	}
 }

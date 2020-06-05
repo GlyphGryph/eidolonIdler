@@ -76,9 +76,11 @@ MonsterDefinitions of the Boss type also have a "domesticId". Link the Monster b
 
 Add a button to Summon Ambush which starts a fight between a random monster or the player character and the "Monster Minion".
 
----
-
 If the monster was a Boss type monster, consuming the soul adds a "secondaryDefinitionId" to the monster assuming one does not already exist.
+
+Add display for current templates on monster info page
+
+---
 
 Consuming a Boss soul adds the abilities from the MonsterDefinition to the consuming monster's lockedAbilities unless it already exists in lockedAbilities or unlockedAbilities.
 

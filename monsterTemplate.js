@@ -19,9 +19,9 @@ var monsterTemplates = {
 			'assist'
 		]
 	}),
-	genericMonster: new MonsterTemplate({
- 		id: 'genericMonster',
-		name: "Generic Monster",
+	domesticBoss: new MonsterTemplate({
+ 		id: 'domesticBoss',
+		name: "Domestic Boss",
 		actions: [
 			'huntWisp',
 			'fakeAction',
@@ -38,7 +38,7 @@ var EnemyTemplate = function(definition){
 	this.type = definition.type;
 	this.name = definition.name;
 	if('boss' == this.type){
-		this.monster = definition.monster;
+		this.monsterTemplateId = definition.monsterTemplateId;
 	}
 }
 
@@ -47,7 +47,7 @@ var enemyTemplates = {
 		id: 'basicBoss',
 		name: 'Basic Boss',
 		type: 'boss',
-		monster: "domesticBoss"
+		monsterTemplateId: "domesticBoss"
 	}),
 	basicMinion: new EnemyTemplate({
 		id: 'basicMinion',

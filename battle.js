@@ -103,7 +103,7 @@ Battle.prototype.update = function(){
 }
 
 Battle.prototype.resolveConsume = function(monster){
-	gainSpirit(100);
+	monster.consume(this.enemy)
 	this.end();
 }
 

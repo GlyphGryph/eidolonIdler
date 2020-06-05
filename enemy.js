@@ -4,6 +4,6 @@ var Enemy = function(id){
 	this.type = this.template.type;
 	this.name = this.template.name;
 	if('boss' == this.type){
-		this.monster = this.template.monster;
+		this.monsterTemplateId = this.template.monsterTemplateId;
 	}
 }
