@@ -120,20 +120,12 @@ var newGameState = function(){
 		{
 			id: 'monster-1',
 			name: "Monster One",
-			lockedAbilities: [
-				'sharedHealing',
-				'fakeAbility',
-				'assist'
-			]
+			primaryTemplateId: 'genericMonster'
 		},
 		{
 			id: 'monster-2',
 			name: "Monster Two",
-			lockedAbilities: [
-				'sharedHealing',
-				'fakeAbility',
-				'assist'
-			]
+			primaryTemplateId: 'genericMonster'
 		}, 
 	]
 	

@@ -58,17 +58,29 @@ In it, for each monster on the players screen, there is the option to "Consume S
 
 Consuming a soul gives the player a significant amount of Spirit.
 
+Add "domesticMonsterDefinitions", which have an id.
+
+When a domestic monster is created, have a "primaryDefinitionId" that references the definition id.
+
+Add a "GenericMonster" MonsterDefinition and link it to both domestic monsters.
+
 ---
+
+Add "rampantMonsterDefinitions", which have a type with one of two values: 'boss', and 'minion'.
 
 Each boss fight should be associated with a MonsterDefinition - add two, "Monster Boss" and "Monster Minion".
 
 The Summon Boss button starts the fight against the Monster Boss.
 
-MonsterDefinitions have three types - 'domestic', 'boss', and 'minion'.
+A Summon Minion button starts the fight against the Monster Minion.
 
-Add a button to Summon Ambush which starts a fight between a random monster or the player character and the "Monster Minion"
+MonsterDefinitions of the Boss type also have a "domesticId". Link the Monster boss to the GenericMonster.
 
-If the monster was a Boss type monster, consuming a soul adds the abilities from the MonsterDefinition to the consuming monster's lockedAbilities unless it already exists in lockedAbilities or unlockedAbilities.
+Add a button to Summon Ambush which starts a fight between a random monster or the player character and the "Monster Minion", while Summon Boss starts the fight between everyone and the Boss.
+
+If the monster was a Boss type monster, consuming the soul adds a "secondaryDefinitionId" to the monster assuming one does not already exist.
+
+Consuming a Boss soul adds the abilities from the MonsterDefinition to the consuming monster's lockedAbilities unless it already exists in lockedAbilities or unlockedAbilities.
 
 If the monster was a Minion type monster, the button instead says "Consume Remnant".
 

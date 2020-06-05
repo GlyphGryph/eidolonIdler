@@ -6,7 +6,14 @@
 // Form of stats in saveState: {bond: value, will: value, intellect: value, power: value}
 var Monster = function(saveState){
 	this.name = saveState.name;
-	
+	this.primaryTemplateId = saveState.primaryTemplateId;
+	this.primaryTemplate = monsterTemplates[this.primaryTemplateId];
+	this.secondaryTemplateId = eqOr(saveState.secondaryTemplateId, null);
+	if(this.secondaryTemplateId){
+		this.secondaryTemplate = monsterTemplates[this.secondaryTemplateId];
+	}else{
+		this.secondaryTemplate = null;
+	}
 	// Status
 	this.destroyed = eqOr(saveState.destroyed, false);
 	
@@ -17,11 +24,7 @@ var Monster = function(saveState){
 	this.actionsElementId = this.id + '-action-family';
 	this.profileElementId = this.id + '-monster-profile';
 	this.actionsAreBusy = (saveState.actionsAreBusy !== undefined) ? saveState.actionsAreBusy : false;
-	this.unlockedActions = (saveState.unlockedActions !== undefined) ? saveState.unlockedActions : [
-		'huntWisp',
-		'fakeAction',
-		'ressurect'
-	];
+	this.unlockedActions = eqOr(saveState.unlockedActions, this.primaryTemplate.actions);
 	this.lockedActions = (saveState.lockedActions !== undefined) ? saveState.lockedActions : [];
 	
 	// Abilities
@@ -30,7 +33,7 @@ var Monster = function(saveState){
 	this.abilityTraining = (saveState.abilityTraining !== undefined) ? saveState.abilityTraining : null;
 	this.abilityTrainingDuration = (saveState.abilityTrainingDuration !== undefined) ? saveState.abilityTrainingDuration : 0;
 	this.unlockedAbilities = (saveState.unlockedAbilities !== undefined) ? saveState.unlockedAbilities : [];
-	this.lockedAbilities = saveState.lockedAbilities;
+	this.lockedAbilities = eqOr(saveState.lockedAbilities, this.primaryTemplate.abilities);
 	this.activeAbilities = (saveState.activeAbilities !== undefined) ? saveState.activeAbilities : [];
 	this.trainedAbilities = (saveState.trainedAbilities !== undefined) ? saveState.trainedAbilities : [];
 	
@@ -65,6 +68,8 @@ Monster.prototype.toSaveState = function(){
 		name: this.name,
 		id: this.id,
 		destroyed: this.destroyed,
+		primaryTemplateId: this.primaryTemplateId, 
+		secondaryTemplateId: this.secondaryTemplateId,
 		
 		// Actions
 		actionRunningDuration: this.actionRunningDuration,
