@@ -74,9 +74,9 @@ A Summon Minion button starts the fight against the Monster Minion.
 
 MonsterDefinitions of the Boss type also have a "domesticId". Link the Monster boss to the GenericMonster.
 
----
+Add a button to Summon Ambush which starts a fight between a random monster or the player character and the "Monster Minion".
 
-Add a button to Summon Ambush which starts a fight between a random monster or the player character and the "Monster Minion", while Summon Boss starts the fight between everyone and the Boss.
+---
 
 If the monster was a Boss type monster, consuming the soul adds a "secondaryDefinitionId" to the monster assuming one does not already exist.
 

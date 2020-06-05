@@ -125,16 +125,24 @@ Battle.prototype.escape = function(){
 	this.end();
 }
 
-Battle.start = function(enemyId){
+Battle.start = function(allyIds, enemyId){
 	if('battle' != state.mode){
 		state.mode = 'battle';
-		var team = ['character'];
-		state.monsters.forEach(function(monster){
-			team.push(monster.id);
-		});
-		state.battle = new Battle({allyIds: team, enemyId: enemyId});
+		state.battle = new Battle({allyIds: allyIds, enemyId: enemyId});
 		state.battle.setup();
 	}
+}
+
+Battle.startBossFight = function(){
+	var team = ['character'];
+	state.monsters.forEach(function(monster){
+		team.push(monster.id);
+	});
+	Battle.start(team, 'basicBoss');
+}
+
+Battle.startAmbush = function(id){
+	Battle.start([id], 'basicBoss');
 }
 
 Battle.prototype.end = function(){

@@ -131,8 +131,8 @@ var startScript = function(){
 	$("#save-button").click(function(){save('saveState2')});
 	$("#load-button").click(function(){load('saveState2')});
 	$("#reset-button").click(function(){resetGame()});
-	$("#summon-minion-button").click(function(){Battle.start('basicMinion')});
-	$("#summon-boss-button").click(function(){Battle.start('basicBoss')});
+	$("#summon-boss-button").click(function(){Battle.startBossFight()});
+	$("#summon-ambush").click(function(){Battle.startAmbush(state.monsters[0].id)});
 	if(getCookie('saveState')){
 		var saveState = JSON.parse(getCookie('saveState'));
 		setup(saveState);
