@@ -6,6 +6,7 @@ actions.huntWisp = new Action({
 	name: "Hunt Wisp",
 	description: "Hunt for wild wisps to gain Spirit.",
 	runTime: 100,
+	risky: true,
 	unlockedConditionsMet: function(context){ return true; },
 	start: function(context){
 		addLog('green', "Monster starts hunting Wisps");
@@ -20,6 +21,7 @@ actions.ressurect = new Action({
 	name: "Ressurect",
 	description: "Return to life, at the cost of a human's well-being.",
 	runTime: 100,
+	risky: false,
 	unlockedConditionsMet: function(context){ return true; },
 	start: function(context){
 		addLog('green', "Monster starts hunting Wisps");
@@ -35,6 +37,7 @@ actions.fakeAction = new Action({
 	name: "Fake Action",
 	description: "--",
 	runTime: 5000,
+	risky: true,
 	unlockedConditionsMet: function(context){ return true; },
 	start: function(context){
 		addLog('green', "Fake Action started");
@@ -52,6 +55,7 @@ actions.explore = new Action({
 	description: "--",
 	unlockedConditionsMet: function(context){ return context.diminished <= 0},
 	runTime: 100,
+	risky: true,
 	start: function(context){
 		addLog('red', "Exploring region...");
 	},
@@ -65,6 +69,7 @@ actions.care = new Action({
 	name: "Care",
 	description: "--",
 	unlockedConditionsMet: function(context){ return context.diminished <= 0},
+	risky: false,
 	runTime: 2000,
 	start: function(context){
 		addLog('green', "Fake Action started");

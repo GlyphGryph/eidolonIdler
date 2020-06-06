@@ -10,11 +10,21 @@ var Action = function(definition){
 	this.id = definition.id;
 	this.elementId = this.id + '-action';
 	this.name = definition.name;
-	this.description = function(){ return definition.description };
 	this.unlockedConditionsMet = definition.unlockedConditionsMet;
+	this.definitionDescription = definition.description;
 	this.runTime = definition.runTime;
 	this.start = definition.start;
 	this.finish = definition.finish;
+	this.risky = definition.risky;
+}
+
+Action.prototype.description = function(){
+	description = "<p>"+this.definitionDescription+"</p>";
+	if(this.risky){
+		description += "<p>This action runs the risk of encountering hostile creatures.</p>"
+	}
+	return description;
+	
 }
 
 Action.prototype.getElementId = function(context){
@@ -29,7 +39,7 @@ Action.prototype.setup = function(context){
 	actionElement.attr('id', this.getElementId(context));
 	actionElement.find('.name').text(this.name);
 	contextElement.append(actionElement);
-	actionElement.mouseenter(function(){openDescription(this, that.description)});
+	actionElement.mouseenter(function(){openDescription(this, that.description())});
 	actionElement.mouseleave(function(){closeDescription()});
 	actionElement.click(function(){that.begin(context)});
 };

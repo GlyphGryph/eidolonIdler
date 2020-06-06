@@ -92,7 +92,9 @@ When a player is present in a Minion Fight, they only get the option to "leave r
 
 ---
 
-Mark some actions as "risky". Implement "automatic ambushes" that has a chance to summon a minion against monsters or players that are currently engaged in an action that is considered "risky".
+Mark some actions as "risky" and visually signify them.
+
+For risky actions, implement "automatic ambushes" that has a chance to summon a minion against monsters or players that are currently engaged in an action that is considered "risky".
 
 Associate a boss monster and minion monster with a region, and add one for Tangled Jungle and Burnt Village.
 
