@@ -63,7 +63,11 @@ Battle.prototype.setupResolution = function(){
 		if('character' == ally.id){
 			var playerRow = $('#resolution-player-row-template').clone();
 			playerRow.find('.orphan-name').text(ally.name);
-			playerRow.find('.bind-resolution').click(function(){that.resolveBind(ally)});
+			if('boss' == that.enemy.type){
+				playerRow.find('.bind-resolution').click(function(){that.resolveBind(ally)});
+			}else{
+				playerRow.find('.bind-resolution').hide();
+			}
 			battleView.append(playerRow);
 		}else{
 			var monsterRow = $('#resolution-monster-row-template').clone();
@@ -148,7 +152,7 @@ Battle.startBossFight = function(){
 }
 
 Battle.startAmbush = function(id){
-	Battle.start([id], 'basicBoss');
+	Battle.start([id], 'basicMinion');
 }
 
 Battle.prototype.end = function(){

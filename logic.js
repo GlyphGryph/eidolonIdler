@@ -132,7 +132,7 @@ var startScript = function(){
 	$("#load-button").click(function(){load('saveState2')});
 	$("#reset-button").click(function(){resetGame()});
 	$("#summon-boss-button").click(function(){Battle.startBossFight()});
-	$("#summon-ambush").click(function(){Battle.startAmbush(state.monsters[0].id)});
+	$("#summon-ambush").click(function(){Battle.startAmbush('character')}); //state.monsters[0].id)});
 	if(getCookie('saveState')){
 		var saveState = JSON.parse(getCookie('saveState'));
 		setup(saveState);
