@@ -33,27 +33,6 @@ var setup = function(saveState){
 	// Setup each monster
 	state.monsters.forEach(function(monster){
 		monster.setup();
-		
-		// Setup stats
-		monster.unlockedStats.forEach(function(id){
-			monster.stats[id].setup()
-		});
-		
-		// Setup abilities
-		monster.unlockedAbilities.forEach(function(id){
-			abilities[id].setup(monster);
-		});
-		
-		if(monster.abilitiesAreUnlocked){
-			$("#abilities").show();
-		}else{
-			$("#abilities").hide();
-		}
-		
-		monster.unlockedActions.forEach(function(id){
-			var action = actions[id];
-			action.setup(monster);
-		});
 	});
 	
 	// Setup character actions

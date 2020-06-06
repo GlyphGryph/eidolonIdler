@@ -74,3 +74,7 @@ Character.prototype.update = function(){
 		characterDiminishedElement.hide();
 	}
 }
+
+Character.prototype.bind = function(enemy){
+	state.addTeammate(enemy.monsterTemplateId);
+};

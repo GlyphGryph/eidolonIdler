@@ -119,6 +119,7 @@ Monster.prototype.totalLevels = function(){
 }
 
 Monster.prototype.setup = function(){
+	var that = this;
 	var actionsElement = $("#action-family-template").clone();
 	actionsElement.attr('id', this.actionsElementId);
 	actionsElement.find('.monster-name').text(this.name);
@@ -128,6 +129,27 @@ Monster.prototype.setup = function(){
 	profileElement.attr('id', this.profileElementId);
 	profileElement.find('.monster-name').text(this.name);
 	$("#monster-view").append(profileElement);
+	
+	// Setup stats
+	this.unlockedStats.forEach(function(id){
+		that.stats[id].setup()
+	});
+	
+	// Setup abilities
+	this.unlockedAbilities.forEach(function(id){
+		abilities[id].setup(that);
+	});
+	
+	if(this.abilitiesAreUnlocked){
+		$("#abilities").show();
+	}else{
+		$("#abilities").hide();
+	}
+	
+	this.unlockedActions.forEach(function(id){
+		var action = actions[id];
+		action.setup(that);
+	});
 }
 
 Monster.prototype.updateAbilities = function(){
@@ -196,8 +218,9 @@ Monster.prototype.consume = function(enemy){
 		gainSpirit(100);
 	}else if('boss' == enemy.type){
 		gainSpirit(100);
-		// Do nothing more if we already have a secondary template
+		// Do nothing more if we already have a secondary template, or the new one is the same as our primary template
 		if(this.secondaryTemplate){return;}
+		if(this.primaryTemplateId == enemy.monsterTemplateId){return;}
 		// Otherwise, gain a secondary template
 		this.secondaryTemplateId = enemy.monsterTemplateId;
 		this.secondaryTemplate = monsterTemplates[this.secondaryTemplateId];

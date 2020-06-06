@@ -63,6 +63,7 @@ Battle.prototype.setupResolution = function(){
 		if('character' == ally.id){
 			var playerRow = $('#resolution-player-row-template').clone();
 			playerRow.find('.orphan-name').text(ally.name);
+			playerRow.find('.bind-resolution').click(function(){that.resolveBind(ally)});
 			battleView.append(playerRow);
 		}else{
 			var monsterRow = $('#resolution-monster-row-template').clone();
@@ -100,6 +101,11 @@ Battle.prototype.teardown = function(){
 }
 
 Battle.prototype.update = function(){
+}
+
+Battle.prototype.resolveBind = function(character){
+	character.bind(this.enemy)
+	this.end();
 }
 
 Battle.prototype.resolveConsume = function(monster){

@@ -107,6 +107,16 @@ State.prototype.getTeammate = function(id){
 	}
 }
 
+State.prototype.addTeammate = function(templateId){
+	var monster = {};
+	monster.id = 'monster-' + (this.monsters.length+1);
+	monster.name = "Captured Monster";
+	monster.primaryTemplateId = templateId;
+	monster = new Monster(monster);
+	this.monsters.push(monster);
+	monster.setup();
+}
+
 
 var newGameState = function(){
 	var lockedRegions = []

@@ -84,11 +84,11 @@ Consuming a Boss soul adds the abilities from the MonsterDefinition to the consu
 
 If the monster was a Minion type monster, only gain some Spirit.
 
----
-
 There is also the option "Bind Soul" if the character is present in a Boss fight.
 
 Bind Soul creates a new monster on the player's team based on the MonsterDefinition.
+
+---
 
 When a player is present in a Minion Fight, they only get the option to "leave remnant" which does nothing.
 
