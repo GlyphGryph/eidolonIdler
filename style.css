@@ -29,6 +29,11 @@ body{
 	text-align: center;
 	margin: auto;
 }
+
+.action.risky button{
+	border-color: red;
+}
+
 .trainer{
 	position: relative;
 	display: inline-block;

@@ -37,7 +37,7 @@ actions.fakeAction = new Action({
 	name: "Fake Action",
 	description: "--",
 	runTime: 5000,
-	risky: true,
+	risky: false,
 	unlockedConditionsMet: function(context){ return true; },
 	start: function(context){
 		addLog('green', "Fake Action started");

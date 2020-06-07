@@ -38,6 +38,9 @@ Action.prototype.setup = function(context){
 	var actionElement = $("#action-template").clone();
 	actionElement.attr('id', this.getElementId(context));
 	actionElement.find('.name').text(this.name);
+	if(this.risky){
+		actionElement.addClass('risky');
+	}
 	contextElement.append(actionElement);
 	actionElement.mouseenter(function(){openDescription(this, that.description())});
 	actionElement.mouseleave(function(){closeDescription()});
