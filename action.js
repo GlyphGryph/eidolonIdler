@@ -64,14 +64,7 @@ Action.prototype.begin = function(context){
 
 Action.prototype.update = function(context){
 	var actionElement = $("#"+this.getElementId(context));
-	if(!context.isAlive()){
-		if('ressurect'==this.id){
-			actionElement.show();
-			actionElement.find('button').prop('disabled', false);
-		}else{
-			actionElement.find('button').prop('disabled', true);
-		}
-	}else{
+	if(context.isAlive()){
 		if('ressurect'==this.id){
 			actionElement.hide();
 		}
@@ -80,6 +73,13 @@ Action.prototype.update = function(context){
 			actionElement.find('button').prop('disabled', true);
 		}else{
 			actionElement.find('button').prop('disabled', false);
+		}
+	}else{
+		if('ressurect'==this.id){
+			actionElement.show();
+			actionElement.find('button').prop('disabled', false);
+		}else{
+			actionElement.find('button').prop('disabled', true);
 		}
 	}
 	
