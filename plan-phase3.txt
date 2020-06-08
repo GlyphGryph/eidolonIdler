@@ -100,8 +100,8 @@ Have ambushes pull from the current regions minion monster.
 
 Gracefully handle Barren Wastelands not having a boss or minion.
 
----
-
 When a region is at 100% explored, add a "Fight Boss" button to the region controls if the boss is available, that works like the Summon Boss button and pulls from the regions boss monster.
+
+---
 
 When a boss has been defeated, mark that region's boss and minions as no longer available to fight.

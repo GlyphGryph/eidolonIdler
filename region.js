@@ -65,16 +65,22 @@ Region.prototype.setup = function(){
 	var that = this;
 	var regionElement = $("#region-template").clone();
 	regionElement.attr('id', this.elementId);
+	
 	var nameElement = regionElement.find('.name')
 	nameElement.text(this.name);
 	$("#region-view").append(regionElement);
 	regionElement.show();
 	nameElement.mouseenter(function(){openDescription(this, that.description)});
 	nameElement.mouseleave(closeDescription);
+	
 	var travelElement = regionElement.find('.travel-button')
 	travelElement.mouseenter(function(){openDescription(this, that.travelDescription())});
 	travelElement.mouseleave(closeDescription);
 	travelElement.click(function(){that.beginTravel()});
+	
+	var fightBossElement = regionElement.find('.fight-boss');
+	fightBossElement.click(function(){Battle.startBossFight()});
+	fightBossElement.hide();
 }
 
 Region.prototype.cancel = function(){
@@ -92,6 +98,12 @@ Region.prototype.update = function(){
 	var exploredPercent = (this.awareness/this.size*100).toFixed(1);
 	var exploredText = ""+exploredPercent+"%";
 	var travelElement = regionElement.find('.travel-button');
+	
+	if(100 == exploredPercent && this.bossId != null && this.id==state.currentRegion){
+		regionElement.find('.fight-boss').show();
+	}else{
+		regionElement.find('.fight-boss').hide();
+	}
 	
 	if(exploredElement.text() != exploredText){
 		exploredElement.text(""+exploredPercent+"%");
