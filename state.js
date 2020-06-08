@@ -139,12 +139,7 @@ var newGameState = function(){
 			id: 'monster-1',
 			name: "Monster One",
 			primaryTemplateId: 'genericMonster'
-		},
-		{
-			id: 'monster-2',
-			name: "Monster Two",
-			primaryTemplateId: 'genericMonster'
-		}, 
+		}
 	]
 	
 	var character = {

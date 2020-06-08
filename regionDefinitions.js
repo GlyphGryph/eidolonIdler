@@ -22,7 +22,7 @@ var regionDefinitions = [
 		description: "A dense, dark jungle, full of clinging vines and sharp thorns. No animal or insect life can be seen or heard.",
 		bossId: 'desireBoss',
 		minionId: 'desireMinion',
-		size: 1,
+		size: 8,
 		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness == 4); },
 		discoveries: {
 		}
@@ -34,7 +34,7 @@ var regionDefinitions = [
 		bossId: 'faithBoss',
 		minionId: 'faithMinion',
 		description: "A small burned out and abandoned village, dominated by a large central chapel.",
-		size: 1,
+		size: 8,
 		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness == 8); },
 		discoveries: {
 		}
