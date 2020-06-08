@@ -101,6 +101,10 @@ State.prototype.toSaveState = function(){
 	return thing;
 }
 
+State.prototype.getCurrentRegion = function(){
+	return this.regions[this.currentRegion];
+}
+
 State.prototype.getTeammate = function(id){
 	if('character' == id){
 		return this.character;

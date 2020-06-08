@@ -5,7 +5,7 @@ actions.huntWisp = new Action({
 	id: 'huntWisp',
 	name: "Hunt Wisp",
 	description: "Hunt for wild wisps to gain Spirit.",
-	runTime: 1000,
+	runTime: 100,
 	risky: true,
 	unlockedConditionsMet: function(context){ return true; },
 	start: function(context){

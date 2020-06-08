@@ -92,18 +92,16 @@ When a player is present in a Minion Fight, they only get the option to "leave r
 
 Mark some actions as "risky" and visually signify them.
 
----
-
 For risky actions, implement "automatic ambushes" that has a chance to summon a minion against monsters or players that are currently engaged in an action that is considered "risky".
 
 Associate a boss monster and minion monster with a region, and add one for Tangled Jungle and Burnt Village.
 
 Have ambushes pull from the current regions minion monster.
 
-Add a "boss available" variable to regions. Set the barren region wasteland to false, and the Tangled Jungle and Burnt Village to true.
+Gracefully handle Barren Wastelands not having a boss or minion.
+
+---
 
 When a region is at 100% explored, add a "Fight Boss" button to the region controls if the boss is available, that works like the Summon Boss button and pulls from the regions boss monster.
 
-When a boss has been defeated, mark that region is boss no longer available.
-
-Cancel ambushes if boss monster is not available.
+When a boss has been defeated, mark that region's boss and minions as no longer available to fight.

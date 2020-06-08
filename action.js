@@ -85,7 +85,6 @@ Action.prototype.update = function(context){
 	
 	if(context.actionRunning == this.id && 'standard' == state.mode){
 		state.ambushClock -= state.timeSinceLastUpdate;
-		console.log(state.ambushClock);
 		if(state.ambushClock < 0){
 			state.ambushClock = getAmbushClock();
 			Battle.startAmbush(context.id);

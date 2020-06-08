@@ -144,15 +144,19 @@ Battle.start = function(allyIds, enemyId){
 }
 
 Battle.startBossFight = function(){
-	var team = ['character'];
-	state.monsters.forEach(function(monster){
-		team.push(monster.id);
-	});
-	Battle.start(team, 'basicBoss');
+	if(null != state.getCurrentRegion().bossId){
+		var team = ['character'];
+		state.monsters.forEach(function(monster){
+			team.push(monster.id);
+		});
+		Battle.start(team, state.getCurrentRegion().bossId);
+	}
 }
 
 Battle.startAmbush = function(id){
-	Battle.start([id], 'basicMinion');
+	if(null != state.getCurrentRegion().minionId){
+		Battle.start([id], state.getCurrentRegion().minionId);
+	}
 }
 
 Battle.prototype.end = function(){

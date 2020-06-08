@@ -43,15 +43,26 @@ var EnemyTemplate = function(definition){
 }
 
 var enemyTemplates = {
-	basicBoss: new EnemyTemplate({
-		id: 'basicBoss',
-		name: 'Basic Boss',
+	desireBoss: new EnemyTemplate({
+		id: 'desireBoss',
+		name: 'Desire Boss',
 		type: 'boss',
 		monsterTemplateId: "domesticBoss"
 	}),
-	basicMinion: new EnemyTemplate({
-		id: 'basicMinion',
-		name: 'Basic Minion',
+	desireMinion: new EnemyTemplate({
+		id: 'desireMinion',
+		name: 'Desire Minion',
+		type: 'minion'
+	}),
+	faithBoss: new EnemyTemplate({
+		id: 'faithBoss',
+		name: 'Faith Boss',
+		type: 'boss',
+		monsterTemplateId: "domesticBoss"
+	}),
+	faithMinion: new EnemyTemplate({
+		id: 'faithMinion',
+		name: 'Faith Minion',
 		type: 'minion'
 	})
 }

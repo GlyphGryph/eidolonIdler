@@ -9,6 +9,8 @@ var Region = function(definition){
 	this.elementId = this.id+'-resource';
 	this.name = definition.name;
 	this._description = definition.description;
+	this.bossId = definition.bossId;
+	this.minionId = definition.minionId;
 	this.size = definition.size;
 	this.unlockedConditionsMet = definition.unlockedConditionsMet;
 	this.discoveries = definition.discoveries;
@@ -21,7 +23,9 @@ Region.prototype.toSaveState = function(){
 	var thing = {
 		id: this.id,
 		awareness: this.awareness,
-		traveling: this.traveling
+		traveling: this.traveling,
+		bossId: this.bossId,
+		minionId: this.minionId
 	}
 	return thing;
 }

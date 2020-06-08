@@ -4,6 +4,8 @@ var regionDefinitions = [
 		elementId: "blackened-wasteland-region",
 		name: "Blackened Wasteland",
 		description: "A barren, burnt wasteland, the spirits here are sparse and weak. Something terrible must have happened here long ago.",
+		bossId: null,
+		minionId: null,
 		size: 8,
 		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness > 0); },
 		discoveries: {
@@ -18,6 +20,8 @@ var regionDefinitions = [
 		elementId: "tangled-jungle-region",
 		name: "Tangled Jungle",
 		description: "A dense, dark jungle, full of clinging vines and sharp thorns. No animal or insect life can be seen or heard.",
+		bossId: 'desireBoss',
+		minionId: 'desireMinion',
 		size: 1,
 		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness == 4); },
 		discoveries: {
@@ -27,6 +31,8 @@ var regionDefinitions = [
 		id: "forgottenVillage",
 		elementId: "forgotten-village-region",
 		name: "Forgotten Village",
+		bossId: 'faithBoss',
+		minionId: 'faithMinion',
 		description: "A small burned out and abandoned village, dominated by a large central chapel.",
 		size: 1,
 		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness == 8); },
