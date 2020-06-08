@@ -5,6 +5,7 @@ var State = function(saveState){
 	this.currentTime = (saveState.currentTime !== undefined) ? saveState.currentTime : null;
 	this.lastTime = (saveState.lastTime !== undefined) ? saveState.lastTime : null;
 	this.timeSinceLastUpdate = (saveState.timeSinceLastUpdate !== undefined) ? saveState.timeSinceLastUpdate : null;
+	this.ambushClock = eqOr(saveState.ambushClock, getAmbushClock());
 	this.selectedTab = (saveState.selectedTab !== undefined) ? saveState.selectedTab : 'action';
 	this.mode = eqOr(saveState.mode, 'standard'); // Valid: 'standard', 'battle' 
 	
@@ -64,6 +65,7 @@ State.prototype.toSaveState = function(){
 		currentTime: this.currentTime,
 		lastTime: this.lastTime,
 		timeSinceLastUpdate: this.timeSinceLastUpdate,
+		ambushClock: this.ambushClock,
 		selectedTab: this.selectedTab,
 		mode: this.mode,
 		log: this.log,

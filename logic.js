@@ -3,6 +3,18 @@ var save = function(saveName='saveState'){
 	setCookie(saveName, saveState, 360);
 }
 
+var settings = {
+	ambush_frequency: 5, // Number of seconds, on average, between ambushes
+	ambush_variability: .5 // Percent of of frequency value can vary until next ambush
+}
+
+var getAmbushClock = function(){
+	var min = settings.ambush_frequency * settings.ambush_variability;
+	var max = settings.ambush_frequency * (1+settings.ambush_variability);
+	var range = max - min;
+	return (Math.random() * range + min) * 1000;
+}
+
 var load = function(saveName='saveState'){
 	if(getCookie(saveName)){
 		var saveState = JSON.parse(getCookie(saveName));

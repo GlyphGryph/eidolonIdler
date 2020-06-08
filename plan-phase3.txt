@@ -90,9 +90,9 @@ Bind Soul creates a new monster on the player's team based on the MonsterDefinit
 
 When a player is present in a Minion Fight, they only get the option to "leave remnant" which does nothing.
 
----
-
 Mark some actions as "risky" and visually signify them.
+
+---
 
 For risky actions, implement "automatic ambushes" that has a chance to summon a minion against monsters or players that are currently engaged in an action that is considered "risky".
 
