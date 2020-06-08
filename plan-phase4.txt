@@ -1,0 +1,52 @@
+Add all 8 regions, including attached bosses and minions and monster templates:
+Top:
+- Barren Wasteland (safe)
+
+Right:
+- Tangled Jungle
+- Noxious Ruins
+- Rumbling Tunnels
+
+Left:
+- Burnt Village
+- Stronglandia (working name)
+- Digital Forest
+
+Bottom:
+- Waterfall City (safe)
+
+Add 8 levels of exploration within each region.
+
+Move log visually to the side of the other areas to make it easier to read.
+
+Rework Will to be Resilience where mentioned.
+
+Add a "dominant resource" to each region, and when players hunt spirits in that region also have them gain Power/Intellect/Resilience associated resources (Red Spirit, Blue Spirit, Green Spirit?).
+
+Also gain the regions resource for defeating bosses/minions.
+
+Require special resources to upgrade stats past level 2.
+
+Add "types" to monsters, and reduce the costs of their governing stat by 25% (up to 50% if both primary and secondary are of the same type family). Default monster is Bond associated.
+
+Add images for each domestic monster and display them on the monster info page.
+
+Add images for each boss monster and display them during the boss fight.
+
+Rework shared healing such that it only triggers on the monster who gains the Spirit.
+
+Add a Fear ability that when active makes all actions by this monster not-risky.
+
+Add a Desire ability that increases the spirit gain by 0.5 when hunting spirits.
+
+Add a Faith ability that let's this monster Ressurect without harming the player.
+
+Add mechanics such that activated abilities can add actions to the monster's action list while active.
+
+Add a Strength ability that allows the hunting of bigger spirit, which takes longer and offers more rewards.
+
+Add a Cunning ability that let's you Explore with this monster.
+
+Add a Persistence ability that allows an action to be repeated automatically by adding a new button to all actions that lets you toggle automate on/off.
+
+Whenever something is disabled (except by combat) add something to it's mouseover description to explain why it's disabled.
