@@ -36,6 +36,8 @@ var State = function(saveState){
 		saveState.regions.forEach(function(regionState){
 			that.regions[regionState.id].awareness = regionState.awareness;
 			that.regions[regionState.id].traveling = regionState.traveling;
+			that.regions[regionState.id].bossId =  regionState.bossId;
+			that.regions[regionState.id].minionId =  regionState.minionId;
 		});
 	}
 

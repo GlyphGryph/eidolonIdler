@@ -14,7 +14,7 @@ var Region = function(definition){
 	this.size = definition.size;
 	this.unlockedConditionsMet = definition.unlockedConditionsMet;
 	this.discoveries = definition.discoveries;
-	this.travelTime = 10000;
+	this.travelTime = 1000;
 	this.awareness = 0;
 	this.traveling = 0;
 }
@@ -81,6 +81,8 @@ Region.prototype.setup = function(){
 	var fightBossElement = regionElement.find('.fight-boss');
 	fightBossElement.click(function(){Battle.startBossFight()});
 	fightBossElement.hide();
+	
+	regionElement.find('.dangerous').hide();
 }
 
 Region.prototype.cancel = function(){
@@ -103,6 +105,12 @@ Region.prototype.update = function(){
 		regionElement.find('.fight-boss').show();
 	}else{
 		regionElement.find('.fight-boss').hide();
+	}
+	
+	if(this.bossId == null){
+		regionElement.find('.dangerous').hide();
+	}else{
+		regionElement.find('.dangerous').show();
 	}
 	
 	if(exploredElement.text() != exploredText){
