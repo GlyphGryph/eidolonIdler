@@ -20,7 +20,7 @@ var Action = function(definition){
 
 Action.prototype.description = function(){
 	description = "<p>"+this.definitionDescription+"</p>";
-	if(this.risky){
+	if(this.risky && state.getCurrentRegion().minionId != null){
 		description += "<p>This action runs the risk of encountering hostile creatures.</p>"
 	}
 	return description;
@@ -38,9 +38,6 @@ Action.prototype.setup = function(context){
 	var actionElement = $("#action-template").clone();
 	actionElement.attr('id', this.getElementId(context));
 	actionElement.find('.name').text(this.name);
-	if(this.risky){
-		actionElement.addClass('risky');
-	}
 	contextElement.append(actionElement);
 	actionElement.mouseenter(function(){openDescription(this, that.description())});
 	actionElement.mouseleave(function(){closeDescription()});
@@ -81,6 +78,12 @@ Action.prototype.update = function(context){
 		}else{
 			actionElement.find('button').prop('disabled', true);
 		}
+	}
+
+	if(this.risky && state.getCurrentRegion().minionId != null && !actionElement.hasClass('risky')){
+		actionElement.addClass('risky');
+	}else if((!this.risky || state.getCurrentRegion().minionId == null) && actionElement.hasClass('risky')){
+		actionElement.removeClass('risky');
 	}
 	
 	if(context.actionRunning == this.id && 'standard' == state.mode){

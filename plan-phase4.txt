@@ -1,6 +1,6 @@
-Make it so explore is disabled when a region is fully explored.
-
 Make it so actions aren't marked as risky in safe areas.
+
+---
 
 Add all 8 regions, including attached bosses and minions and monster templates:
 Top:
@@ -49,8 +49,12 @@ Add mechanics such that activated abilities can add actions to the monster's act
 
 Add a Strength ability that allows the hunting of bigger spirit, which takes longer and offers more rewards.
 
+Make it so explore is disabled when a region is fully explored.
+
 Add a Cunning ability that let's you Explore with this monster.
 
 Add a Persistence ability that allows an action to be repeated automatically by adding a new button to all actions that lets you toggle automate on/off.
 
 Whenever something is disabled (except by combat) add something to it's mouseover description to explain why it's disabled.
+
+Add descriptions to EVERYTHING, especially the activate/deactivate buttons for abilities.
