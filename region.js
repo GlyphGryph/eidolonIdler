@@ -56,7 +56,7 @@ Region.prototype.unlock = function(){
 	state.lockedRegions = removeFromArray(state.lockedRegions, this.id);
 	state.unlockedRegions.push(this.id);
 	this.setup();
-	addLog('black', "Region "+this.name+" unlocked.");
+	addLog('black', "You discover an exit that leads to the "+this.name+"! Region "+this.name+" unlocked.");
 }
 
 

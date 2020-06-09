@@ -1,10 +1,11 @@
 Make it so actions aren't marked as risky in safe areas.
 
----
-
-Add all 8 regions, including attached bosses and minions and monster templates:
 Top:
 - Barren Wasteland (safe)
+
+---
+
+Add all 8 regions, including attached bosses and minions and monster templates and explorations:
 
 Right:
 - Tangled Jungle
