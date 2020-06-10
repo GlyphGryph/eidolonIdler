@@ -50,7 +50,7 @@ var regionDefinitions = [
 		minionId: 'fearMinion',
 		description: "A ruined city, cloaked in noxious fumes, dominated by a tall tower atop which perches a gigantic eye.",
 		size: 8,
-		unlockedConditionsMet: function(){ return (state.regions.tangledJungle.awareness == 3); },
+		unlockedConditionsMet: function(){ return (state.regions.tangledJungle.awareness == 3 || state.regions.rumblingTunnels.awareness == 4); },
 		discoveries: {
 			1: function(){addLog('purple', "A thick yellow fog envelops a ruined city city street, with half standing buildings and an old abandoned car standing with its door ajar in the road. Your lungs burn, and you swear there are terrible creatures lurking just out of sight in the swirling mist.");},
 			2: function(){addLog('purple', "You discover a fountain, and the liquid pooled in its basin has the color and consistancy of vomit. Billows of thick yellow fog come from the fountain's pipes, out the mouths of the frogs that stand along the central column.");},
@@ -70,7 +70,7 @@ var regionDefinitions = [
 		minionId: 'persistMinion',
 		description: "An immense complex of underground tunnels and caverns. Earthquakes are common.",
 		size: 8,
-		unlockedConditionsMet: function(){ return (state.regions.tangledJungle.awareness == 3); },
+		unlockedConditionsMet: function(){ return (state.regions.noxiousRuins.awareness == 3 || state.regions.waterfallCity.awareness == 1); },
 		discoveries: {
 			1: function(){addLog('purple', "You descend underground into what seems to be some sort of mine, following a set of tracks as the tunnel forks, and then forks again. It's dark, although there are lamps placed at irregular intervals. In the darkest spots you must navigate by sense of touch alone.");},
 			2: function(){addLog('purple', "The main tunnel is crisscrossed by unlit cross-tunnels that enter and leave at odd angles. The ground rumbles at regular intervals, as if whatever dug the cross-tunnels is still hard at work. Some are smaller than you can fit down - a few are far larger than you are tall. For now, you stick to the primary set of tunnels.");},
@@ -83,15 +83,55 @@ var regionDefinitions = [
 		}
 	},
 	{
+		id: "waterfallCity",
+		elementId: "waterfall-city-region",
+		name: "Waterfall City",
+		bossId: null,
+		minionId: null,
+		description: "An idea for a city.",
+		size: 1,
+		unlockedConditionsMet: function(){ return (state.regions.rumblingTunnels.awareness == 4 || state.regions.digitalForest.awareness == 1); },
+		discoveries: {
+			1: function(){addLog('purple', "You discover a placeholder for an entire city. All that's here is a sign that says 'Under Construction'.");},
+		}
+	},
+	{
+		id: "digitalForest",
+		elementId: "digital-forest-region",
+		name: "Digital Forest",
+		bossId: 'cunningBoss',
+		minionId: 'cunningMinion',
+		description: "A forest with wires for roots and worms for fruits.",
+		size: 1,
+		unlockedConditionsMet: function(){ return (state.regions.waterfallCity.awareness == 1 || state.regions.stronglandia.awareness == 1); },
+		discoveries: {
+			1: function(){addLog('purple', "Not done yet.");},
+		}
+	},
+	{
+		id: "stronglandia",
+		elementId: "stronglandia-region",
+		name: "Stronglandia",
+		bossId: 'strengthBoss',
+		minionId: 'strengthMinion',
+		description: "The most placeholdery of all region placeholders.",
+		size: 1,
+		unlockedConditionsMet: function(){ return (state.regions.digitalForest.awareness == 1 || state.regions.forgottenVillage.awareness == 1); },
+		discoveries: {
+			1: function(){addLog('purple', "Not done yet.");},
+		}
+	},
+	{
 		id: "forgottenVillage",
 		elementId: "forgotten-village-region",
 		name: "Forgotten Village",
 		bossId: 'faithBoss',
 		minionId: 'faithMinion',
 		description: "A small burned out and abandoned village, dominated by a large central chapel.",
-		size: 8,
-		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness == 8); },
+		size: 1,
+		unlockedConditionsMet: function(){ return (state.regions.blackenedWasteland.awareness == 8 || state.regions.stronglandia.awareness == 1); },
 		discoveries: {
+			1: function(){addLog('purple', "Not done yet.");},
 		}
 	}
 ];
