@@ -86,5 +86,27 @@ var enemyTemplates = {
 		id: 'persistMinion',
 		name: 'Persistence Minion',
 		type: 'minion'
-	})
+	}),
+	strengthBoss: new EnemyTemplate({
+		id: 'strengthBoss',
+		name: 'Strength Boss',
+		type: 'boss',
+		monsterTemplateId: "domesticBoss"
+	}),
+	strengthMinion: new EnemyTemplate({
+		id: 'strengthMinion',
+		name: 'Strength Minion',
+		type: 'minion'
+	}),
+	cunningBoss: new EnemyTemplate({
+		id: 'cunningBoss',
+		name: 'Cunning Boss',
+		type: 'boss',
+		monsterTemplateId: "domesticBoss"
+	}),
+	cunningMinion: new EnemyTemplate({
+		id: 'cunningMinion',
+		name: 'Cunning Minion',
+		type: 'minion'
+	}),
 }
