@@ -52,6 +52,27 @@ var regionDefinitions = [
 		size: 8,
 		unlockedConditionsMet: function(){ return (state.regions.tangledJungle.awareness == 3); },
 		discoveries: {
+			1: function(){addLog('purple', "A thick yellow fog envelops a ruined city city street, with half standing buildings and an old abandoned car standing with its door ajar in the road. Your lungs burn, and you swear there are terrible creatures lurking just out of sight in the swirling mist.");},
+			2: function(){addLog('purple', "You discover a fountain, and the liquid pooled in its basin has the color and consistancy of vomit. Billows of thick yellow fog come from the fountain's pipes, out the mouths of the frogs that stand along the central column.");},
+			3: function(){addLog('purple', "The diner here has a cracked window, and inside it looks like someone has punched several holes in the wall. The lights are still on, somehow, but they cast long shadows that seem to twist in the street.");},
+			4: function(){addLog('purple', "You've found an abandoned, fog-shrouded school, with a clock spire in front. At first, you think faces are staring at you from the windows, but after more careful examination they only seem to be cobwebs.");},
+			5: function(){addLog('purple', "This plaza seems to have the contents of a house spread across it - a child's bathtub, a dinner table, a wooden toyhorse, a refrigerator, a bed, a sofa, and more. All of them seem to be stained with splashes of dark red.");},
+			6: function(){addLog('purple', "You see a street clear of fog, lit by a simple street lamp. A police officer is whispering something you can't make out to a woman standing under the light, and you can feel an almost palpable sense of relief in the scene... until he reaches out and grabs her by the arm, at which point the fog comes rushing in and a terrible scream fills the air before fading out. The street is empty, as if no one was ever on it.");},
+			7: function(){addLog('purple', "As you walk down the fog shrouded streets, you hear crying in the distance. It begins to rain, lazily, large drops of viscous fluid ocassionally dripping onto your body from somewhere above. Distracted by the crying and the rain, your vision limited by the haze, you nearly walk off the edge of the cliff without noticing. The city seems to sheer and drop away a hundred feet before continuing far below. You turn back and try to find another way.");},
+			8: function(){addLog('purple', "You've found the base of a tall, crumbling stone tower. The door is ajar, and inside a stairway twists up and away into the darkness. Something is waiting up there. Waiting for you.");},
+			
+		}
+	},
+	{
+		id: "rumblingTunnels",
+		elementId: "rumbling-tunnels-region",
+		name: "Rumbling Tunnels",
+		bossId: 'persistBoss',
+		minionId: 'persistMinion',
+		description: "An immense complex of underground tunnels and caverns. Earthquakes are common.",
+		size: 8,
+		unlockedConditionsMet: function(){ return (state.regions.tangledJungle.awareness == 3); },
+		discoveries: {
 		}
 	},
 	{

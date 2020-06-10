@@ -64,5 +64,27 @@ var enemyTemplates = {
 		id: 'faithMinion',
 		name: 'Faith Minion',
 		type: 'minion'
+	}),
+	fearBoss: new EnemyTemplate({
+		id: 'fearBoss',
+		name: 'Fear Boss',
+		type: 'boss',
+		monsterTemplateId: "domesticBoss"
+	}),
+	fearMinion: new EnemyTemplate({
+		id: 'fearMinion',
+		name: 'Fear Minion',
+		type: 'minion'
+	}),
+	persistBoss: new EnemyTemplate({
+		id: 'persistBoss',
+		name: 'Persistence Boss',
+		type: 'boss',
+		monsterTemplateId: "domesticBoss"
+	}),
+	persistMinion: new EnemyTemplate({
+		id: 'persistMinion',
+		name: 'Persistence Minion',
+		type: 'minion'
 	})
 }
