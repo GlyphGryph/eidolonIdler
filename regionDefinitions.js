@@ -59,8 +59,7 @@ var regionDefinitions = [
 			5: function(){addLog('purple', "This plaza seems to have the contents of a house spread across it - a child's bathtub, a dinner table, a wooden toyhorse, a refrigerator, a bed, a sofa, and more. All of them seem to be stained with splashes of dark red.");},
 			6: function(){addLog('purple', "You see a street clear of fog, lit by a simple street lamp. A police officer is whispering something you can't make out to a woman standing under the light, and you can feel an almost palpable sense of relief in the scene... until he reaches out and grabs her by the arm, at which point the fog comes rushing in and a terrible scream fills the air before fading out. The street is empty, as if no one was ever on it.");},
 			7: function(){addLog('purple', "As you walk down the fog shrouded streets, you hear crying in the distance. It begins to rain, lazily, large drops of viscous fluid ocassionally dripping onto your body from somewhere above. Distracted by the crying and the rain, your vision limited by the haze, you nearly walk off the edge of the cliff without noticing. The city seems to sheer and drop away a hundred feet before continuing far below. You turn back and try to find another way.");},
-			8: function(){addLog('purple', "You've found the base of a tall, crumbling stone tower. The door is ajar, and inside a stairway twists up and away into the darkness. Something is waiting up there. Waiting for you.");},
-			
+			8: function(){addLog('purple', "You've found the base of a tall, crumbling stone tower. The door is ajar, and inside a stairway twists up and away into the darkness. Something is waiting up there. Waiting for you.");}
 		}
 	},
 	{
@@ -73,6 +72,14 @@ var regionDefinitions = [
 		size: 8,
 		unlockedConditionsMet: function(){ return (state.regions.tangledJungle.awareness == 3); },
 		discoveries: {
+			1: function(){addLog('purple', "You descend underground into what seems to be some sort of mine, following a set of tracks as the tunnel forks, and then forks again. It's dark, although there are lamps placed at irregular intervals. In the darkest spots you must navigate by sense of touch alone.");},
+			2: function(){addLog('purple', "The main tunnel is crisscrossed by unlit cross-tunnels that enter and leave at odd angles. The ground rumbles at regular intervals, as if whatever dug the cross-tunnels is still hard at work. Some are smaller than you can fit down - a few are far larger than you are tall. For now, you stick to the primary set of tunnels.");},
+			3: function(){addLog('purple', "You hear the sound of rocks falling in the distance, and cries for help. By the time you locate the source of the sound, the cries have ceased. The collapsed tunnel contains nothing but a wooden prosthetic leg.");},
+			4: function(){addLog('purple', "There's a fresh breeze from down one of the side tunnels, and a flash of daylight. A way out?");},
+			5: function(){addLog('purple', "You discover a tunnel where the floor has become pavement, painted like a road, although it's not clear how any car would ever find it's way here. As you progress down the tunnel, you hear a loud crash and the twisting of metal, and you taste acrid smoke. You turn to find two cars, one having crashed into the side of the other, now in flames. A great wind fills the tunnel, and you raise an arm to shield your face from the heat and smoke. When you lower it again, the tunnel is once more just an empty road.");},
+			6: function(){addLog('purple', "The tunnel opens up into a sterile hospital room, with an operating table, a patient's bed with flowers next to it, and a set of seats for waiting. The light are harsh, and occassionally flicker.");},
+			7: function(){addLog('purple', "The walls of the tunnel slowly transition transition from stone to wood, until you find yourself inside what looks for all intents and purposes like a quaint suburban house, including windows that look out onto a quaint suburban neighborhood. A wheelchair is tucked behind the couch, and there's an old 50s television set that's tuned in to an episode of The Lone Ranger. There's a sharp knock on the front door, and the television dies. Opening the door, you see only solid, raw rock on the other side.");},
+			8: function(){addLog('purple', "You step, at last, into an enormous chamber. The walls are lined with tunnels - it seems as the whole of the underground tunnel system terminates in this room, no matter what path you take. Something massive shifts in the darkness ahead of you.");}
 		}
 	},
 	{
