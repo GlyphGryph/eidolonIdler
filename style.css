@@ -2,6 +2,37 @@ body{
 	position: relative;	
 }
 
+#debug-controls{
+	border: 1px solid black;
+	margin: 5px;
+	width: auto;
+}
+
+#play-area{
+	position: relative;
+	float: left;
+}
+
+#resources{
+	float: left;
+	width: 140px;
+	border: 1px solid black;
+	padding: 15px;
+	margin-left: 5px;
+}
+
+#log{
+	float: left;
+	width: 220px;
+	border: 1px solid black;
+	margin-right: 5px;
+	padding: 15px;
+}
+
+.log-entry{
+	border-top: 1px dotted black;
+}
+
 .tab{
 	display: inline-block;
 	border: 1px solid black;
@@ -14,6 +45,7 @@ body{
 	display: block;
 	width: 400px;
 	border: 1px solid black;
+	padding: 10px;
 }
 .action{
 	position: relative;
@@ -102,11 +134,10 @@ body{
 	display: block;
 	display: none;
 	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 80%;
-	height: 80%;
-	margin: 10%;
+	left: 235px;
+	top: 80px;
+	width: 500px;
+	height: 500px;
 	background-color: white;
 	border: 4px double black;
 }

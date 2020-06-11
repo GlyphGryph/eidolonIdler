@@ -8,8 +8,6 @@ Right:
 - Noxious Ruins
 - Rumbling Tunnels
 
----
-
 Add all 8 regions, including attached bosses and minions and monster templates and explorations:
 
 Left:
@@ -20,9 +18,15 @@ Left:
 Bottom:
 - Waterfall City (safe)
 
-Add 8 levels of exploration within each region.
 
 Move log visually to the side of the other areas to make it easier to read.
+
+Make general style improvements.
+
+---
+
+
+Add 8 levels of exploration within each region.
 
 Rework Will to be Resilience where mentioned.
 
@@ -50,7 +54,7 @@ Add mechanics such that activated abilities can add actions to the monster's act
 
 Add a Strength ability that allows the hunting of bigger spirit, which takes longer and offers more rewards.
 
-Make it so explore is disabled when a region is fully explored.
+Make it so explore is disabled/disappeared when a region is fully explored.
 
 Add a Cunning ability that let's you Explore with this monster.
 

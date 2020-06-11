@@ -61,7 +61,6 @@ actions.explore = new Action({
 	},
 	finish: function(context){
 		exploreRegion();
-		addLog('red', "Explored region.");
 	}
 });
 actions.care = new Action({

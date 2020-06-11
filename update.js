@@ -79,7 +79,7 @@ var updateLog = function(){
 	var logElement = $('#log');
 	logElement.html("");
 	[...state.log].reverse().forEach(function(message){
-		messageElement = $("<p>"+message[1]+"</p>");
+		messageElement = $("<p class='log-entry'>"+message[1]+"</p>");
 		messageElement.css('color', message[0]);
 		logElement.append(messageElement);
 	});
