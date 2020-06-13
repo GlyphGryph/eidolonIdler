@@ -23,8 +23,9 @@ Move log visually to the side of the other areas to make it easier to read.
 
 Make general style improvements.
 
----
+Fix bug where even beating a minion renders an area safe - this should only happen for bosses.
 
+---
 
 Add 8 levels of exploration within each region.
 

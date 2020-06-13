@@ -119,8 +119,10 @@ Battle.prototype.resolveConsume = function(monster){
 
 Battle.prototype.win = function(){
 	this.mode = 'resolution';
-	state.getCurrentRegion().bossId = null;
-	state.getCurrentRegion().minionId = null;
+	if('boss' == this.enemy.type){
+		state.getCurrentRegion().bossId = null;
+		state.getCurrentRegion().minionId = null;
+	}
 	this.setupResolution();
 }
 

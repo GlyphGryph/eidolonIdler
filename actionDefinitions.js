@@ -9,11 +9,10 @@ actions.huntWisp = new Action({
 	risky: true,
 	unlockedConditionsMet: function(context){ return true; },
 	start: function(context){
-		addLog('green', "Monster starts hunting Wisps");
 	},
 	finish: function(context){
-		gainSpirit(2);
 		addLog('green', "Monster caught a Wisp.");
+		gainSpirit(2);
 	}
 });
 actions.ressurect = new Action({
@@ -24,12 +23,11 @@ actions.ressurect = new Action({
 	risky: false,
 	unlockedConditionsMet: function(context){ return true; },
 	start: function(context){
-		addLog('green', "Monster starts hunting Wisps");
+		addLog('green', "Monster begins reforming.");
 	},
 	finish: function(context){
 		context.destroyed = false;
 		state.character.kill(context.totalLevels());
-		addLog('green', "Monster caught a Wisp.");
 	}
 });
 actions.fakeAction = new Action({
