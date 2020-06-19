@@ -18,14 +18,14 @@ Monster classes and governing stats:
 
 Each stat is fed by the following:
 Power: Passion, Strength
-Will: Faith, Persistence
+Resilience: Faith, Persistence
 Intellect: Fear, Cunning
 Bond: pure Spirit
 
 Player can choose 1 of 3 starting monsters, or decline to get a fourth monster.
 
 Helcule: Power-based Monster
-Watua: Will-based Monster
+Watua: Resilience-based Monster
 Pixi: Intellect-based Monster
 
 Sapine: Bond-based Monster 

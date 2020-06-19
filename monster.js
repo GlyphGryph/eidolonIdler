@@ -3,7 +3,7 @@
 // name
 // abilities
 //
-// Form of stats in saveState: {bond: value, will: value, intellect: value, power: value}
+// Form of stats in saveState: {bond: value, resilience: value, intellect: value, power: value}
 var Monster = function(saveState){
 	this.name = saveState.name;
 	this.primaryTemplateId = saveState.primaryTemplateId;
@@ -42,21 +42,21 @@ var Monster = function(saveState){
 		'bond'
 	];
 	this.lockedStats = (saveState.lockedStats !== undefined) ? saveState.lockedStats : [
-		'will',
+		'resilience',
 		'intellect',
 		'power'
 	];
 	if(saveState.stats){
 		this.stats = {
 			bond: new BondStat(this, saveState.stats.bond),
-			will: new WillStat(this, saveState.stats.will),
+			resilience: new ResilienceStat(this, saveState.stats.resilience),
 			intellect: new IntellectStat(this, saveState.stats.intellect),
 			power: new PowerStat(this, saveState.stats.power),
 		};
 	}else{
 		this.stats = {
 			bond: new BondStat(this, 0),
-			will: new WillStat(this, 1),
+			resilience: new ResilienceStat(this, 1),
 			intellect: new IntellectStat(this, 1),
 			power: new PowerStat(this, 1),
 		};
@@ -94,7 +94,7 @@ Monster.prototype.toSaveState = function(){
 		lockedStats: this.lockedStats,
 		stats: {
 			bond: this.stats.bond.level,
-			will: this.stats.will.level,
+			resilience: this.stats.resilience.level,
 			intellect: this.stats.intellect.level,
 			power: this.stats.power.level
 		}
@@ -215,9 +215,9 @@ Monster.prototype.kill = function(){
 Monster.prototype.consume = function(enemy){
 	var that = this;
 	if('minion' == enemy.type){
-		gainSpirit(100);
+		this.gainSpirit(40, 10);
 	}else if('boss' == enemy.type){
-		gainSpirit(100);
+		this.gainSpirit(100, 20);
 		// Do nothing more if we already have a secondary template, or the new one is the same as our primary template
 		if(this.secondaryTemplate){return;}
 		if(this.primaryTemplateId == enemy.monsterTemplateId){return;}
@@ -230,5 +230,29 @@ Monster.prototype.consume = function(enemy){
 			}
 		});
 		addLog("green", this.name+" gained additional monster type "+this.secondaryTemplate.name);
+	}
+}
+
+Monster.prototype.gainSpirit = function(value, special_value=0){
+	if(abilities.sharedHealing.isActive(this) && state.character.diminished > 0){
+		var amountToSiphon = this.stats.power.level;
+		if(amountToSiphon > value){
+			amountToSiphon = value;
+		}
+		if(amountToSiphon > state.character.diminished){
+			amountToSiphon = state.character.diminished;
+		}
+		state.character.diminished -= amountToSiphon;
+		addLog('red', "Orphan healed "+amountToSiphon+" points of damage.");
+		if(state.character.diminished <= 0){
+			addLog('red', "Orphan fully healed.");
+		}
+		value = value - amountToSiphon;
+	}
+	state.resources.spirit.change(value);
+
+	specialResourceId = state.getCurrentRegion().specialResourceId
+	if(null != specialResourceId){
+		state.resources[specialResourceId].change(special_value);
 	}
 }

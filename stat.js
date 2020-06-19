@@ -116,15 +116,15 @@ var BondStat = function(owner, level){
 BondStat.prototype = Object.create(Stat.prototype);
 BondStat.prototype.constructor = BondStat;
 
-var WillStat = function(owner, level){
-	Stat.call(this, 'will', owner, level, 3);
-	this.name = 'Will';
+var ResilienceStat = function(owner, level){
+	Stat.call(this, 'resilience', owner, level, 3);
+	this.name = 'Resilience';
 	this.description = function(){ return "A monster's persistence and resilience, their ability to keep going when things get difficult."};
 	this.unlockedConditionsMet = function(){ return owner.stats.bond.level > 0};
 }
 
-WillStat.prototype =  Object.create(Stat.prototype);
-WillStat.prototype.constructor = WillStat;
+ResilienceStat.prototype =  Object.create(Stat.prototype);
+ResilienceStat.prototype.constructor = ResilienceStat;
 
 var PowerStat = function(owner, level){
 	Stat.call(this, 'power', owner, level, 3);

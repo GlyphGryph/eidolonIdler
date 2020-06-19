@@ -87,27 +87,6 @@ var anyActionsAreBusy = function(){
 	return anyMonsterActionsAreBusy() || state.character.actionsAreBusy
 }
 
-var gainSpirit = function(value){
-	state.monsters.forEach(function(monster){
-		if(abilities.sharedHealing.isActive(monster) && state.character.diminished > 0){
-			var amountToSiphon = monster.stats.power.level;
-			if(amountToSiphon > value){
-				amountToSiphon = value;
-			}
-			if(amountToSiphon > state.character.diminished){
-				amountToSiphon = state.character.diminished;
-			}
-			state.character.diminished -= amountToSiphon;
-			addLog('red', "Orphan healed "+amountToSiphon+" points of damage.");
-			if(state.character.diminished <= 0){
-				addLog('red', "Orphan fully healed.");
-			}
-			value = value - amountToSiphon;
-		}
-	})
-	state.resources.spirit.change(value);
-}
-
 var exploreRegion = function(){
 	var region = state.regions[state.currentRegion]
 	if(region.awareness < region.size){

@@ -12,7 +12,7 @@ actions.huntWisp = new Action({
 	},
 	finish: function(context){
 		addLog('green', "Monster caught a Wisp.");
-		gainSpirit(2);
+		context.gainSpirit(2, 1);
 	}
 });
 actions.ressurect = new Action({
@@ -40,8 +40,7 @@ actions.fakeAction = new Action({
 	start: function(context){
 		addLog('green', "Fake Action started");
 	},
-	finish: function(context){	
-		gainSpirit(2);
+	finish: function(context){
 		addLog('green', "Fake Action finished.");
 	}
 })

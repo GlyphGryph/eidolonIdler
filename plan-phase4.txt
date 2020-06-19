@@ -25,15 +25,13 @@ Make general style improvements.
 
 Fix bug where even beating a minion renders an area safe - this should only happen for bosses.
 
----
-
-Add 8 levels of exploration within each region.
-
 Rework Will to be Resilience where mentioned.
 
 Add a "dominant resource" to each region, and when players hunt spirits in that region also have them gain Power/Intellect/Resilience associated resources (Red Spirit, Blue Spirit, Green Spirit?).
 
 Also gain the regions resource for defeating bosses/minions.
+
+---
 
 Require special resources to upgrade stats past level 2.
 
@@ -62,5 +60,7 @@ Add a Cunning ability that let's you Explore with this monster.
 Add a Persistence ability that allows an action to be repeated automatically by adding a new button to all actions that lets you toggle automate on/off.
 
 Whenever something is disabled (except by combat) add something to it's mouseover description to explain why it's disabled.
+
+Add 8 levels of exploration within each region.
 
 Add descriptions to EVERYTHING, especially the activate/deactivate buttons for abilities.
