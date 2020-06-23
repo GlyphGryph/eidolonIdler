@@ -86,7 +86,7 @@ Action.prototype.update = function(context){
 		actionElement.removeClass('risky');
 	}
 	
-	if(context.actionRunning == this.id && 'standard' == state.mode){
+	if(context.actionRunning == this.id && 'standard' == state.mode && this.risky){
 		state.ambushClock -= state.timeSinceLastUpdate;
 		if(state.ambushClock < 0){
 			state.ambushClock = getAmbushClock();
