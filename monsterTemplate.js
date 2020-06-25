@@ -21,22 +21,9 @@ var monsterTemplates = {
 			'assist'
 		]
 	}),
-	domesticBoss: new MonsterTemplate({
- 		id: 'domesticBoss',
-		name: "Domestic Boss",
-		type: 'bond',
-		actions: [
-			'huntWisp',
-			'fakeAction',
-			'ressurect'
-		],
-		abilities: [
-			'fakeAbility'
-		]
-	}),
 	domesticDesire: new MonsterTemplate({
  		id: 'domesticDesire',
-		name: "Domestic Desire",
+		name: "Grennsevoir",
 		type: 'desire',
 		actions: [
 			'huntWisp',
@@ -72,7 +59,7 @@ var monsterTemplates = {
 	}),
 	domesticPersistence: new MonsterTemplate({
  		id: 'domesticPersistence',
-		name: "Domestic Persistence",
+		name: "Rigby",
 		type: 'persistence',
 		actions: [
 			'huntWisp',
