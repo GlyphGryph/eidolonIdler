@@ -191,9 +191,9 @@ Monster.prototype.update = function(){
 		profileNameElement.text(displayName);
 	}
 	
-	var displayType = this.primaryTemplate.name;
+	var displayType = this.primaryTemplate.name+'(' +this.primaryTemplate.type+')';
 	if(this.secondaryTemplate){
-		displayType += "/"+this.secondaryTemplate.name;
+		displayType += "/"+this.secondaryTemplate.name+'(' +this.secondaryTemplate.type+')';
 	}
 	var profileTypeElement = $("#"+this.profileElementId+" .monster-type");
 	if(profileTypeElement.text() != displayType){

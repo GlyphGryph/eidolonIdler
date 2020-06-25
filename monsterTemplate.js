@@ -3,6 +3,7 @@ var MonsterTemplate = function(definition){
 	this.name = definition.name;
 	this.actions = definition.actions;
 	this.abilities = definition.abilities;
+	this.type = definition.type;
 }
 
 var monsterTemplates = {

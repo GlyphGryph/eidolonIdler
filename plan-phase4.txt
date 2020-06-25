@@ -33,11 +33,17 @@ Also gain the regions resource for defeating bosses/minions.
 
 Require special resources to upgrade stats past level 2.
 
----
-
 Fix bug where non-risky actions still provoke ambushes.
 
-Add "types" to monsters, and reduce the costs of their governing stat by 25% (up to 50% if both primary and secondary are of the same type family). Default monster is Bond associated.
+Give each monster a domestic form
+
+Add "types" to monsters
+
+Make types visible on monster page (primary and secondary)
+
+---
+
+Reduce the costs of their governing stat by 25% (up to 50% if both primary and secondary are of the same type family). Default monster is Bond associated.
 
 Add images for each domestic monster and display them on the monster info page.
 
