@@ -9,6 +9,7 @@ var monsterTemplates = {
 	genericMonster: new MonsterTemplate({
  		id: 'genericMonster',
 		name: "Generic Monster",
+		type: 'bond',
 		actions: [
 			'huntWisp',
 			'fakeAction',
@@ -22,9 +23,82 @@ var monsterTemplates = {
 	domesticBoss: new MonsterTemplate({
  		id: 'domesticBoss',
 		name: "Domestic Boss",
+		type: 'bond',
 		actions: [
 			'huntWisp',
 			'fakeAction',
+			'ressurect'
+		],
+		abilities: [
+			'fakeAbility'
+		]
+	}),
+	domesticDesire: new MonsterTemplate({
+ 		id: 'domesticDesire',
+		name: "Domestic Desire",
+		type: 'desire',
+		actions: [
+			'huntWisp',
+			'ressurect'
+		],
+		abilities: [
+			'fakeAbility'
+		]
+	}),
+	domesticFaith: new MonsterTemplate({
+ 		id: 'domesticFaith',
+		name: "Domestic Faith",
+		type: 'faith',
+		actions: [
+			'huntWisp',
+			'ressurect'
+		],
+		abilities: [
+			'fakeAbility'
+		]
+	}),
+	domesticFear: new MonsterTemplate({
+ 		id: 'domesticFear',
+		name: "Domestic Fear",
+		type: 'fear',
+		actions: [
+			'huntWisp',
+			'ressurect'
+		],
+		abilities: [
+			'fakeAbility'
+		]
+	}),
+	domesticPersistence: new MonsterTemplate({
+ 		id: 'domesticPersistence',
+		name: "Domestic Persistence",
+		type: 'persistence',
+		actions: [
+			'huntWisp',
+			'ressurect'
+		],
+		abilities: [
+			'fakeAbility'
+		]
+	}),
+	domesticStrength: new MonsterTemplate({
+ 		id: 'domesticStrength',
+		name: "Domestic Strength",
+		type: 'strength',
+		actions: [
+			'huntWisp',
+			'ressurect'
+		],
+		abilities: [
+			'fakeAbility'
+		]
+	}),
+	domesticCunning: new MonsterTemplate({
+ 		id: 'domesticCunning',
+		name: "Domestic Cunning",
+		type: 'cunning',
+		actions: [
+			'huntWisp',
 			'ressurect'
 		],
 		abilities: [
@@ -47,7 +121,7 @@ var enemyTemplates = {
 		id: 'desireBoss',
 		name: 'Desire Boss',
 		type: 'boss',
-		monsterTemplateId: "domesticBoss"
+		monsterTemplateId: "domesticDesire"
 	}),
 	desireMinion: new EnemyTemplate({
 		id: 'desireMinion',
@@ -58,7 +132,7 @@ var enemyTemplates = {
 		id: 'faithBoss',
 		name: 'Faith Boss',
 		type: 'boss',
-		monsterTemplateId: "domesticBoss"
+		monsterTemplateId: "domesticFaith"
 	}),
 	faithMinion: new EnemyTemplate({
 		id: 'faithMinion',
@@ -69,7 +143,7 @@ var enemyTemplates = {
 		id: 'fearBoss',
 		name: 'Fear Boss',
 		type: 'boss',
-		monsterTemplateId: "domesticBoss"
+		monsterTemplateId: "domesticFear"
 	}),
 	fearMinion: new EnemyTemplate({
 		id: 'fearMinion',
@@ -80,7 +154,7 @@ var enemyTemplates = {
 		id: 'persistBoss',
 		name: 'Persistence Boss',
 		type: 'boss',
-		monsterTemplateId: "domesticBoss"
+		monsterTemplateId: "domesticPersistence"
 	}),
 	persistMinion: new EnemyTemplate({
 		id: 'persistMinion',
@@ -91,7 +165,7 @@ var enemyTemplates = {
 		id: 'strengthBoss',
 		name: 'Strength Boss',
 		type: 'boss',
-		monsterTemplateId: "domesticBoss"
+		monsterTemplateId: "domesticStrength"
 	}),
 	strengthMinion: new EnemyTemplate({
 		id: 'strengthMinion',
@@ -102,7 +176,7 @@ var enemyTemplates = {
 		id: 'cunningBoss',
 		name: 'Cunning Boss',
 		type: 'boss',
-		monsterTemplateId: "domesticBoss"
+		monsterTemplateId: "domesticCunning"
 	}),
 	cunningMinion: new EnemyTemplate({
 		id: 'cunningMinion',
